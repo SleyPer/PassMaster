@@ -3,8 +3,23 @@
         <a routerLink="/home" class="navbar-brand">PassMaster</a>
     </div>
     <div class="navbar-down">
-        <a routerLink="/chests">Mes coffres</a>
-        <a routerLink="/generator">Générateur de mot de passe</a>
-        <a routerLink="/account">Mon compte</a>
+        <div [ngClass]="{'selected-menu': showChestSubTabs}">
+            <a routerLink="/chests" class="main-tab" (click)="toggleChestSubTabs()">Mes coffres</a>
+            <ul class="sub-tabs" *ngIf="showChestSubTabs" class="slide-down-animation">
+                <li><a routerLink="/chests/all">Tous les coffres</a></li>
+                <li><a routerLink="/chests/favorites">Favoris</a></li>
+                <li><a routerLink="/chests/trash">Corbeille</a></li>
+            </ul>
+        </div>
+        <div [ngClass]="{'selected-menu': showGeneratorSubTabs}">
+            <a routerLink="/generator" class="main-tab" (click)="toggleGeneratorSubTabs()">Générateur de mot de passe</a>
+        </div>
+        <div [ngClass]="{'selected-menu': showAccountSubTabs}">
+            <a routerLink="/account" class="main-tab" (click)="toggleAccountSubTabs()">Mon compte</a>
+            <ul class="sub-tabs" *ngIf="showAccountSubTabs" class="slide-down-animation">
+                <li><a routerLink="/account/profile">Profil</a></li>
+                <li><a routerLink="/account/logout">Déconnexion</a></li>
+            </ul>
+        </div>
     </div>
 </nav>
