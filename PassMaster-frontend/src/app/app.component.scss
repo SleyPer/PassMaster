@@ -1,13 +1,24 @@
 .container {
-    display: flex;
-    height: 100vh;
     width: 100%;
-}
 
-.sidebar {
-    width: 20%;
-}
+    .navbar {
+        height: 5vh;
+        background-color: #222;
+    }
 
-.content {
-    flex: 1;
+    .down {
+        display: flex;
+
+        .sidebar {
+            width: 20%;
+            height: 95vh;
+        }
+        
+        .content {
+            flex: 1;
+            height: 95vh;
+            box-shadow: -10px 0 10px rgba(0, 0, 0, 1);
+            background-color: #333;
+        }
+    }
 }
