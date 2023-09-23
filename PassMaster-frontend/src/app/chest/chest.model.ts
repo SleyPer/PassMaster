@@ -1,13 +1,13 @@
 export class Chest {
     id ?: number;
-    name: string;
-    description: string;
+    name ?: string;
+    description ?: string;
     creationDate ?: string;
-    username: string;
-    password: string;
-    link: string;
+    username ?: string;
+    password ?: string;
+    link ?: string;
   
-    constructor(id: number, name: string, description: string, creationDate: string, username: string, password: string, link: string) {
+    constructor(id ?: number, name ?: string, description ?: string, creationDate ?: string, username ?: string, password ?: string, link ?: string) {
       this.id = id;
       this.name = name;
       this.description = description;

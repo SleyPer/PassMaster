@@ -6,22 +6,28 @@
             Accueil
         </div>
     </a>
-    <a routerLink="/chest" [ngClass]="{'active': isChestSelected}" class="section" 
-    (mouseenter)="showChestSubTabs = true" (mouseleave)="showChestSubTabs = false">
+    <a routerLink="/chest" [ngClass]="{'active': isChestSelected}" class="section"
+        (mouseenter)="showChestSubTabs = true" (mouseleave)="showChestSubTabs = false">
         <div class="menu-item">
             <mat-icon class="icon-white">store</mat-icon>
             Mes coffres
         </div>
+        <ul class="sub-tabs" *ngIf="showChestSubTabs">
+            <li><a routerLink="/accueil">Accueil</a></li>
+            <li><a routerLink="/chests">Mes coffres</a></li>
+            <li><a routerLink="/generator">Générateur de mot de passe</a></li>
+            <li><a routerLink="/account">Mon compte</a></li>
+        </ul>
     </a>
-    <a routerLink="/generator" [ngClass]="{'active': isGeneratorSelected}" class="section" 
-    (mouseenter)="showGeneratorSubTabs = true" (mouseleave)="showGeneratorSubTabs = false">
+    <a routerLink="/generator" [ngClass]="{'active': isGeneratorSelected}" class="section"
+        (mouseenter)="showGeneratorSubTabs = true" (mouseleave)="showGeneratorSubTabs = false">
         <div class="menu-item">
             <mat-icon class="icon-white">build</mat-icon>
             Générateur de mots de passe
         </div>
     </a>
-    <a routerLink="/account" [ngClass]="{'active': isAccountSelected}" class="section" 
-    (mouseenter)="showAccountSubTabs = true" (mouseleave)="showAccountSubTabs = false">
+    <a routerLink="/account" [ngClass]="{'active': isAccountSelected}" class="section"
+        (mouseenter)="showAccountSubTabs = true" (mouseleave)="showAccountSubTabs = false">
         <div class="menu-item">
             <mat-icon class="icon-white">account_circle</mat-icon>
             Mon compte

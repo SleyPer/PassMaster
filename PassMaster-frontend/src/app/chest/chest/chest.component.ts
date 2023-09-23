@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChestService } from '../chest.service';
 import { Chest } from '../chest.model';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-chest',
@@ -15,14 +16,13 @@ export class ChestComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.getAllChests();
-    console.log(this.chests.length)
+  async ngOnInit() {
+    await this.getAllChests();
+    console.log(this.chests)
   }
 
-  getAllChests() {
-    this.chestService.getAllChests().subscribe(data => {
-      this.chests = data;
-    })
+  async getAllChests() {
+    const data = await lastValueFrom(this.chestService.getAllChests());
+    this.chests = data;
   }
 }
