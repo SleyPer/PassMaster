@@ -1,1 +1,37 @@
-<p>generator works!</p>
+<h1>Générateur de mots de passe</h1>
+
+<div class="generator-form">
+
+    <div class="generated-password" *ngIf="generatedPassword">
+        <p>{{ generatedPassword }}</p>
+        <div class="buttons">
+            <button (click)="generatePassword()">
+                <mat-icon>refresh</mat-icon>
+            </button>
+            <button (click)="copyToClipboard()">
+                <mat-icon>filter_none</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="section">
+        <label for="passwordLength">Longueur du mot de passe :</label>
+        <input type="number" id="passwordLength" [(ngModel)]="passwordLength" />
+    </div>
+
+    <div class="section">
+        <label for="uppercase">Lettres majuscules</label>
+        <input type="checkbox" id="uppercase" [(ngModel)]="includeUppercase" />
+    </div>
+
+    <div class="section">
+        <label for="numbers">Chiffres</label>
+        <input type="checkbox" id="numbers" [(ngModel)]="includeNumbers" />
+    </div>
+
+    <div class="section">
+        <label for="specialCharacters">Caractères spéciaux</label>
+        <input type="checkbox" id="specialCharacters" [(ngModel)]="includeSpecialCharacters" />
+    </div>
+
+</div>

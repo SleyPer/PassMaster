@@ -11,6 +11,7 @@ import { lastValueFrom } from 'rxjs';
 export class ChestComponent implements OnInit {
 
   chests: Chest[] = [];
+  test: boolean = false;
 
   constructor(private chestService: ChestService) {
 
@@ -19,6 +20,8 @@ export class ChestComponent implements OnInit {
   async ngOnInit() {
     await this.getAllChests();
     console.log(this.chests)
+    console.log(this.chests.length)
+    this.test = true;
   }
 
   async getAllChests() {

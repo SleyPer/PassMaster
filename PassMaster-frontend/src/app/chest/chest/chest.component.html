@@ -1,5 +1,6 @@
 <h1>Mes coffres</h1>
 <ng-container *ngIf="!!chests && chests.length > 0">
+    <p>{{chests[0].name}}</p>
   <div *ngFor="let chest of chests">
       <p>{{ chest.name }}</p>
   </div>
