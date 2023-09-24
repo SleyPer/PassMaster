@@ -16,7 +16,12 @@ h1 {
     font-size: 20px;
     margin-bottom: 5vh;
 
-    input[type="number"] {
+    label {
+        flex: 1;
+        text-align: left;
+    }
+
+    input[type=number] {
         margin-left: 2%;
         height: 5vh;
         width: 10%;
@@ -33,7 +38,7 @@ h1 {
         -webkit-appearance: none;
     }
 
-    input[type="checkbox"] {
+    input[type=checkbox] {
         margin-left: 2%;
         position: relative;
         width: 60px;
@@ -45,11 +50,11 @@ h1 {
 
     }
 
-    input:checked[type="checkbox"] {
+    input:checked[type=checkbox] {
         background: linear-gradient(0deg, #6dd1ff, #20b7ff);
     }
 
-    input[type="checkbox"]:before {
+    input[type=checkbox]:before {
         content: '';
         position: absolute;
         top: 0;
@@ -63,11 +68,11 @@ h1 {
         transition: 0.5s;
     }
 
-    input:checked[type="checkbox"]:before {
+    input:checked[type=checkbox]:before {
         left: 20px;
     }
 
-    input[type="checkbox"]:after {
+    input[type=checkbox]:after {
         content: '';
         position: absolute;
         top: calc(50% - 2px);
@@ -79,7 +84,7 @@ h1 {
         transition: 0.5s;
     }
 
-    input:checked[type="checkbox"]:after {
+    input:checked[type=checkbox]:after {
         left: 45px;
         background: #63cdff;
         box-shadow: 0 0 5px #13b3ff, 0 0 15px #13b3ff;

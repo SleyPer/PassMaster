@@ -10,9 +10,10 @@ import { ClipboardService } from 'ngx-clipboard';
 export class GeneratorComponent implements OnInit {
 
   passwordLength: number = 12;
+  includeLowercase: boolean = true;
   includeUppercase: boolean = true;
   includeNumbers: boolean = true;
-  includeSpecialCharacters: boolean = false;
+  includeSpecialCharacters: boolean = true;
   generatedPassword: string = '';
 
   constructor(
@@ -26,8 +27,12 @@ export class GeneratorComponent implements OnInit {
 
   generatePassword(): string {
     const passwordLength = this.passwordLength;
-    let charset = 'abcdefghijklmnopqrstuvwxyz';
+    let charset = '';
     let generatedPassword = '';
+
+    if (this.includeLowercase) {
+      charset += 'abcdefghijklmnopqrstuvwxyz';
+    }
   
     if (this.includeUppercase) {
       charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -38,10 +43,10 @@ export class GeneratorComponent implements OnInit {
     }
   
     if (this.includeSpecialCharacters) {
-      charset += '/\\+-@&';
+      charset += '!$%&@/+-';
     }
   
-    if (!this.includeUppercase && !this.includeNumbers && !this.includeSpecialCharacters) {
+    if (!this.includeLowercase && !this.includeUppercase && !this.includeNumbers && !this.includeSpecialCharacters) {
       charset = 'abcdefghijklmnopqrstuvwxyz';
     }
   

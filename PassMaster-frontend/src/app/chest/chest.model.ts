@@ -1,20 +1,20 @@
 export class Chest {
-    id ?: number;
-    name ?: string;
-    description ?: string;
-    creationDate ?: string;
-    username ?: string;
-    password ?: string;
-    link ?: string;
+    chest_id ?: number;
+    chest_name ?: string;
+    chest_description ?: string;
+    chest_creationDate ?: string;
+    chest_username ?: string;
+    chest_password ?: string;
+    chest_link ?: string;
   
-    constructor(id ?: number, name ?: string, description ?: string, creationDate ?: string, username ?: string, password ?: string, link ?: string) {
-      this.id = id;
-      this.name = name;
-      this.description = description;
-      this.creationDate = creationDate;
-      this.username = username;
-      this.password = password;
-      this.link = link;
+    constructor(chest_id ?: number, chest_name ?: string, chest_description ?: string, chest_creationDate ?: string, chest_username ?: string, chest_password ?: string, chest_link ?: string) {
+      this.chest_id = chest_id;
+      this.chest_name = chest_name;
+      this.chest_description = chest_description;
+      this.chest_creationDate = chest_creationDate;
+      this.chest_username = chest_username;
+      this.chest_password = chest_password;
+      this.chest_link = chest_link;
     }
   }
   
