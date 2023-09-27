@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
+import { NotificationComponent } from 'src/app/notification/notification/notification.component';
 
 @Component({
   selector: 'app-generator',
@@ -67,17 +68,20 @@ export class GeneratorComponent implements OnInit {
   copyToClipboard() {
     if (this.generatedPassword) {
       this.clipboardService.copyFromContent(this.generatedPassword);
-      this.showCopyNotification("Mot de passe copié");
+      this.showCopyNotification("Mot de passe copié", "success");
     }
   }
 
-  showCopyNotification(msg: string) {
-    let config = new MatSnackBarConfig();
-    config.panelClass = ['custom-snackbar'];
-    this.snackBar.open(msg, 'Fermer', {
-      duration: 2000,
+  showCopyNotification(msg: string, type: string) {
+    this.snackBar.openFromComponent(NotificationComponent, {
+      duration: 5000,
+      data: {
+        message: msg,
+        icon: type == "success" ? "check" : "close"
+      },
       horizontalPosition: 'end',
-      verticalPosition: 'bottom'
+      verticalPosition: 'bottom',
+      panelClass: type == "success" ? ['success-snackbar'] : ['error-snackbar']
     });
   }
 }

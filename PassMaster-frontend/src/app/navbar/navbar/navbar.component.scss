@@ -1,5 +1,17 @@
 .navbar {
     color: white;
-    line-height: 5vh;
-    padding-left: 5px;;
+    padding-left: 5px;
+    display: flex;
+
+    .title {
+        width: 20%;
+    }
+
+    .content {
+
+        .create-chest {
+            display: flex;
+            cursor: pointer;
+        }
+    }
 }

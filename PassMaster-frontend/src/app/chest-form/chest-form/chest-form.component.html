@@ -1,0 +1,34 @@
+<div class="form">
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="title">Nom :</label>
+            <input type="text" id="title" name="title" [(ngModel)]="chest.chest_name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description :</label>
+            <textarea id="description" name="description" [(ngModel)]="chest.chest_description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" [(ngModel)]="chest.chest_username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" [(ngModel)]="chest.chest_password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="link">Lien :</label>
+            <input type="text" id="link" name="link" [(ngModel)]="chest.chest_link">
+        </div>
+
+        <div class="button">
+            <button type="submit">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,3 +1,11 @@
 <nav class="navbar">
-    <h4>PassMaster</h4>
+    <div class="title">
+        <h4>PassMaster</h4>
+    </div>
+    <div class="content">
+        <div class="create-chest" *ngIf="isNotCreateRoute()" (click)="createChest()">
+            <mat-icon>add</mat-icon>
+            <h4>Créer</h4>
+        </div>
+    </div>
 </nav>

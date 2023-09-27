@@ -16,6 +16,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChestComponent } from './chest/chest/chest.component';
 import { GeneratorComponent } from './generator/generator/generator.component';
 import { AccountComponent } from './account/account/account.component';
+import { ChestFormComponent } from './chest-form/chest-form/chest-form.component';
+import { CreateChestComponent } from './create-chest/create-chest/create-chest.component';
+import { NotificationComponent } from './notification/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { AccountComponent } from './account/account/account.component';
     SidebarComponent,
     ChestComponent,
     GeneratorComponent,
-    AccountComponent
+    AccountComponent,
+    ChestFormComponent,
+    CreateChestComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
