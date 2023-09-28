@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Chest } from 'src/app/chest/chest.model';
 
 @Component({
@@ -8,7 +8,7 @@ import { Chest } from 'src/app/chest/chest.model';
 })
 export class ChestFormComponent {
   @Output() chestAdded = new EventEmitter<Chest>();
-  chest: Chest = new Chest();
+  @Input() chest: Chest = new Chest();
 
   onSubmit() {
     this.chestAdded.emit(this.chest);

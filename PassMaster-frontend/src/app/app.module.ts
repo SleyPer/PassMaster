@@ -19,6 +19,7 @@ import { AccountComponent } from './account/account/account.component';
 import { ChestFormComponent } from './chest-form/chest-form/chest-form.component';
 import { CreateChestComponent } from './create-chest/create-chest/create-chest.component';
 import { NotificationComponent } from './notification/notification/notification.component';
+import { ChestDetailsComponent } from './chest-details/chest-details/chest-details.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NotificationComponent } from './notification/notification/notification.
     AccountComponent,
     ChestFormComponent,
     CreateChestComponent,
-    NotificationComponent
+    NotificationComponent,
+    ChestDetailsComponent
   ],
   imports: [
     BrowserModule,
