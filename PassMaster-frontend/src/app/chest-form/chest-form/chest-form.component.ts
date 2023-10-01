@@ -9,10 +9,16 @@ import { Chest } from 'src/app/chest/chest.model';
 export class ChestFormComponent {
   @Output() chestAdded = new EventEmitter<Chest>();
   @Input() chest: Chest = new Chest();
+  showPassword: boolean = false;
 
   onSubmit() {
     this.chestAdded.emit(this.chest);
-    
+
     this.chest = new Chest();
+  }
+
+  togglePasswordVisibility(passwordInput: HTMLInputElement) {
+    this.showPassword = !this.showPassword;
+    passwordInput.type = this.showPassword ? 'text' : 'password';
   }
 }
