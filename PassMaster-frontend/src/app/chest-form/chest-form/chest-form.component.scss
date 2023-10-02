@@ -19,6 +19,12 @@
         text-align: left;
     }
 
+    .hoverable-label:hover {
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+
     input[type="text"],
     input[type="password"],
     textarea {

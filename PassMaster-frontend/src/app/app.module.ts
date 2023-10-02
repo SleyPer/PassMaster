@@ -13,6 +13,7 @@ import { SidebarComponent } from './sidebar/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ChestComponent } from './chest/chest/chest.component';
 import { GeneratorComponent } from './generator/generator/generator.component';
 import { AccountComponent } from './account/account/account.component';
@@ -43,7 +44,8 @@ import { ChestDetailsComponent } from './chest-details/chest-details/chest-detai
     HttpClientModule,
     FormsModule,
     ClipboardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

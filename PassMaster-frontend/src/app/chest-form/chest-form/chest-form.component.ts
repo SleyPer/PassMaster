@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ClipboardService } from 'ngx-clipboard';
 import { Chest } from 'src/app/chest/chest.model';
+import { NotificationComponent } from 'src/app/notification/notification/notification.component';
 
 @Component({
   selector: 'app-chest-form',
@@ -9,7 +12,11 @@ import { Chest } from 'src/app/chest/chest.model';
 export class ChestFormComponent {
   @Output() chestAdded = new EventEmitter<Chest>();
   @Input() chest: Chest = new Chest();
-  showPassword: boolean = false;
+
+  constructor(
+    private clipboardService: ClipboardService,
+    private snackBar: MatSnackBar
+  ) { }
 
   onSubmit() {
     this.chestAdded.emit(this.chest);
@@ -17,8 +24,26 @@ export class ChestFormComponent {
     this.chest = new Chest();
   }
 
-  togglePasswordVisibility(passwordInput: HTMLInputElement) {
-    this.showPassword = !this.showPassword;
-    passwordInput.type = this.showPassword ? 'text' : 'password';
+  copyField(fieldName: string) {
+    const field = document.getElementById(fieldName) as HTMLInputElement;
+    if (field.value) {
+      this.clipboardService.copyFromContent(field.value);
+      this.showCopyNotification("Champ copié", "success");
+    } else {
+      this.showCopyNotification("Renseignez le champ pour le copier", "error");
+    }
+  }
+
+  showCopyNotification(msg: string, type: string) {
+    this.snackBar.openFromComponent(NotificationComponent, {
+      duration: 5000,
+      data: {
+        message: msg,
+        icon: type == "success" ? "check" : "close"
+      },
+      horizontalPosition: 'end',
+      verticalPosition: 'bottom',
+      panelClass: type == "success" ? ['success-snackbar'] : ['error-snackbar']
+    });
   }
 }
