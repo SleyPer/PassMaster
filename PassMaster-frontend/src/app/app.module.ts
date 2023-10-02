@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ChestComponent } from './chest/chest/chest.component';
 import { GeneratorComponent } from './generator/generator/generator.component';
 import { AccountComponent } from './account/account/account.component';
@@ -21,6 +22,7 @@ import { ChestFormComponent } from './chest-form/chest-form/chest-form.component
 import { CreateChestComponent } from './create-chest/create-chest/create-chest.component';
 import { NotificationComponent } from './notification/notification/notification.component';
 import { ChestDetailsComponent } from './chest-details/chest-details/chest-details.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { ChestDetailsComponent } from './chest-details/chest-details/chest-detai
     ChestFormComponent,
     CreateChestComponent,
     NotificationComponent,
-    ChestDetailsComponent
+    ChestDetailsComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { ChestDetailsComponent } from './chest-details/chest-details/chest-detai
     FormsModule,
     ClipboardModule,
     MatSnackBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

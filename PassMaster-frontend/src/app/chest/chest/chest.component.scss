@@ -9,8 +9,10 @@ p {
 
 .chest-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 .chest-item {

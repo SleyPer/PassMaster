@@ -1,0 +1,19 @@
+<div class="dialog">
+  <h2>Attention</h2>
+  <div class="message">{{ data.message }}</div>
+  <div class="message">
+    Veuillez écrire le nom du coffre pour confirmer
+  </div>
+  <div class="form">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input type="text" id="confirm" name="confirm" [(ngModel)]="confirmationInput" required>
+      </div>
+    </form>
+  </div>
+  <div class="button">
+    <button class="delete-button custom-button" [disabled]="!isConfirmationValid()" (click)="onDelete()">
+      <mat-icon class="custom-icon">delete</mat-icon>
+    </button>
+  </div>  
+</div>

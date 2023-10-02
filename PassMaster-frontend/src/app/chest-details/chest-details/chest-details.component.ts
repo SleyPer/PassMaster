@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Chest } from 'src/app/chest/chest.model';
 import { ChestService } from 'src/app/chest/chest.service';
+import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
 import { NotificationComponent } from 'src/app/notification/notification/notification.component';
 
 @Component({
@@ -27,11 +29,14 @@ export class ChestDetailsComponent implements OnInit {
     chest_password: '',
     chest_link: ''
   };
+  dialogRef!: any;
 
   constructor(
     private chestService: ChestService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private router: Router
   ) {
 
   }
@@ -71,6 +76,30 @@ export class ChestDetailsComponent implements OnInit {
       horizontalPosition: 'end',
       verticalPosition: 'bottom',
       panelClass: type == "success" ? ['success-snackbar'] : ['error-snackbar']
+    });
+  }
+
+  confirmDeleteChest(): void {
+    this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '40%',
+      data: { 
+        message: 'Êtes-vous sûr de vouloir supprimer le coffre "' + this.chest.chest_name + '" ?',
+        chestName: this.chest.chest_name
+      }
+    });
+  
+    this.dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.chestService.deleteChest(this.chest).subscribe(
+          () => {
+            this.showNotification('Coffre supprimé avec succès', 'success');
+            this.router.navigate(['/chest']);
+          },
+          (error: any) => {
+            this.showNotification('Erreur lors de la suppression da la catégorie', 'error');
+          }
+        );
+      }
     });
   }
 }
