@@ -1,7 +1,6 @@
 package com.example.PassMasterbackend.service;
 
-import com.example.PassMasterbackend.exception.ChestNotFoundException;
-import com.example.PassMasterbackend.model.Chest;
+import com.example.PassMasterbackend.entity.Chest;
 import com.example.PassMasterbackend.repository.ChestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,11 +29,11 @@ public class ChestService {
     public ResponseEntity<?> updateChest(Long id, Chest chest) {
         Chest existingChest = chestRepository.findById(id).orElse(null);
         if (existingChest != null) {
-            existingChest.setChest_name(chest.getChest_name());
-            existingChest.setChest_description(chest.getChest_description());
-            existingChest.setChest_username(chest.getChest_username());
-            existingChest.setChest_password(chest.getChest_password());
-            existingChest.setChest_link(chest.getChest_link());
+            existingChest.setName(chest.getName());
+            existingChest.setDescription(chest.getDescription());
+            existingChest.setUsername(chest.getUsername());
+            existingChest.setPassword(chest.getPassword());
+            existingChest.setLink(chest.getLink());
 
             return ResponseEntity.ok(chestRepository.save(existingChest));
         }

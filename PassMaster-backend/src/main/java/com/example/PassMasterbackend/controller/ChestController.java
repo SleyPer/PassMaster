@@ -1,6 +1,6 @@
 package com.example.PassMasterbackend.controller;
 
-import com.example.PassMasterbackend.model.Chest;
+import com.example.PassMasterbackend.entity.Chest;
 import com.example.PassMasterbackend.service.ChestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
