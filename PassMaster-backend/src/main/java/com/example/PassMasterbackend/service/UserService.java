@@ -3,11 +3,14 @@ package com.example.PassMasterbackend.service;
 import com.example.PassMasterbackend.entity.Role;
 import com.example.PassMasterbackend.entity.RoleType;
 import com.example.PassMasterbackend.entity.User;
+import com.example.PassMasterbackend.entity.Validation;
 import com.example.PassMasterbackend.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Map;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -16,6 +19,7 @@ public class UserService {
 
     private UserRepository userRepository;
     private BCryptPasswordEncoder passwordEncoder;
+    private ValidationService validationService;
 
     public void registration(User user) {
         if (!user.getMail().contains("@") && !user.getMail().contains(".")) {
@@ -34,6 +38,20 @@ public class UserService {
         userRole.setName(RoleType.USER);
         user.setRole(userRole);
 
-        this.userRepository.save(user);
+        user = this.userRepository.save(user);
+        this.validationService.save(user);
+    }
+
+    public void activation(Map<String, String> activation) {
+        Validation validation = this.validationService.getValidationByCode(activation.get("code"));
+        if (Instant.now().isAfter(validation.getExpiration())) {
+            throw new RuntimeException("Votre code a expiré");
+        }
+
+        User activatedUser = this.userRepository.findById(Math.toIntExact(validation.getUser().getId()))
+                .orElseThrow(() -> new RuntimeException("utilisateur inconnu"));
+
+        activatedUser.setActive(true);
+        this.userRepository.save(activatedUser);
     }
 }
