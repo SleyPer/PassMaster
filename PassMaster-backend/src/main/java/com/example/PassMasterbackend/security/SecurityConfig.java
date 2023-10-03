@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.*;
 
 @Configuration
 @EnableWebSecurity
@@ -20,8 +20,13 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize ->
                         authorize
-                                .requestMatchers(POST, "/registration").permitAll()
-                                .requestMatchers(POST, "/activation").permitAll()
+                                .requestMatchers(POST, "/api/user/registration").permitAll()
+                                .requestMatchers(POST, "/api/user/activation").permitAll()
+                                .requestMatchers(GET, "/api/chests").permitAll()
+                                .requestMatchers(GET, "/api/chests/{id}").permitAll()
+                                .requestMatchers(POST, "/api/chests").permitAll()
+                                .requestMatchers(PUT, "/api/chests/{id}").permitAll()
+                                .requestMatchers(DELETE, "/api/chests/{id}").permitAll()
                                 .anyRequest().authenticated()
                 ).build();
     }

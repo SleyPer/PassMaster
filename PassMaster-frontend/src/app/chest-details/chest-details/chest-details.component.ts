@@ -17,17 +17,17 @@ export class ChestDetailsComponent implements OnInit {
   chest: Chest = new Chest();
   chestId: number = 0;
   chestForm: {
-    chest_name?: string,
-    chest_description?: string,
-    chest_username?: string,
-    chest_password?: string,
-    chest_link?: string
+    name?: string,
+    description?: string,
+    username?: string,
+    password?: string,
+    link?: string
   } = {
-    chest_name: '',
-    chest_description: '',
-    chest_username: '',
-    chest_password: '',
-    chest_link: ''
+    name: '',
+    description: '',
+    username: '',
+    password: '',
+    link: ''
   };
   dialogRef!: any;
 
@@ -53,11 +53,11 @@ export class ChestDetailsComponent implements OnInit {
       (chest: Chest) => {
         this.chest = chest;
         this.chestForm = {
-          chest_name: chest.chest_name,
-          chest_description: chest.chest_description,
-          chest_username: chest.chest_username,
-          chest_password: chest.chest_password,
-          chest_link: chest.chest_link
+          name: chest.name,
+          description: chest.description,
+          username: chest.username,
+          password: chest.password,
+          link: chest.link
         };
       },
       (error: any) => {
@@ -83,8 +83,8 @@ export class ChestDetailsComponent implements OnInit {
     this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '40%',
       data: { 
-        message: 'Êtes-vous sûr de vouloir supprimer le coffre "' + this.chest.chest_name + '" ?',
-        chestName: this.chest.chest_name
+        message: 'Êtes-vous sûr de vouloir supprimer le coffre "' + this.chest.name + '" ?',
+        chestName: this.chest.name
       }
     });
   

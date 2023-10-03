@@ -26,12 +26,12 @@ export class ChestService {
   }
 
   updateChest(updatedChest: Chest): Observable<Chest> {
-    const url = `${this.apiUrl}/${updatedChest.chest_id}`;
+    const url = `${this.apiUrl}/${updatedChest.id}`;
     return this.http.put<Chest>(url, updatedChest);
   }  
 
   deleteChest(deletedChest: Chest): Observable<void> {
-    const url = `${this.apiUrl}/${deletedChest.chest_id}`;
+    const url = `${this.apiUrl}/${deletedChest.id}`;
     return this.http.delete<void>(url);
   }
 }

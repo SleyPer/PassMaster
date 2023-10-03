@@ -51,6 +51,6 @@ export class ChestComponent implements OnInit {
   }
 
   viewChestDetails(chest: Chest) {
-    this.router.navigate(['/chest', chest.chest_id]);
+    this.router.navigate(['/chest', chest.id]);
   }
 }
