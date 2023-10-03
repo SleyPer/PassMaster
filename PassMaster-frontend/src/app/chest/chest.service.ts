@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ChestService {
 
-  private apiUrl = 'http://localhost:8080/api/chests';
+  private apiUrl = '/api/chests';
 
   constructor(private http: HttpClient) { }
 
