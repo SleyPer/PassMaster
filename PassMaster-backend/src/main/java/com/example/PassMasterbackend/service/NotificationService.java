@@ -14,12 +14,12 @@ public class NotificationService {
 
     public void send(Validation validation) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setFrom("np-reply@thom.fr");
+        mailMessage.setFrom("no-reply@thom.fr");
         mailMessage.setTo(validation.getUser().getMail());
         mailMessage.setSubject("Code d'activation de votre compte PassMaster");
 
-        String text = String.format("Bonjour %s ! <br /> Votre code d'activation est %s; A bientôt :)",
-                validation.getUser().getName(),
+        String text = String.format("Bonjour %s ! \n\n Votre code d'activation est %s \n\n A bientôt :)",
+                validation.getUser().getFirstName(),
                 validation.getCode()
         );
 

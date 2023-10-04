@@ -1,5 +1,5 @@
 <div class="form">
-    <form (ngSubmit)="onSubmit()">
+    <form>
         <div class="form-group">
             <label for="title" (click)="copyField('title')" class="hoverable-label" [matTooltip]="'Copier le nom'">Nom :</label>
             <input type="text" id="title" name="title" [(ngModel)]="chest.name" required>
@@ -25,10 +25,8 @@
             <input type="text" id="link" name="link" [(ngModel)]="chest.link">
         </div>
 
-        <div class="button">
-            <button type="submit">
-                <mat-icon>add</mat-icon>
-            </button>
+        <div class="button" type="submit" (click)="onSubmit()">
+            <p>Créer un coffre</p>
         </div>
     </form>
 </div>

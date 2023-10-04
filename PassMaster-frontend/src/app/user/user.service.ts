@@ -39,4 +39,8 @@ export class UserService {
   activate(activation: Activation): Observable<Activation> {
     return this.http.post<Activation>(this.apiUrl + "/activation", activation);
   }
+
+  login(username: string, password: string): Observable<User> {
+    return this.http.post<User>(this.apiUrl + "/login", {username, password});
+  }
 }

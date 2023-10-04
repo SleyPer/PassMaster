@@ -1,9 +1,6 @@
 package com.example.PassMasterbackend.service;
 
-import com.example.PassMasterbackend.entity.Role;
-import com.example.PassMasterbackend.entity.RoleType;
-import com.example.PassMasterbackend.entity.User;
-import com.example.PassMasterbackend.entity.Validation;
+import com.example.PassMasterbackend.entity.*;
 import com.example.PassMasterbackend.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -50,7 +48,7 @@ public class UserService implements UserDetailsService {
             throw new RuntimeException("Votre code a expiré");
         }
 
-        User activatedUser = this.userRepository.findById(Math.toIntExact(validation.getUser().getId()))
+        User activatedUser = this.userRepository.findById(validation.getUser().getId())
                 .orElseThrow(() -> new RuntimeException("utilisateur inconnu"));
 
         activatedUser.setActive(true);
@@ -61,5 +59,13 @@ public class UserService implements UserDetailsService {
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
         return this.userRepository.findByMail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Aucun utilisateur trouvé"));
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 }

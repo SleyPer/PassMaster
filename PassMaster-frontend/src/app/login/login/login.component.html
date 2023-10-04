@@ -1,1 +1,21 @@
-<p>login works!</p>
+<h1>Se connecter</h1>
+
+<div class="form">
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="mail">Adresse mail :</label>
+            <input type="text" name="mail" [(ngModel)]="user.mail" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mot de passe :</label>
+            <input type="password" name="password" [(ngModel)]="user.pass" required>
+        </div>
+
+        <div class="button">
+            <button type="submit">
+                <p>Se connecter</p>
+            </button>
+        </div>
+    </form>
+</div>

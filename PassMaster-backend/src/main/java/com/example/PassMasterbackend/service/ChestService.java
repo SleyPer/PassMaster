@@ -3,6 +3,7 @@ package com.example.PassMasterbackend.service;
 import com.example.PassMasterbackend.entity.Chest;
 import com.example.PassMasterbackend.entity.User;
 import com.example.PassMasterbackend.repository.ChestRepository;
+import com.example.PassMasterbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +18,9 @@ public class ChestService {
     @Autowired
     private ChestRepository chestRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public List<Chest> getAllChests() {
         return chestRepository.findAll();
     }
@@ -27,10 +31,17 @@ public class ChestService {
 
     public ResponseEntity<?> createChest(Chest chest) {
         chest.setCreationDate(LocalDateTime.now());
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = this.userRepository.findByMail(username).orElseThrow(
+                () -> new RuntimeException("Vous devez vous connecter pour créer un coffre")
+        );
+
         chest.setUser(user);
+
         return ResponseEntity.ok(chestRepository.save(chest));
     }
+
 
     public ResponseEntity<?> updateChest(Long id, Chest chest) {
         Chest existingChest = chestRepository.findById(id).orElse(null);
