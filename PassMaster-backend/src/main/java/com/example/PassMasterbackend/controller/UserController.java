@@ -1,10 +1,14 @@
 package com.example.PassMasterbackend.controller;
 
+import com.example.PassMasterbackend.dto.AuthenticationDTO;
 import com.example.PassMasterbackend.entity.User;
+import com.example.PassMasterbackend.security.JwtService;
 import com.example.PassMasterbackend.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,15 +22,31 @@ import java.util.Map;
 @RequestMapping("/api/user")
 public class UserController {
 
+    private AuthenticationManager authenticationManager;
     private UserService userService;
+    private JwtService jwtService;
 
     @PostMapping(path = "registration")
-    public void registration(@RequestBody User user) {
+    public void register(@RequestBody User user) {
         this.userService.registration(user);
     }
 
     @PostMapping(path = "activation")
-    public void activation(@RequestBody Map<String, String> activation) {
+    public void activate(@RequestBody Map<String, String> activation) {
         this.userService.activation(activation);
+    }
+
+    @PostMapping(path = "login")
+    public Map<String, String> login(@RequestBody AuthenticationDTO authenticationDTO) {
+        final Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        authenticationDTO.username(),
+                        authenticationDTO.password())
+        );
+
+        if (authentication.isAuthenticated()) {
+            return this.jwtService.generate(authenticationDTO.username());
+        }
+        return null;
     }
 }

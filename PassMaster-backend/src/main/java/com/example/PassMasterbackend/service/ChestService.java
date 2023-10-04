@@ -1,9 +1,11 @@
 package com.example.PassMasterbackend.service;
 
 import com.example.PassMasterbackend.entity.Chest;
+import com.example.PassMasterbackend.entity.User;
 import com.example.PassMasterbackend.repository.ChestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,6 +27,8 @@ public class ChestService {
 
     public ResponseEntity<?> createChest(Chest chest) {
         chest.setCreationDate(LocalDateTime.now());
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        chest.setUser(user);
         return ResponseEntity.ok(chestRepository.save(chest));
     }
 

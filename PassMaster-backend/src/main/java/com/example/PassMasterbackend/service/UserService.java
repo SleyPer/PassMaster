@@ -6,6 +6,8 @@ import com.example.PassMasterbackend.entity.User;
 import com.example.PassMasterbackend.entity.Validation;
 import com.example.PassMasterbackend.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private UserRepository userRepository;
     private BCryptPasswordEncoder passwordEncoder;
@@ -53,5 +55,11 @@ public class UserService {
 
         activatedUser.setActive(true);
         this.userRepository.save(activatedUser);
+    }
+
+    @Override
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
+        return this.userRepository.findByMail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Aucun utilisateur trouvé"));
     }
 }

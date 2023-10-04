@@ -38,4 +38,7 @@ public class Chest {
 
     @Column
     private String link;
+
+    @ManyToOne
+    private User user;
 }
