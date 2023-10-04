@@ -6,6 +6,8 @@ import { GeneratorComponent } from './generator/generator/generator.component';
 import { AccountComponent } from './account/account/account.component';
 import { CreateChestComponent } from './create-chest/create-chest/create-chest.component';
 import { ChestDetailsComponent } from './chest-details/chest-details/chest-details.component';
+import { LoginComponent } from './login/login/login.component';
+import { RegisterComponent } from './register/register/register.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: 'account', component: AccountComponent },
   { path: 'chest/:id', component: ChestDetailsComponent },
   { path: 'create', component: CreateChestComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

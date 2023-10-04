@@ -9,12 +9,13 @@
     .section {
         text-decoration: none;
         color: white;
-        transition: color 0.3s;
+        transition: 0.3s;
         padding: 0.5rem;
 
         &:hover {
             color: aqua;
             background-color: #000;
+            transition: 0.3s;
         }
 
 

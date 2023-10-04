@@ -23,6 +23,8 @@ import { CreateChestComponent } from './create-chest/create-chest/create-chest.c
 import { NotificationComponent } from './notification/notification/notification.component';
 import { ChestDetailsComponent } from './chest-details/chest-details/chest-details.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
+import { LoginComponent } from './login/login/login.component';
+import { RegisterComponent } from './register/register/register.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     CreateChestComponent,
     NotificationComponent,
     ChestDetailsComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
