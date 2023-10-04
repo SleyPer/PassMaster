@@ -8,6 +8,7 @@ import { CreateChestComponent } from './create-chest/create-chest/create-chest.c
 import { ChestDetailsComponent } from './chest-details/chest-details/chest-details.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
+import { ValidateComponent } from './validate/validate/validate.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'create', component: CreateChestComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'validate', component: ValidateComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

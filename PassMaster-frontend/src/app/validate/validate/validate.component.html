@@ -1,0 +1,18 @@
+<h1>Valider mon compte</h1>
+
+<div class="form">
+    <form (ngSubmit)="onSubmit()">
+        <div class="text">
+            <label for="code">Veuillez saisir le code d'activation reçu par mail :</label>
+        </div>
+        <div>
+            <input type="text" name="code" [(ngModel)]="activation.code" required maxlength="6">
+        </div>        
+
+        <div class="button">
+            <button type="submit">
+                <p>Valider mon compte</p>
+            </button>
+        </div>
+    </form>
+</div>

@@ -34,7 +34,7 @@ export class CreateChestComponent {
       }
     );
 
-    //this.resetForm();
+    this.resetForm();
   }
 
   resetForm() {

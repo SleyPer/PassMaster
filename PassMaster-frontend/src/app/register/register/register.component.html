@@ -1,1 +1,36 @@
-<p>register works!</p>
+<h1>S'incrire</h1>
+
+<div class="form">
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="first_name" >Prénom :</label>
+            <input type="text" name="first_name" [(ngModel)]="user.firstName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="last_name">Nom :</label>
+            <input type="text" name="last_name" [(ngModel)]="user.lastName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="mail">Adresse mail :</label>
+            <input type="text" name="mail" [(ngModel)]="user.mail" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mot de passe :</label>
+            <input type="password" name="password" [(ngModel)]="user.pass">
+        </div>
+
+        <div class="form-group">
+            <label for="confirm_password">Confirmer le mot de passe :</label>
+            <input type="password" name="confirm_password" [(ngModel)]="confirmPassword">
+        </div>
+
+        <div class="button">
+            <button type="submit">
+                <p>Créer un compte</p>
+            </button>
+        </div>
+    </form>
+</div>

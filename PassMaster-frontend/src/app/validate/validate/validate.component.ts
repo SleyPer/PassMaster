@@ -2,32 +2,31 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NotificationComponent } from 'src/app/notification/notification/notification.component';
-import { User } from 'src/app/user/user.model';
 import { UserService } from 'src/app/user/user.service';
+import { Activation } from 'src/app/activation/activation.model';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-validate',
+  templateUrl: './validate.component.html',
+  styleUrls: ['./validate.component.scss']
 })
-export class RegisterComponent {
-  user: User = new User();
-  confirmPassword: string = "";
+export class ValidateComponent {
+  activation: Activation = new Activation();
 
   constructor(
     private userService: UserService,
     private snackBar: MatSnackBar,
     private router: Router
-  ) { }
+  ) {}
 
   onSubmit() {
-    this.userService.register(this.user).subscribe(
+    this.userService.activate(this.activation).subscribe(
       () => {
-        this.showNotification("Un mail vous a été envoyé avec votre code d'activation !", "success");
-        this.router.navigate(['/validate']);
+        this.showNotification("Votre compte a été vérifié avec succès", "success");
+        this.router.navigate(['/home']);
       },
-      (error: any) => {
-        this.showNotification("Erreur lors de la création de votre compte", "error");
+      (error) => {
+        this.showNotification("Erreur lors de la vérification de votre compte", "error");
       }
     )
   }

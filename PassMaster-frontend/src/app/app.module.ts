@@ -25,6 +25,7 @@ import { ChestDetailsComponent } from './chest-details/chest-details/chest-detai
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
+import { ValidateComponent } from './validate/validate/validate.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { RegisterComponent } from './register/register/register.component';
     ChestDetailsComponent,
     ConfirmationDialogComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ValidateComponent
   ],
   imports: [
     BrowserModule,
