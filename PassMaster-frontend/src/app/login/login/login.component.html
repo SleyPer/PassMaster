@@ -1,7 +1,7 @@
 <h1>Se connecter</h1>
 
 <div class="form">
-    <form (ngSubmit)="onSubmit()">
+    <form>
         <div class="form-group">
             <label for="mail">Adresse mail :</label>
             <input type="text" name="mail" [(ngModel)]="user.mail" required>
@@ -12,10 +12,8 @@
             <input type="password" name="password" [(ngModel)]="user.pass" required>
         </div>
 
-        <div class="button">
-            <button type="submit">
-                <p>Se connecter</p>
-            </button>
+        <div class="button" type="submit" (click)="onSubmit()">
+            <p>Se connecter</p>
         </div>
     </form>
 </div>

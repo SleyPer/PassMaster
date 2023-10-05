@@ -23,7 +23,7 @@ export class LoginComponent {
     if (this.user.mail && this.user.pass) {
       this.userService.login(this.user.mail, this.user.pass).subscribe(
         () => {
-          this.showNotification("Bienvenue " + this.user.name + " !", "success");
+          this.showNotification("Bienvenue !", "success");
           this.router.navigate(['/home']);
         },
         (error: any) => {
