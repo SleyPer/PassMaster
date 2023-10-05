@@ -19,7 +19,7 @@ public class NotificationService {
         mailMessage.setSubject("Code d'activation de votre compte PassMaster");
 
         String text = String.format("Bonjour %s ! \n\n Votre code d'activation est %s \n\n A bientôt :)",
-                validation.getUser().getName(),
+                validation.getUser().getFirstName() + " " + validation.getUser().getLastName(),
                 validation.getCode()
         );
 
