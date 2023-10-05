@@ -37,7 +37,6 @@ public class UserController {
 
     @PostMapping(path = "login")
     public Map<String, String> login(@RequestBody AuthenticationDTO authenticationDTO) {
-        System.out.println("username : " + authenticationDTO.username() + " - password : " + authenticationDTO.password());
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authenticationDTO.username(),

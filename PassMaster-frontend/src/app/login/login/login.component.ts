@@ -20,15 +20,17 @@ export class LoginComponent {
   ) { }
 
   onSubmit() {
-    this.userService.register(this.user).subscribe(
-      () => {
-        this.showNotification("Un mail vous a été envoyé avec votre code d'activation !", "success");
-        this.router.navigate(['/validate']);
-      },
-      (error: any) => {
-        this.showNotification("Erreur lors de la création de votre compte", "error");
-      }
-    )
+    if (this.user.mail && this.user.pass) {
+      this.userService.login(this.user.mail, this.user.pass).subscribe(
+        () => {
+          this.showNotification("Bienvenue " + this.user.name + " !", "success");
+          this.router.navigate(['/home']);
+        },
+        (error: any) => {
+          this.showNotification("Erreur lors de la création de votre compte", "error");
+        }
+      )
+    }
   }
 
   showNotification(msg: string, type: string) {
