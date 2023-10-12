@@ -14,6 +14,7 @@ export class ChestComponent implements OnInit {
   itemsPerPage: number = 6;
   currentPage: number = 1;
   totalPages: number = 0;
+  search: string = "";
 
   constructor(
     private chestService: ChestService,
@@ -22,6 +23,10 @@ export class ChestComponent implements OnInit {
 
   ngOnInit() {
     this.loadChests();
+  }
+
+  createChest() {
+    this.router.navigate(["/create"]);
   }
 
   loadChests() {

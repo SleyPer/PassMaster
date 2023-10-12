@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="isAuthenticated()">
   <div class="navbar">
     <app-navbar></app-navbar>
   </div>
@@ -6,8 +6,31 @@
     <div class="sidebar">
       <app-sidebar></app-sidebar>
     </div>
+    <div class="list">
+      <app-chest></app-chest>
+    </div>
     <div class="content">
       <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<div class="auth" *ngIf="!isAuthenticated()">
+  <div class="title">
+    <p class="big">Bienvenue sur PassMaster</p>
+    <p class="small">Le gestionnaire de mots de passe le plus sécurisé du monde</p>
+  </div>
+  <div class="form">
+    <app-login *ngIf="login"></app-login>
+    <app-register *ngIf="register"></app-register>
+
+    <div class="choice">
+      <div (click)="changeForm()" *ngIf="login">
+        Créer un compte
+      </div>
+      <div (click)="changeForm()" *ngIf="register">
+        Se connecter
+      </div>
     </div>
   </div>
 </div>

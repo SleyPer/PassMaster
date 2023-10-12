@@ -1,12 +1,14 @@
-<h1>Mes coffres</h1>
+<div class="header">
+  <div class="search">
+    <input type="text" id="search" name="search" [(ngModel)]="search">
+  </div>
+  <div class="button" (click)="createChest()">
+    <mat-icon class="icon-white">add</mat-icon>
+  </div>
+</div>
 
 <div class="chest-grid">
   <div class="chest-item" *ngFor="let chest of displayedChests" (click)="viewChestDetails(chest)">
     <p>{{ chest.name }}</p>
   </div>
-</div>
-
-<div class="pagination">
-  <button (click)="showPreviousPage()" [disabled]="currentPage === 1">&lt; Précédent</button>
-  <button (click)="showNextPage()" [disabled]="currentPage === totalPages">Suivant &gt;</button>
 </div>

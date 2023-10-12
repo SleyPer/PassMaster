@@ -1,33 +1,20 @@
 <nav class="sidebar">
     <a routerLink="/home" [ngClass]="{'active': isHomeSelected}" class="section"
-        (mouseenter)="showAccueilSubTabs = true" (mouseleave)="showAccueilSubTabs = false">
+        (click)="toggleSubMenu('home')">
         <div class="menu-item">
             <mat-icon class="icon-white">home</mat-icon>
             Accueil
         </div>
     </a>
-    <a routerLink="/chest" [ngClass]="{'active': isChestSelected}" class="section"
-        (mouseenter)="showChestSubTabs = true" (mouseleave)="showChestSubTabs = false" *ngIf="isAuthenticated()">
-        <div class="menu-item">
-            <mat-icon class="icon-white">store</mat-icon>
-            Mes coffres
-        </div>
-        <ul class="sub-tabs" *ngIf="showChestSubTabs">
-            <li><a routerLink="/accueil">Accueil</a></li>
-            <li><a routerLink="/chests">Mes coffres</a></li>
-            <li><a routerLink="/generator">Générateur de mot de passe</a></li>
-            <li><a routerLink="/account">Mon compte</a></li>
-        </ul>
-    </a>
     <a routerLink="/generator" [ngClass]="{'active': isGeneratorSelected}" class="section"
-        (mouseenter)="showGeneratorSubTabs = true" (mouseleave)="showGeneratorSubTabs = false" *ngIf="isAuthenticated()">
+    (click)="toggleSubMenu('generator')" *ngIf="isAuthenticated()">
         <div class="menu-item">
             <mat-icon class="icon-white">build</mat-icon>
             Générateur de mots de passe
         </div>
     </a>
     <a [ngClass]="{'active': isAccountSelected}" class="section"
-        (mouseenter)="showAccountSubTabs = true" (mouseleave)="showAccountSubTabs = false" *ngIf="isAuthenticated()">
+    (click)="toggleSubMenu('account')" *ngIf="isAuthenticated()">
         <div class="menu-item">
             <mat-icon class="icon-white">account_circle</mat-icon>
             Mon compte
