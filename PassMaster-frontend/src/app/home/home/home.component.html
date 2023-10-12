@@ -1,5 +1,5 @@
 <h1>Accueil</h1>
-<div class="buttons">
+<div class="buttons" *ngIf="!isAuthenticated()">
     <div class="section" (click)="login()">
         <div class="text">
             <p>Vous avez déjà un compte ?</p>
@@ -16,4 +16,8 @@
             <p>S'inscrire</p>
         </div>
     </div>
+</div>
+
+<div class="buttons" *ngIf="isAuthenticated()">
+    <h1>BIENVENUE</h1>
 </div>

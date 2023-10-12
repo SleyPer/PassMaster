@@ -7,7 +7,7 @@
         </div>
     </a>
     <a routerLink="/chest" [ngClass]="{'active': isChestSelected}" class="section"
-        (mouseenter)="showChestSubTabs = true" (mouseleave)="showChestSubTabs = false">
+        (mouseenter)="showChestSubTabs = true" (mouseleave)="showChestSubTabs = false" *ngIf="isAuthenticated()">
         <div class="menu-item">
             <mat-icon class="icon-white">store</mat-icon>
             Mes coffres
@@ -20,17 +20,21 @@
         </ul>
     </a>
     <a routerLink="/generator" [ngClass]="{'active': isGeneratorSelected}" class="section"
-        (mouseenter)="showGeneratorSubTabs = true" (mouseleave)="showGeneratorSubTabs = false">
+        (mouseenter)="showGeneratorSubTabs = true" (mouseleave)="showGeneratorSubTabs = false" *ngIf="isAuthenticated()">
         <div class="menu-item">
             <mat-icon class="icon-white">build</mat-icon>
             Générateur de mots de passe
         </div>
     </a>
-    <a routerLink="/account" [ngClass]="{'active': isAccountSelected}" class="section"
-        (mouseenter)="showAccountSubTabs = true" (mouseleave)="showAccountSubTabs = false">
+    <a [ngClass]="{'active': isAccountSelected}" class="section"
+        (mouseenter)="showAccountSubTabs = true" (mouseleave)="showAccountSubTabs = false" *ngIf="isAuthenticated()">
         <div class="menu-item">
             <mat-icon class="icon-white">account_circle</mat-icon>
             Mon compte
         </div>
+        <ul class="sub-tabs" *ngIf="showAccountSubTabs">
+            <li><a routerLink="/profile">Mon profil</a></li>
+            <li><a (click)="logout()">Déconnexion</a></li>
+        </ul>
     </a>
 </nav>

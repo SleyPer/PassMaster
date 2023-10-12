@@ -40,7 +40,7 @@ export class UserService {
     return this.http.post<Activation>(this.apiUrl + "/activation", activation);
   }
 
-  login(username: string, password: string): Observable<User> {
-    return this.http.post<User>(this.apiUrl + "/login", {username, password});
+  login(username: string, password: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "/login", {username, password});
   }
 }
