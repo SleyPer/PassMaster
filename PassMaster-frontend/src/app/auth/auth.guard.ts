@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
       if (restrictedRoutes.includes(state.url)) {
         return this.router.parseUrl('/home');
       } else {
-        return true;
+        return true;  
       }
     }
   }

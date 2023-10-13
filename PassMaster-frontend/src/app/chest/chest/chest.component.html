@@ -7,8 +7,8 @@
   </div>
 </div>
 
-<div class="chest-grid">
-  <div class="chest-item" *ngFor="let chest of displayedChests" (click)="viewChestDetails(chest)">
+<div class="scrollable-list">
+  <div class="chest-item" *ngFor="let chest of chests" (click)="viewChestDetails(chest)">
     <p>{{ chest.name }}</p>
   </div>
 </div>

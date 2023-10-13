@@ -93,7 +93,7 @@ export class ChestDetailsComponent implements OnInit {
         this.chestService.deleteChest(this.chest).subscribe(
           () => {
             this.showNotification('Coffre supprimé avec succès', 'success');
-            this.router.navigate(['/chest']);
+            this.router.navigate(['/home']);
           },
           (error: any) => {
             this.showNotification('Erreur lors de la suppression da la catégorie', 'error');

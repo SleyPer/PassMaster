@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
   }
 
   isAuthenticated() {
-    console.log(this.authService.isAuthenticated());
     return this.authService.isAuthenticated();
   }
 }
