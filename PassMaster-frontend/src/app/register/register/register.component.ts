@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { LoginComponent } from 'src/app/login/login/login.component';
+import { RegisterDirective } from 'src/app/directive/register.directive';
 import { NotificationComponent } from 'src/app/notification/notification/notification.component';
 import { User } from 'src/app/user/user.model';
 import { UserService } from 'src/app/user/user.service';
@@ -18,19 +18,29 @@ export class RegisterComponent {
   constructor(
     private userService: UserService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    // private registerDirective: RegisterDirective
   ) { }
 
   onSubmit() {
-    this.userService.register(this.user).subscribe(
-      () => {
-        this.showNotification("Un mail vous a été envoyé avec votre code d'activation !", "success");
-        this.router.navigate(['/validate']);
-      },
-      (error: any) => {
-        this.showNotification("Erreur lors de la création de votre compte", "error");
-      }
-    )
+    if (this.verifyFields()) {
+      this.userService.register(this.user).subscribe(
+        () => {
+          this.showNotification("Un mail vous a été envoyé avec votre code d'activation !", "success");
+          this.router.navigate(['/validate']);
+        },
+        (error: any) => {
+          this.showNotification("Erreur lors de la création de votre compte", "error");
+        }
+      )
+    }
+  }
+
+  verifyFields(): boolean {
+    // return (this.registerDirective.verifyFields(
+    //   this.user.firstName, this.user.lastName, this.user.mail, this.user.pass, this.confirmPassword)
+    // )
+    return true;
   }
 
   showNotification(msg: string, type: string) {

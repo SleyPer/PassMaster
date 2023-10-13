@@ -2,6 +2,7 @@
     display: flex;
     width: 100%;
     height: 100%;
+    position: relative;
 
     .title {
         width: 70%;
@@ -11,12 +12,12 @@
         text-align: right;
         display: flex;
         flex-direction: column;
+        position: relative;
 
         .big {
-            width: 100%;
             margin-top: 30%;
             color: #408812;
-            font-weight: bold;
+            position: relative;
             justify-content: center;
             align-items: center;
             font-size: 4rem;
@@ -99,12 +100,12 @@
             height: 10%;
             align-items: center;
             justify-content: center;
-        
+
             p {
                 color: white;
                 cursor: pointer;
             }
-        
+
             p:hover {
                 font-weight: bold;
             }

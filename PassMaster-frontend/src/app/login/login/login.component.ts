@@ -1,10 +1,8 @@
-import { HttpResponse } from '@angular/common/http';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NotificationComponent } from 'src/app/notification/notification/notification.component';
-import { RegisterComponent } from 'src/app/register/register/register.component';
 import { User } from 'src/app/user/user.model';
 import { UserService } from 'src/app/user/user.service';
 
@@ -13,7 +11,7 @@ import { UserService } from 'src/app/user/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   user: User = new User();
 
   constructor(
@@ -23,18 +21,24 @@ export class LoginComponent {
     private router: Router
   ) { }
 
+  ngOnInit(): void {
+
+  }
+
   onSubmit() {
     if (this.user.mail && this.user.pass) {
       this.userService.login(this.user.mail, this.user.pass).subscribe(
         (response) => {
-            this.authService.setToken(response.bearer);
-            this.showNotification("Bienvenue !", "success");
-            this.router.navigate(['/home']);
+          this.authService.setToken(response.bearer);
+          this.showNotification("Bienvenue !", "success");
+          this.router.navigate(['/home']);
         },
         (error: any) => {
           this.showNotification("Erreur lors de la connexion à votre compte", "error");
         }
       )
+    } else {
+      this.showNotification("Veuillez remplir tous les champs", "error");
     }
   }
 

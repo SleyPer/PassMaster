@@ -27,6 +27,7 @@ import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
 import { ValidateComponent } from './validate/validate/validate.component';
 import { TokenInterceptor } from './interceptor/token-interceptor.service';
+import { RegisterDirective } from './directive/register.directive';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { TokenInterceptor } from './interceptor/token-interceptor.service';
     ConfirmationDialogComponent,
     LoginComponent,
     RegisterComponent,
-    ValidateComponent
+    ValidateComponent,
+    RegisterDirective
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,7 @@ import { TokenInterceptor } from './interceptor/token-interceptor.service';
     ClipboardModule,
     MatSnackBarModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [
     {
