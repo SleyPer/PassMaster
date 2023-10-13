@@ -1,34 +1,43 @@
-<h1>S'incrire</h1>
+<div class="content">
+    <div class="title">
+        <p class="big">Bienvenue sur PassMaster</p>
+        <p class="small">Le gestionnaire de mots de passe le plus sécurisé du monde</p>
+    </div>
+    <div class="register">
+        <div class="form">
+            <form>
+                <div class="form-group">
+                    <label for="first_name" >Prénom :</label>
+                    <input type="text" name="first_name" [(ngModel)]="user.firstName" required>
+                </div>
 
-<div class="form">
-    <form>
-        <div class="form-group">
-            <label for="first_name" >Prénom :</label>
-            <input type="text" name="first_name" [(ngModel)]="user.firstName" required>
-        </div>
+                <div class="form-group">
+                    <label for="last_name" >Nom :</label>
+                    <input type="text" name="last_name" [(ngModel)]="user.lastName" required>
+                </div>
 
-        <div class="form-group">
-            <label for="last_name" >Nom :</label>
-            <input type="text" name="last_name" [(ngModel)]="user.lastName" required>
-        </div>
+                <div class="form-group">
+                    <label for="mail">Adresse mail :</label>
+                    <input type="text" name="mail" [(ngModel)]="user.mail" required>
+                </div>
 
-        <div class="form-group">
-            <label for="mail">Adresse mail :</label>
-            <input type="text" name="mail" [(ngModel)]="user.mail" required>
-        </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" name="password" [(ngModel)]="user.pass">
+                </div>
 
-        <div class="form-group">
-            <label for="password">Mot de passe :</label>
-            <input type="password" name="password" [(ngModel)]="user.pass">
-        </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirmer le mot de passe :</label>
+                    <input type="password" name="confirm_password" [(ngModel)]="confirmPassword">
+                </div>
 
-        <div class="form-group">
-            <label for="confirm_password">Confirmer le mot de passe :</label>
-            <input type="password" name="confirm_password" [(ngModel)]="confirmPassword">
+                <div class="button" (click)="onSubmit()">
+                    <p>Créer mon compte</p>
+                </div>
+            </form>
         </div>
-
-        <div class="button" (click)="onSubmit()">
-            <p>Créer mon compte</p>
+        <div class="label" (click)="goToLoginPage()">
+            <p>Déjà un compte ? Se connecter</p>
         </div>
-    </form>
+    </div>
 </div>

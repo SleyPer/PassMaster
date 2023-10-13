@@ -1,16 +1,20 @@
-<h1>Valider mon compte</h1>
+<div class="content">
+    <div class="title">
+        <p class="big">Bienvenue sur PassMaster</p>
+        <p class="small">Le gestionnaire de mots de passe le plus sécurisé du monde</p>
+    </div>
+    <div class="validate">
+        <div class="form">
+            <form>
+                <div class="form-group">
+                    <label for="code">Saisissez le code d'activation reçu par mail :</label>
+                    <input type="text" name="code" [(ngModel)]="activation.code" required maxlength="6">
+                </div>        
 
-<div class="form">
-    <form>
-        <div class="text">
-            <label for="code">Veuillez saisir le code d'activation reçu par mail :</label>
+                <div class="button" (click)="onSubmit()">
+                    <p>Vérifier mon compte</p>
+                </div>
+            </form>
         </div>
-        <div>
-            <input type="text" name="code" [(ngModel)]="activation.code" required maxlength="6">
-        </div>        
-
-        <div class="button" (click)="onSubmit()">
-            <p>Vérifier mon compte</p>
-        </div>
-    </form>
+    </div>
 </div>

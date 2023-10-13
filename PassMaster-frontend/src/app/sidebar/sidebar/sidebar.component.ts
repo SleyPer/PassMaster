@@ -47,6 +47,6 @@ export class SidebarComponent {
 
   logout() {
     this.authService.deleteToken();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
   }
 }

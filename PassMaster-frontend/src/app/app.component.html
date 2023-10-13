@@ -15,22 +15,6 @@
   </div>
 </div>
 
-<div class="auth" *ngIf="!isAuthenticated()">
-  <div class="title">
-    <p class="big">Bienvenue sur PassMaster</p>
-    <p class="small">Le gestionnaire de mots de passe le plus sécurisé du monde</p>
-  </div>
-  <div class="form">
-    <app-login *ngIf="login"></app-login>
-    <app-register *ngIf="register"></app-register>
-
-    <div class="choice">
-      <div (click)="changeForm()" *ngIf="login">
-        Créer un compte
-      </div>
-      <div (click)="changeForm()" *ngIf="register">
-        Se connecter
-      </div>
-    </div>
-  </div>
+<div class="container" *ngIf="!isAuthenticated()">
+  <router-outlet></router-outlet>
 </div>

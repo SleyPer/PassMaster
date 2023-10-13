@@ -1,68 +1,113 @@
-h1 {
-    color: white;
-    padding: 2%;
-}
+.content {
+    display: flex;
+    width: 100%;
+    height: 100%;
 
-.form {
-    width: 60%;
-    text-align: left;
-    margin-left: 20%;
-    border: 2px solid white;
-    border-radius: 20px;
-    color: white;
-
-    .form-group {
-        margin-left: 5%;
-        margin-top: 5%;
-        display: flex;
-        align-items: center;
-    }
-
-    .form-group label {
-        flex: 1;
-        margin-right: 10px;
-        text-align: left;
-    }
-
-    .hoverable-label:hover {
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-
-    input[type="text"],
-    input[type="password"] {
-        flex: 2;
-        margin-right: 5%;
+    .title {
+        width: 70%;
+        height: 100%;
         background-color: #111;
-        color: white;
-        padding: 0.5rem;
-        border: 1px solid #111;
-        border-radius: 5px;
+        padding-right: 5%;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+
+        .big {
+            width: 100%;
+            margin-top: 30%;
+            color: #408812;
+            font-weight: bold;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            font-family: "Rajdhani", sans-serif;
+            font-stretch: extra-condensed;
+        }
+
+        .small {
+            color: white;
+            font-size: 1rem;
+            font-family: "Rajdhani", sans-serif;
+            margin-top: 5%;
+        }
     }
 
-    .button {
-        margin-bottom: 5%;
-        margin-left: 35%;
+    .register {
         width: 30%;
-        margin-top: 5%;
-        height: 5vh;
-        padding: 10px;
-        text-align: center;
-        cursor: pointer;
-        color: white;
-        border-radius: 5px;
-        background: #111;
-        line-height: 5vh;
-        font-weight: bold;
-        transition: 0.3s;
-    }
+        background-color: #333;
 
-    .button:hover {
-        width: 50%;
-        margin-left: 25%;
-        background-color: white;
-        color: black;
-        transition: 0.3s;
+        .form {
+            width: 100%;
+            height: 90%;
+            text-align: left;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .form-group {
+                margin-left: 10%;
+                width: 80%;
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 5%;
+
+                label {
+                    width: 100%;
+                    text-align: left;
+                    margin-bottom: 2%;
+                }
+
+                input {
+                    background-color: #111;
+                    padding: 0.5rem;
+                    color: white;
+                    border: 1px solid #111;
+                    border-radius: 5px;
+                }
+            }
+
+            .button {
+                margin-bottom: 5%;
+                margin-left: 30%;
+                width: 40%;
+                margin-top: 5%;
+                height: 5vh;
+                padding: 10px;
+                text-align: center;
+                cursor: pointer;
+                color: white;
+                border-radius: 5px;
+                background: #111;
+                line-height: 5vh;
+                font-weight: bold;
+                transition: 0.3s;
+            }
+
+            .button:hover {
+                width: 60%;
+                margin-left: 20%;
+                background-color: white;
+                color: black;
+                transition: 0.3s;
+            }
+        }
+
+        .label {
+            display: flex;
+            width: 100%;
+            height: 10%;
+            align-items: center;
+            justify-content: center;
+        
+            p {
+                color: white;
+                cursor: pointer;
+            }
+        
+            p:hover {
+                font-weight: bold;
+            }
+        }
     }
 }

@@ -9,17 +9,18 @@ import { ChestDetailsComponent } from './chest-details/chest-details/chest-detai
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
 import { ValidateComponent } from './validate/validate/validate.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'chest', component: ChestComponent },
-  { path: 'generator', component: GeneratorComponent },
-  { path: 'account', component: AccountComponent },
-  { path: 'chest/:id', component: ChestDetailsComponent },
-  { path: 'create', component: CreateChestComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'validate', component: ValidateComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'chest', component: ChestComponent, canActivate: [AuthGuard] },
+  { path: 'generator', component: GeneratorComponent, canActivate: [AuthGuard] },
+  { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
+  { path: 'chest/:id', component: ChestDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'create', component: CreateChestComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
+  { path: 'validate', component: ValidateComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

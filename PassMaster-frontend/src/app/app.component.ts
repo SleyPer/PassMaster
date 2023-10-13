@@ -8,8 +8,6 @@ import { AuthService } from './auth/auth.service';
 })
 export class AppComponent {
   title = 'PassMaster';
-  login: boolean = true;
-  register: boolean = false;
 
   constructor(private authService: AuthService) {
 
@@ -17,10 +15,5 @@ export class AppComponent {
 
   isAuthenticated() {
     return this.authService.isAuthenticated();
-  }
-
-  changeForm() {
-    this.login = !this.login;
-    this.register = !this.register;
   }
 }

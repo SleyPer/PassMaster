@@ -1,17 +1,28 @@
-<div class="form">
-    <form>
-        <div class="form-group">
-            <label for="mail">Adresse mail :</label>
-            <input type="text" name="mail" [(ngModel)]="user.mail" required>
-        </div>
+<div class="content">
+    <div class="title">
+        <p class="big">Bienvenue sur PassMaster</p>
+        <p class="small">Le gestionnaire de mots de passe le plus sécurisé du monde</p>
+    </div>
+    <div class="login">
+        <div class="form">
+            <form>
+                <div class="form-group">
+                    <label for="mail">Adresse mail :</label>
+                    <input type="text" name="mail" [(ngModel)]="user.mail" required>
+                </div>
 
-        <div class="form-group">
-            <label for="password">Mot de passe :</label>
-            <input type="password" name="password" [(ngModel)]="user.pass" required>
-        </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" name="password" [(ngModel)]="user.pass" required>
+                </div>
 
-        <div class="button" (click)="onSubmit()">
-            <p>Se connecter</p>
+                <div class="button" (click)="onSubmit()">
+                    <p>Se connecter</p>
+                </div>
+            </form>
         </div>
-    </form>
+        <div class="label" (click)="goToRegisterPage()">
+            <p>Créer un compte</p>
+        </div>
+    </div>
 </div>

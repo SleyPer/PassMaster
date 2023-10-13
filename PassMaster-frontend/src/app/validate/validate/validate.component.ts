@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NotificationComponent } from 'src/app/notification/notification/notification.component';
@@ -23,7 +23,7 @@ export class ValidateComponent {
     this.userService.activate(this.activation).subscribe(
       () => {
         this.showNotification("Votre compte a été vérifié avec succès", "success");
-        this.router.navigate(['/home']);
+        this.router.navigate(['/login']);
       },
       (error) => {
         this.showNotification("Erreur lors de la vérification de votre compte", "error");
