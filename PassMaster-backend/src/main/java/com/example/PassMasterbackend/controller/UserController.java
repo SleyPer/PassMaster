@@ -1,7 +1,6 @@
 package com.example.PassMasterbackend.controller;
 
 import com.example.PassMasterbackend.dto.AuthenticationDTO;
-import com.example.PassMasterbackend.entity.Chest;
 import com.example.PassMasterbackend.entity.User;
 import com.example.PassMasterbackend.security.JwtService;
 import com.example.PassMasterbackend.service.UserService;

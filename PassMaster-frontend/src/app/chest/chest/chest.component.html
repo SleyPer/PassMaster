@@ -2,7 +2,7 @@
   <div class="search">
     <input type="text" id="search" name="search" [(ngModel)]="search">
   </div>
-  <div class="button" (click)="createChest()">
+  <div class="button" (click)="createChest()" [matTooltip]="'Créer un coffre'">
     <mat-icon class="icon-white">add</mat-icon>
   </div>
 </div>

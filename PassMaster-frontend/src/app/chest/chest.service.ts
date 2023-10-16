@@ -16,6 +16,10 @@ export class ChestService {
     return this.http.get<Chest[]>(this.apiUrl);
   }
 
+  getChestsByUserId(userId: number): Observable<Chest[]>{
+    return this.http.get<Chest[]>(this.apiUrl + '/user/' + userId);
+  }
+
   getChestById(chestId: number): Observable<Chest> {
     const url = `${this.apiUrl}/${chestId}`;
     return this.http.get<Chest>(url);

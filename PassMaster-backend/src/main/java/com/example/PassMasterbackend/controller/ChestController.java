@@ -20,6 +20,11 @@ public class ChestController {
         return chestService.getAllChests();
     }
 
+    @GetMapping("/user/{userId}")
+    public List<Chest> getChestsByUserId(@PathVariable Long userId) {
+        return chestService.getChestsByUserId(userId);
+    }
+
     @GetMapping("/{id}")
     public Chest getChestById(@PathVariable Long id) {
         return chestService.getChestById(id);

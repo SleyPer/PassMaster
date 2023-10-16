@@ -27,7 +27,6 @@ import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
 import { ValidateComponent } from './validate/validate/validate.component';
 import { TokenInterceptor } from './interceptor/token-interceptor.service';
-import { RegisterDirective } from './directive/register.directive';
 
 @NgModule({
   declarations: [
@@ -46,7 +45,6 @@ import { RegisterDirective } from './directive/register.directive';
     LoginComponent,
     RegisterComponent,
     ValidateComponent,
-    RegisterDirective
   ],
   imports: [
     BrowserModule,

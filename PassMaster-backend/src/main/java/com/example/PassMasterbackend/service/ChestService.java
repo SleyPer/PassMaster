@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -60,5 +61,9 @@ public class ChestService {
 
     public void deleteChest(Long id) {
         chestRepository.deleteById(id);
+    }
+
+    public List<Chest> getChestsByUserId(Long userId) {
+        return chestRepository.findByUserId(userId);
     }
 }
