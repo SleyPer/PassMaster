@@ -1,1 +1,32 @@
-<h1>Mon compte</h1>
+<div class="form">
+    <form>
+        <div class="form-group">
+            <div [matTooltip]="'Modifier la photo de profil'" class="default-profile-picture"
+                (click)="selectProfilePicture()">
+                <mat-icon class="icon-white" *ngIf="!profilePictureUrl">add</mat-icon>
+                <img [src]="profilePictureUrl" *ngIf="profilePictureUrl">
+                <input type="file" (change)="onProfilePictureSelected($event)" style="display: none;" #fileInput>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="firstName">Prénom :</label>
+            <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName">
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Nom :</label>
+            <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName">
+        </div>
+
+        <div class="form-group">
+            <label for="mail">Adresse mail :</label>
+            <input type="text" id="mail" name="mail" [(ngModel)]="user.mail">
+        </div>
+
+        <div class="button" (click)="modifyPassword()">
+            <p>Modifier le mot de passe</p>
+        </div>
+    </form>
+</div>

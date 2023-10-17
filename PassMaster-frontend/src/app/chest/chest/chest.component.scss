@@ -53,6 +53,10 @@ p {
     overflow-y: auto;
     margin: 2%;
 
+    .no-chests {
+        text-align: center;
+    }
+
     &::-webkit-scrollbar {
         width: 6px;
     }

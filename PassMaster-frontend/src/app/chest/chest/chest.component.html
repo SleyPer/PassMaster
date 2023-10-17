@@ -8,6 +8,9 @@
 </div>
 
 <div class="scrollable-list">
+  <div *ngIf="chests.length === 0" class="no-chests">
+    <p>Aucun coffre</p>
+  </div>
   <div class="chest-item" *ngFor="let chest of chests" (click)="viewChestDetails(chest)">
     <p>{{ chest.name }}</p>
   </div>

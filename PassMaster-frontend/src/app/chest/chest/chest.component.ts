@@ -22,8 +22,6 @@ export class ChestComponent implements OnInit {
   ngOnInit() {
     this.loadChests();
     if (this.authService.getToken()) {
-      console.log("token", this.authService.getToken());
-      console.log("decoded : ", this.authService.getDecodedToken(this.authService.getToken()));
     }
   }
 
