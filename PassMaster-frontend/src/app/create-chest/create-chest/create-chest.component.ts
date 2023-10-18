@@ -1,6 +1,5 @@
-import { Component, EventEmitter } from '@angular/core';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Chest } from 'src/app/chest/chest.model';
 import { ChestService } from 'src/app/chest/chest.service';
 import { NotificationComponent } from 'src/app/notification/notification/notification.component';
@@ -20,8 +19,7 @@ export class CreateChestComponent {
 
   constructor(
     private chestService: ChestService,
-    private snackBar: MatSnackBar,
-    private router: Router
+    private snackBar: MatSnackBar
   ) {
 
   }

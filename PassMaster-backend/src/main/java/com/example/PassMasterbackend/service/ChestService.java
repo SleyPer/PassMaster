@@ -10,7 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -45,6 +44,7 @@ public class ChestService {
 
 
     public ResponseEntity<?> updateChest(Long id, Chest chest) {
+        System.out.println("JE SUIS LA");
         Chest existingChest = chestRepository.findById(id).orElse(null);
         if (existingChest != null) {
             existingChest.setName(chest.getName());
@@ -52,6 +52,13 @@ public class ChestService {
             existingChest.setUsername(chest.getUsername());
             existingChest.setPassword(chest.getPassword());
             existingChest.setLink(chest.getLink());
+
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            User user = this.userRepository.findByMail(username).orElseThrow(
+                    () -> new RuntimeException("Vous devez vous connecter pour modifier un coffre")
+            );
+
+            existingChest.setUser(user);
 
             return ResponseEntity.ok(chestRepository.save(existingChest));
         }

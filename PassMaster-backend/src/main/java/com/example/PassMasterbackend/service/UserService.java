@@ -2,11 +2,14 @@ package com.example.PassMasterbackend.service;
 
 import com.example.PassMasterbackend.entity.*;
 import com.example.PassMasterbackend.repository.UserRepository;
+import com.example.PassMasterbackend.util.ImageUtil;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.Instant;
 import java.util.List;
@@ -67,5 +70,19 @@ public class UserService implements UserDetailsService {
 
     public User getUserById(Long id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    public Object updateUser(Long id, User user) {
+        User existingUser = userRepository.findById(id).orElse(null);
+        if (existingUser != null) {
+            existingUser.setFirstName(user.getFirstName());
+            existingUser.setLastName(user.getLastName());
+            existingUser.setMail(user.getMail());
+            existingUser.setPass(user.getPass());
+
+            return ResponseEntity.ok(userRepository.save(existingUser));
+        }
+
+        return ResponseEntity.notFound().build();
     }
 }

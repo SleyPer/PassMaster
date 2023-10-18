@@ -36,7 +36,8 @@ public class ChestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCategory(@PathVariable Long id, @RequestBody Chest chest) {
+    public ResponseEntity<?> updateChest(@PathVariable Long id, @RequestBody Chest chest) {
+        System.out.println("JE SUIS LA");
         return ResponseEntity.ok(chestService.updateChest(id, chest));
     }
 

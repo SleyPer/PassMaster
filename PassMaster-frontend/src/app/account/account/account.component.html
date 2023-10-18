@@ -1,11 +1,9 @@
 <div class="form">
     <form>
         <div class="form-group">
-            <div [matTooltip]="'Modifier la photo de profil'" class="default-profile-picture"
-                (click)="selectProfilePicture()">
-                <mat-icon class="icon-white" *ngIf="!profilePictureUrl">add</mat-icon>
-                <img [src]="profilePictureUrl" *ngIf="profilePictureUrl">
-                <input type="file" (change)="onProfilePictureSelected($event)" style="display: none;" #fileInput>
+            <div [matTooltip]="'Modifier la photo de profil'" class="default-profile-picture">
+                <input type="file" (change)="onImageSelected($event)">
+                <input type="button" (click)="uploadImage()" value="upload">
             </div>
         </div>
 
