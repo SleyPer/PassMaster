@@ -1,29 +1,50 @@
-<div class="form">
-    <form>
-        <div class="form-group">
-            <div [matTooltip]="'Modifier la photo de profil'" class="default-profile-picture">
-
+<h2 class="title">Mon profil</h2>
+<div class="user-profile" [ngClass]="{'expanded': isExpanded}">
+    <div class="header">
+        <div class="profile-picture" [matTooltip]="'Modifier la photo de profil'">
+            <div class="default-profile-picture">
+                <mat-icon class="icon-white">add</mat-icon>
             </div>
         </div>
 
+        <div class="user-details">
+            <div class="user-name">
+                <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+            </div>
 
-        <div class="form-group">
-            <label for="firstName">Prénom :</label>
-            <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName">
+            <div class="user-email">
+                <p>{{ user.mail }}</p>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="lastName">Nom :</label>
-            <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName">
-        </div>
-
-        <div class="form-group">
-            <label for="mail">Adresse mail :</label>
-            <input type="text" id="mail" name="mail" [(ngModel)]="user.mail">
-        </div>
-
-        <div class="button" (click)="modifyPassword()">
+        <div class="button" (click)="showForm()">
             <p>Modifier le mot de passe</p>
         </div>
-    </form>
+    </div>
+
+    <div class="footer">
+        <div class="form">
+            <form>
+                <div class="form-group">
+                    <label for="oldPassword">Mot de passe actuel :</label>
+                    <input type="password" id="oldPassword" name="oldPassword" [(ngModel)]="oldPassword" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="newPassword">Nouveau mot de passe :</label>
+                    <input type="password" id="newPassword" name="newPassword" [(ngModel)]="newPassword" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmNewPassword">Confirmez le mot de passe :</label>
+                    <input type="password" id="confirmNewPassword" name="confirmNewPassword"
+                        [(ngModel)]="confirmNewPassword" required>
+                </div>
+
+                <div class="button" (click)="onSubmit()">
+                    <mat-icon>check</mat-icon>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

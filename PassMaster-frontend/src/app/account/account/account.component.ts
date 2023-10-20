@@ -12,6 +12,11 @@ import { UserService } from 'src/app/user/user.service';
 })
 export class AccountComponent implements OnInit {
   user: User = new User();
+  isExpanded: boolean = false;
+
+  oldPassword: string = "";
+  newPassword: string = "";
+  confirmNewPassword: string = "";
 
   constructor(
     private userService: UserService,
@@ -31,7 +36,11 @@ export class AccountComponent implements OnInit {
     return this.authService.getDecodedToken(this.authService.getToken()).jti;
   }
 
-  modifyPassword() {
+  showForm() {
+    this.isExpanded = !this.isExpanded;
+  }
+
+  onSubmit() {
 
   }
 
