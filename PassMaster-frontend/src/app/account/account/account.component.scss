@@ -80,6 +80,14 @@
         .header {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
+
+            .button {
+                margin-left: 5%;
+                width: 40%;
+                background-color: white;
+                color: black;
+                transition: 0.3s;
+            }
         }
     }
 

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { LogoutDialogComponent } from 'src/app/logout-dialog/logout-dialog/logout-dialog.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,7 +19,10 @@ export class SidebarComponent {
   isGeneratorSelected: boolean = false;
   isAccountSelected: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) {
+  dialogRef!: any;
+
+  constructor(private router: Router, private authService: AuthService, private dialog: MatDialog
+    ) {
     this.router.events.subscribe((val) => {
       this.isHomeSelected = this.router.url === '/home';
       this.isGeneratorSelected = this.router.url === '/generator';
@@ -48,5 +53,20 @@ export class SidebarComponent {
   logout() {
     this.authService.deleteToken();
     this.router.navigate(['/login']);
+  }
+
+  confirmLogout(): void {
+    this.dialogRef = this.dialog.open(LogoutDialogComponent, {
+      width: '40%',
+      data: { 
+        message: 'Êtes-vous sûr de vouloir vous déconnecter ?'
+      }
+    });
+  
+    this.dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.logout();
+      }
+    });
   }
 }

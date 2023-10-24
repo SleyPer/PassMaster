@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Chest } from 'src/app/chest/chest.model';
 import { ChestService } from 'src/app/chest/chest.service';
@@ -10,6 +10,7 @@ import { NotificationComponent } from 'src/app/notification/notification/notific
   styleUrls: ['./create-chest.component.scss']
 })
 export class CreateChestComponent {
+  @Output() chestCreated: EventEmitter<void> = new EventEmitter<void>();
 
   chestName: string = '';
   chestDescription: string = '';
@@ -19,7 +20,7 @@ export class CreateChestComponent {
 
   constructor(
     private chestService: ChestService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {
 
   }
@@ -28,6 +29,7 @@ export class CreateChestComponent {
     this.chestService.createChest(chest).subscribe(
       (response) => {
         this.showNotification("Coffre créé avec succès", "success");
+        this.chestCreated.emit();
       },
       (error) => {
         this.showNotification("Erreur lors de la création du coffre", "error");

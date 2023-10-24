@@ -27,6 +27,7 @@ import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
 import { ValidateComponent } from './validate/validate/validate.component';
 import { TokenInterceptor } from './interceptor/token-interceptor.service';
+import { LogoutDialogComponent } from './logout-dialog/logout-dialog/logout-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { TokenInterceptor } from './interceptor/token-interceptor.service';
     LoginComponent,
     RegisterComponent,
     ValidateComponent,
+    LogoutDialogComponent,
   ],
   imports: [
     BrowserModule,
