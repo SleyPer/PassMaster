@@ -11,16 +11,16 @@
         <div class="characters-div">
             <label>Caractères :</label>
             <div class="checkbox-group">
-                <div class="checkbox" (click)="changeParams('lowerCase')"  [ngClass]="{'lower': includeLowercase}">
+                <div class="checkbox" (click)="changeParams('lowerCase')"  [ngClass]="{'active': includeLowercase}">
                     a-z
                 </div>
-                <div class="checkbox" (click)="changeParams('upperCase')" [ngClass]="{'upper': includeUppercase}">
+                <div class="checkbox" (click)="changeParams('upperCase')" [ngClass]="{'active': includeUppercase}">
                     A-Z
                 </div>
-                <div class="checkbox" (click)="changeParams('numbers')" [ngClass]="{'numbers': includeNumbers}">
+                <div class="checkbox" (click)="changeParams('numbers')" [ngClass]="{'active': includeNumbers}">
                     0-9
                 </div>
-                <div class="checkbox" (click)="changeParams('specialCharacters')" [ngClass]="{'special': includeSpecialCharacters}">
+                <div class="checkbox" (click)="changeParams('specialCharacters')" [ngClass]="{'active': includeSpecialCharacters}">
                     !$%&@/+-
                 </div>
             </div>

@@ -13,6 +13,20 @@
             Générateur de mots de passe
         </div>
     </a>
+    <a routerLink="/friends" [ngClass]="{'active': isFriendsSelected}" class="section"
+    (click)="toggleSubMenu('friends')" *ngIf="isAuthenticated()">
+        <div class="menu-item">
+            <mat-icon class="icon-white">people</mat-icon>
+            Mes amis
+        </div>
+    </a>
+    <a routerLink="/messages" [ngClass]="{'active': isMessagesSelected}" class="section"
+    (click)="toggleSubMenu('messages')" *ngIf="isAuthenticated()">
+        <div class="menu-item">
+            <mat-icon class="icon-white">message</mat-icon>
+            Messages
+        </div>
+    </a>
     <a [ngClass]="{'active': isAccountSelected}" class="section"
     (click)="toggleSubMenu('account')" *ngIf="isAuthenticated()">
         <div class="menu-item">

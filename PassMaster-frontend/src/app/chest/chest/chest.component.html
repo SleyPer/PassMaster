@@ -1,6 +1,7 @@
 <div class="header">
   <div class="search">
-    <input type="text" id="search" name="search" [(ngModel)]="search">
+    <input type="text" id="search" name="search" placeholder="Chercher un coffre" [(ngModel)]="search"
+      (keyup)="searchChests()">
   </div>
   <div class="button" (click)="createChest()" [matTooltip]="'Créer un coffre'">
     <mat-icon class="icon-white">add</mat-icon>

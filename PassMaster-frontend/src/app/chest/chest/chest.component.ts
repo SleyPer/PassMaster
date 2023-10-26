@@ -17,7 +17,7 @@ export class ChestComponent implements OnInit {
     private chestService: ChestService,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadChests();
@@ -44,4 +44,13 @@ export class ChestComponent implements OnInit {
   onChestCreated() {
     this.loadChests();
   }
+
+  searchChests() {
+    if (this.search.trim() === '') {
+      this.loadChests();
+    } else {
+      const searchTerm = this.search.toLowerCase();
+      this.chests = this.chests.filter(chest => chest.name ? chest.name.toLowerCase().includes(searchTerm) : "");
+    }
+  }  
 }
