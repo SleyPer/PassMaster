@@ -58,7 +58,7 @@ import { LogoutDialogComponent } from './logout-dialog/logout-dialog/logout-dial
     ClipboardModule,
     MatSnackBarModule,
     MatTooltipModule,
-    MatDialogModule,
+    MatDialogModule
   ],
   providers: [
     {

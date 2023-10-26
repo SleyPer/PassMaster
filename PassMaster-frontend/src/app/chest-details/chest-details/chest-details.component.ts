@@ -114,4 +114,26 @@ export class ChestDetailsComponent implements OnInit {
     this.chest = Object.assign({}, this.originalChest);
     this.isEditing = false;
   }
+
+  copyToClipboard(field: string) {
+    console.log("je suis la")
+    const text = field === 'name' ? this.chest.name :
+      field === 'description' ? this.chest.description :
+        field === 'username' ? this.chest.username :
+          field === 'password' ? this.chest.password :
+            field === 'link' ? this.chest.link : '';
+
+    const tempTextArea = document.createElement('textarea');
+    if (text) {
+      tempTextArea.value = text;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+      this.showNotification('Champ copié', 'success');
+    } else {
+      this.showNotification('Veuillez renseigner le champ pour le copier', 'error');
+    }
+  }
+
 }

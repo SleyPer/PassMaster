@@ -11,7 +11,7 @@ export class NotificationComponent {
   msg: string;
   icon: string;
 
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data : any) {
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
     this.msg = data.message;
     this.icon = data.icon;
   }

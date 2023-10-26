@@ -42,6 +42,16 @@ h1 {
             padding: 0.5rem;
             resize: none;
             width: 90%;
+            margin-bottom: 5%;
+        }
+
+        p {
+            display: inline;
+        }
+
+        p:hover {
+            font-weight: bold;
+            cursor: pointer;
         }
 
         textarea {
@@ -66,6 +76,10 @@ h1 {
             &::-webkit-scrollbar-button {
                 display: none;
             }
+        }
+
+        textarea:hover {
+            cursor: pointer;
         }
 
         input.edit,
@@ -104,4 +118,3 @@ h1 {
         transition: 0.3s;
     }
 }
-
