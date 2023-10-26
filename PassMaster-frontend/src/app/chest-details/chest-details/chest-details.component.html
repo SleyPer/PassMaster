@@ -1,7 +1,41 @@
-<h1>{{ chest.name }}</h1>
+<h1>Détails du coffre</h1>
 
-<app-chest-form [chest]="chestForm"></app-chest-form>
+<div class="grid-container">
+    <div class="grid-item">
+        <p>Nom : </p>
+        <input type="text" id="title" name="title" [disabled]="!isEditing" [(ngModel)]="chest.name" [ngClass]="{'edit': isEditing}">
+    </div>
+    <div class="grid-item">
+        <p>Description :</p>
+        <textarea id="description" name="description" [disabled]="!isEditing" [(ngModel)]="chest.description" [ngClass]="{'edit': isEditing}"></textarea>
+    </div>
+    <div class="grid-item">
+        <p>Username :</p>
+        <input type="text" id="username" name="username" [disabled]="!isEditing" [(ngModel)]="chest.username" [ngClass]="{'edit': isEditing}">
+        <p>Password : </p>
+        <input type="password" id="password" name="password" [disabled]="!isEditing" [(ngModel)]="chest.password" [ngClass]="{'edit': isEditing}">
+    </div>
+    <div class="grid-item">
+        <p>Lien : </p>
+        <a [href]="chest.link" target="_blank" *ngIf="!isEditing">{{ chest.link }}</a>
+        <input type="text" id="link" name="link" [disabled]="!isEditing" [(ngModel)]="chest.link" [ngClass]="{'edit': isEditing}" *ngIf="isEditing">
+    </div>
+</div>
 
-<div class="deleteChest">
-    <label class="hoverable-delete-label" (click)="confirmDeleteChest()">Supprimer le coffre</label>
+<div class="buttons" *ngIf="!isEditing">
+    <div class="button" (click)="editChest()">
+        <p>Modifier</p>
+    </div>
+    <div class="button" (click)="confirmDeleteChest()">
+        <p>Supprimer</p>
+    </div>
+</div>
+
+<div class="buttons" *ngIf="isEditing">
+    <div class="button" (click)="submit()">
+        <mat-icon>check</mat-icon>
+    </div>
+    <div class="button" (click)="cancelEdit()">
+        <mat-icon>close</mat-icon>
+    </div>
 </div>

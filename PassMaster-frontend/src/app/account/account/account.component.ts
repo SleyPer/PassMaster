@@ -56,41 +56,35 @@ export class AccountComponent implements OnInit {
 
   verifyFields(): boolean {
     if (this.oldPassword && this.newPassword && this.confirmNewPassword) {
-      if (this.oldPassword === this.user.pass) {
-        if (this.newPassword === this.confirmNewPassword) {
-          if (this.newPassword.length >= 8) {
-            const uppercaseLetterPattern = /[A-Z]/;
-            if (uppercaseLetterPattern.test(this.newPassword)) {
-              const digitPattern = /\d/;
-              if (digitPattern.test(this.newPassword)) {
-                const specialCharacterPattern = /[^A-Za-z0-9]/;
-                if (specialCharacterPattern.test(this.newPassword)) {
-                  return true;
-                } else {
-                  this.showNotification("Le mot de passe doit contenir au moins un caractère spécial", "error");
-                  return false;
-                }
+      if (this.newPassword === this.confirmNewPassword) {
+        if (this.newPassword.length >= 8) {
+          const uppercaseLetterPattern = /[A-Z]/;
+          if (uppercaseLetterPattern.test(this.newPassword)) {
+            const digitPattern = /\d/;
+            if (digitPattern.test(this.newPassword)) {
+              const specialCharacterPattern = /[^A-Za-z0-9]/;
+              if (specialCharacterPattern.test(this.newPassword)) {
+                return true;
               } else {
-                this.showNotification("Le mot de passe doit contenir au moins un chiffre", "error");
+                this.showNotification("Le mot de passe doit contenir au moins un caractère spécial", "error");
                 return false;
               }
             } else {
-              this.showNotification("Le mot de passe doit contenir au moins une lettre majuscule", "error");
+              this.showNotification("Le mot de passe doit contenir au moins un chiffre", "error");
               return false;
             }
           } else {
-            this.showNotification("Le mot de passe doit faire 8 caractères minimum", "error");
+            this.showNotification("Le mot de passe doit contenir au moins une lettre majuscule", "error");
             return false;
           }
         } else {
-          this.showNotification("Les nouveaux mots de passe doivent être identiques", "error");
+          this.showNotification("Le mot de passe doit faire 8 caractères minimum", "error");
           return false;
         }
       } else {
-        this.showNotification("Le mot de passe actuel est incorrect", "error");
-          return false;
+        this.showNotification("Les nouveaux mots de passe doivent être identiques", "error");
+        return false;
       }
-
     } else {
       this.showNotification("Veuillez remplir tous les champs", "error");
       return false;

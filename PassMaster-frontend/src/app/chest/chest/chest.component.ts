@@ -21,8 +21,6 @@ export class ChestComponent implements OnInit {
 
   ngOnInit() {
     this.loadChests();
-    if (this.authService.getToken()) {
-    }
   }
 
   createChest() {

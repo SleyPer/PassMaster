@@ -13,23 +13,11 @@ import { NotificationComponent } from 'src/app/notification/notification/notific
   styleUrls: ['./chest-details.component.scss']
 })
 export class ChestDetailsComponent implements OnInit {
-
   chest: Chest = new Chest();
+  originalChest: Chest = new Chest();
   chestId: number = 0;
-  chestForm: {
-    name?: string,
-    description?: string,
-    username?: string,
-    password?: string,
-    link?: string
-  } = {
-    name: '',
-    description: '',
-    username: '',
-    password: '',
-    link: ''
-  };
   dialogRef!: any;
+  isEditing: boolean = false;
 
   constructor(
     private chestService: ChestService,
@@ -52,13 +40,6 @@ export class ChestDetailsComponent implements OnInit {
     this.chestService.getChestById(this.chestId).subscribe(
       (chest: Chest) => {
         this.chest = chest;
-        this.chestForm = {
-          name: chest.name,
-          description: chest.description,
-          username: chest.username,
-          password: chest.password,
-          link: chest.link
-        };
       },
       (error: any) => {
         this.showNotification("Erreur lors de la récupération des données", "error");
@@ -82,12 +63,12 @@ export class ChestDetailsComponent implements OnInit {
   confirmDeleteChest(): void {
     this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '40%',
-      data: { 
+      data: {
         message: 'Êtes-vous sûr de vouloir supprimer le coffre "' + this.chest.name + '" ?',
         chestName: this.chest.name
       }
     });
-  
+
     this.dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
         this.chestService.deleteChest(this.chest).subscribe(
@@ -96,10 +77,41 @@ export class ChestDetailsComponent implements OnInit {
             this.router.navigate(['/home']);
           },
           (error: any) => {
-            this.showNotification('Erreur lors de la suppression da la catégorie', 'error');
+            this.showNotification('Erreur lors de la suppression du coffre', 'error');
           }
         );
       }
     });
+  }
+
+  editChest() {
+    if (this.isEditing) {
+      this.chest = Object.assign({}, this.originalChest);
+    } else {
+      this.originalChest = Object.assign({}, this.chest);
+    }
+    this.isEditing = !this.isEditing;
+  }
+
+
+  submit() {
+    if (this.chest.name) {
+      this.chestService.updateChest(this.chest).subscribe(
+        result => {
+          this.chest = result;
+          this.showNotification('Coffre modifié avec succès', 'success');
+        },
+        error => {
+          this.showNotification('Erreur lors de la modification du coffre', 'error');
+        }
+      )
+    } else {
+      this.showNotification('Veuillez renseigner le nom du coffre', 'error');
+    }
+  }
+
+  cancelEdit() {
+    this.chest = Object.assign({}, this.originalChest);
+    this.isEditing = false;
   }
 }
