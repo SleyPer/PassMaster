@@ -116,7 +116,6 @@ export class ChestDetailsComponent implements OnInit {
   }
 
   copyToClipboard(field: string) {
-    console.log("je suis la")
     const text = field === 'name' ? this.chest.name :
       field === 'description' ? this.chest.description :
         field === 'username' ? this.chest.username :
@@ -135,5 +134,4 @@ export class ChestDetailsComponent implements OnInit {
       this.showNotification('Veuillez renseigner le champ pour le copier', 'error');
     }
   }
-
 }
