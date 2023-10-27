@@ -1,6 +1,5 @@
 package com.example.PassMasterbackend.entity;
 
-import com.example.PassMasterbackend.dto.ChestDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

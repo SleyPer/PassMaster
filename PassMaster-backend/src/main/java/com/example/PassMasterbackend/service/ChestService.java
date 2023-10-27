@@ -44,7 +44,6 @@ public class ChestService {
 
 
     public ResponseEntity<?> updateChest(Long id, Chest chest) {
-        System.out.println("JE SUIS LA");
         Chest existingChest = chestRepository.findById(id).orElse(null);
         if (existingChest != null) {
             existingChest.setName(chest.getName());

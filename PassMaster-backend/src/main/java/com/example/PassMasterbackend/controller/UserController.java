@@ -15,10 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
 @Slf4j
 @AllArgsConstructor
 @RestController
@@ -37,6 +33,11 @@ public class UserController {
     @PostMapping(path = "activation")
     public void activate(@RequestBody Map<String, String> activation) {
         this.userService.activation(activation);
+    }
+
+    @PostMapping(path = "refresh-token")
+    public @ResponseBody Map<String, String> refreshToken(@RequestBody Map<String, String> refreshTokenRequest) {
+        return this.jwtService.refreshToken(refreshTokenRequest);
     }
 
     @PostMapping(path = "login")

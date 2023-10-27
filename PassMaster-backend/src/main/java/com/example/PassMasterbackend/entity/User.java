@@ -1,5 +1,7 @@
 package com.example.PassMasterbackend.entity;
 
+import com.example.PassMasterbackend.deserializer.UserDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +20,7 @@ import java.util.Collections;
 @NoArgsConstructor
 @Entity
 @Table(name = "user")
+@JsonDeserialize(using = UserDeserializer.class)
 public class User implements UserDetails {
 
     @Id
