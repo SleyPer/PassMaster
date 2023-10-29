@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { LogoutDialogComponent } from 'src/app/logout-dialog/logout-dialog/logout-dialog.component';
+import { NotificationComponent } from 'src/app/notification/notification/notification.component';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -25,7 +28,11 @@ export class SidebarComponent {
 
   dialogRef!: any;
 
-  constructor(private router: Router, private authService: AuthService, private dialog: MatDialog
+  constructor(private router: Router,
+    private authService: AuthService, 
+    private dialog: MatDialog, 
+    private userService: UserService,
+    private snackBar: MatSnackBar
   ) {
     this.router.events.subscribe((val) => {
       this.isHomeSelected = this.router.url === '/home';
@@ -61,8 +68,16 @@ export class SidebarComponent {
   }
 
   logout() {
-    this.authService.deleteToken();
-    this.router.navigate(['/login']);
+    this.userService.logout().subscribe(
+      result => {
+        this.authService.deleteToken();
+        this.router.navigate(['/login']);
+        this.showNotification("A bientôt", "success");
+      },
+      error => {
+        this.showNotification("Erreur lors de la déconnexion", "error");
+      }
+    )
   }
 
   confirmLogout(): void {
@@ -77,6 +92,19 @@ export class SidebarComponent {
       if (result) {
         this.logout();
       }
+    });
+  }
+
+  showNotification(msg: string, type: string) {
+    this.snackBar.openFromComponent(NotificationComponent, {
+      duration: 5000,
+      data: {
+        message: msg,
+        icon: type == "success" ? "check" : "close"
+      },
+      horizontalPosition: 'end',
+      verticalPosition: 'bottom',
+      panelClass: type == "success" ? ['success-snackbar'] : ['error-snackbar']
     });
   }
 }

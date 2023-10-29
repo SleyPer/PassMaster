@@ -43,4 +43,8 @@ export class UserService {
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(this.apiUrl + "/login", {username, password});
   }
+
+  logout(): Observable<any> {
+    return this.http.post<any>(this.apiUrl + "/logout", null);
+  }
 }

@@ -40,6 +40,7 @@ public class SecurityConfig {
                                 .requestMatchers(POST, "/api/user/registration").permitAll()
                                 .requestMatchers(POST, "/api/user/activation").permitAll()
                                 .requestMatchers(POST, "/api/user/login").permitAll()
+                                .requestMatchers(POST, "/api/user/logout").permitAll()
                                 .requestMatchers(POST, "/api/user/refresh-token").permitAll()
                                 .requestMatchers(GET, "/api/user").permitAll()
                                 .requestMatchers(GET, "/api/user/{id}").permitAll()

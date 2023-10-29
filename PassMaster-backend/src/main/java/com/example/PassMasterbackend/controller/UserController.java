@@ -55,6 +55,11 @@ public class UserController {
         return null;
     }
 
+    @PostMapping(path = "logout")
+    public void logout() {
+        this.jwtService.logout();
+    }
+
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();

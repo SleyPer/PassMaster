@@ -28,6 +28,7 @@ import { RegisterComponent } from './register/register/register.component';
 import { ValidateComponent } from './validate/validate/validate.component';
 import { TokenInterceptor } from './interceptor/token-interceptor.service';
 import { LogoutDialogComponent } from './logout-dialog/logout-dialog/logout-dialog.component';
+import { FriendsComponent } from './friends/friends/friends.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { LogoutDialogComponent } from './logout-dialog/logout-dialog/logout-dial
     RegisterComponent,
     ValidateComponent,
     LogoutDialogComponent,
+    FriendsComponent,
   ],
   imports: [
     BrowserModule,
