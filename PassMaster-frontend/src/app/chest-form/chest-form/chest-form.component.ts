@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { ClipboardService } from 'ngx-clipboard';
 import { Chest } from 'src/app/chest/chest.model';
 import { NotificationComponent } from 'src/app/notification/notification/notification.component';
@@ -15,12 +14,14 @@ export class ChestFormComponent {
   @Input() chest: Chest = new Chest();
 
   constructor(
-    private router: Router,
     private clipboardService: ClipboardService,
     private snackBar: MatSnackBar
   ) { }
 
   onSubmit() {
+    if (this.chest.link !== undefined && this.chest.link.trim() !== '') {
+      this.chest.link = 'http://' + this.chest.link;
+    }
     this.chestAdded.emit(this.chest);
 
     this.chest = new Chest();

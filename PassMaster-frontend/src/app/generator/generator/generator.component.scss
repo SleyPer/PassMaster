@@ -118,6 +118,9 @@ h1 {
     }
 
     .generated-password {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: #111;
         width: 96%;
         margin-left: 2%;
