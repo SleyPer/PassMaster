@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @AllArgsConstructor
 @Service
@@ -22,25 +25,27 @@ public class UserService implements UserDetailsService {
     private BCryptPasswordEncoder passwordEncoder;
     private ValidationService validationService;
 
+    private static String errorMsg;
+
     public void registration(User user) {
-        if (!user.getMail().contains("@") && !user.getMail().contains(".")) {
-            throw new RuntimeException("Mail invalide !");
+        if (this.verifyFields(user)) {
+            Optional<User> optionalUser = this.userRepository.findByMail(user.getMail());
+            if (optionalUser.isPresent()) {
+                throw new RuntimeException("Ce mail existe déjà !");
+            }
+
+            String cryptedPass = this.passwordEncoder.encode(user.getPass());
+            user.setPass(cryptedPass);
+
+            Role userRole = new Role();
+            userRole.setName(RoleType.USER);
+            user.setRole(userRole);
+
+            user = this.userRepository.save(user);
+            this.validationService.save(user);
         }
 
-        Optional<User> optionalUser = this.userRepository.findByMail(user.getMail());
-        if (optionalUser.isPresent()) {
-            throw new RuntimeException("Ce mail existe déjà !");
-        }
-
-        String cryptedPass = this.passwordEncoder.encode(user.getPass());
-        user.setPass(cryptedPass);
-
-        Role userRole = new Role();
-        userRole.setName(RoleType.USER);
-        user.setRole(userRole);
-
-        user = this.userRepository.save(user);
-        this.validationService.save(user);
+        throw new RuntimeException(errorMsg);
     }
 
     public void activation(Map<String, String> activation) {
@@ -73,15 +78,87 @@ public class UserService implements UserDetailsService {
     public Object updateUser(Long id, User user) {
         User existingUser = userRepository.findById(id).orElse(null);
         if (existingUser != null) {
-            existingUser.setFirstName(user.getFirstName());
-            existingUser.setLastName(user.getLastName());
-            existingUser.setMail(user.getMail());
-            String cryptedPass = this.passwordEncoder.encode(user.getPass());
-            existingUser.setPass(cryptedPass);
+            if (this.verifyFields(user)) {
+                Optional<User> optionalUser = this.userRepository.findByMail(user.getMail());
+                if (optionalUser.isPresent()) {
+                    if (!Objects.equals(optionalUser.get().getId(), existingUser.getId())) {
+                        throw new RuntimeException("Ce mail existe déjà !");
+                    }
+                }
+                existingUser.setFirstName(user.getFirstName());
+                existingUser.setLastName(user.getLastName());
+                existingUser.setMail(user.getMail());
+                String encryptedPass = this.passwordEncoder.encode(user.getPass());
+                existingUser.setPass(encryptedPass);
 
-            return ResponseEntity.ok(userRepository.save(existingUser));
+                return ResponseEntity.ok(userRepository.save(existingUser));
+            }
+
+            return ResponseEntity.badRequest().body(errorMsg);
+
         }
 
         return ResponseEntity.notFound().build();
+    }
+
+    private boolean verifyFields(User user) {
+        if (user.getFirstName().trim().isEmpty()) {
+            errorMsg = "Le prénom ne peut pas être vide";
+            return false;
+        }
+
+        if (user.getLastName().trim().isEmpty()) {
+            errorMsg = "Le nom de famille ne peut pas être vide";
+            return false;
+        }
+
+        if (!user.getMail().trim().isEmpty()) {
+            String mailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,7}$";
+            Pattern mailPattern = Pattern.compile((mailRegex));
+            Matcher mailMatcher = mailPattern.matcher(user.getMail());
+            if (!mailMatcher.matches()) {
+                errorMsg = "Le format de l'adresse mail est incorrect";
+                return false;
+            }
+        } else {
+            errorMsg = "L'adresse mail ne peut pas être vide";
+            return false;
+        }
+
+        if (!user.getPass().trim().isEmpty()) {
+            if (user.getPass().length() >= 8) {
+                String uppercaseLetterRegex = ".*[A-Z].*";
+                Pattern uppercaseLetterPattern = Pattern.compile(uppercaseLetterRegex);
+                Matcher uppercaseLetterMatcher = uppercaseLetterPattern.matcher(user.getPass());
+                if (uppercaseLetterMatcher.matches()) {
+                    String digitRegex = ".*\\d.*";
+                    Pattern digitPattern = Pattern.compile(digitRegex);
+                    Matcher digitMatcher = digitPattern.matcher(user.getPass());
+                    if (digitMatcher.matches()) {
+                        String specialRegex = ".*[^A-Za-z0-9].*";
+                        Pattern specialPattern = Pattern.compile(specialRegex);
+                        Matcher specialMatcher = specialPattern.matcher(user.getPass());
+                        if (specialMatcher.matches()) {
+                            return true;
+                        } else {
+                            errorMsg = "Le mot de passe doit contenir au moins un caractère spécial";
+                            return false;
+                        }
+                    } else {
+                        errorMsg = "Le mot de passe doit contenir au moins un chiffre";
+                        return false;
+                    }
+                } else {
+                    errorMsg = "Le mot de passe doit contenir au moins une lettre majuscule";
+                    return false;
+                }
+            } else {
+                errorMsg = "Le mot de passe doit contenir au moins 8 caractères";
+                return false;
+            }
+        } else {
+            errorMsg = "Le mot de passe ne peut pas être vide";
+            return false;
+        }
     }
 }

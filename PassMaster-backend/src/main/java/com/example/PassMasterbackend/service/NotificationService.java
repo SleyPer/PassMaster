@@ -14,7 +14,7 @@ public class NotificationService {
 
     public void send(Validation validation) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setFrom("no-reply@thom.fr");
+        mailMessage.setFrom("no-reply@thom.tech");
         mailMessage.setTo(validation.getUser().getMail());
         mailMessage.setSubject("Code d'activation de votre compte PassMaster");
 

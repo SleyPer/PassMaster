@@ -26,7 +26,7 @@ public class ChestService {
     }
 
     public Chest getChestById(Long id) {
-        return chestRepository.findById(id).orElse(null);
+        return chestRepository.findById(id).orElseThrow(() -> new RuntimeException("Le coffre avec l'id " + id + " n'existe pas"));
     }
 
     public ResponseEntity<?> createChest(Chest chest) {
@@ -38,6 +38,9 @@ public class ChestService {
         );
 
         chest.setUser(user);
+
+        if (chest.getName().trim().isEmpty())
+            return ResponseEntity.badRequest().body("Le nom du coffre ne peut pas être vide");
 
         return ResponseEntity.ok(chestRepository.save(chest));
     }
