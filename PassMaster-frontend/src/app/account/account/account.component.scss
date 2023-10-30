@@ -8,14 +8,15 @@
     height: 80%;
     margin-left: 2%;
 
-    .header{
+    .header {
         width: 100%;
         height: 25%;
         display: flex;
         align-items: center;
-        border-radius: 5px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         background-color: #222;
-    
+
         .profile-picture {
             margin-left: 2%;
             width: 13%;
@@ -27,16 +28,16 @@
             border-radius: 50%;
             margin-right: 20px;
             cursor: pointer;
-        
+
             .default-profile-picture {
                 font-size: 48px;
                 color: white;
             }
-        }          
-    
+        }
+
         .user-details {
             width: 30%;
-        
+
             .user-name {
                 h2 {
                     font-size: 24px;
@@ -44,14 +45,14 @@
                     font-weight: bold;
                 }
             }
-        
+
             .user-email {
                 p {
                     color: white;
                 }
             }
         }
-    
+
         .button {
             margin-left: 10%;
             width: 30%;
@@ -66,14 +67,14 @@
             font-weight: bold;
             transition: 0.3s;
         }
-        
+
         .button:hover {
             margin-left: 5%;
             width: 40%;
             background-color: white;
             color: black;
             transition: 0.3s;
-        }    
+        }
     }
 
     &.expanded {
@@ -105,18 +106,18 @@
             text-align: left;
             margin-left: 20%;
             color: white;
-        
+
             .form-group {
                 margin-left: 5%;
                 margin-top: 5%;
                 align-items: center;
             }
-        
+
             .form-group label {
                 width: 100%;
                 text-align: left;
-            } 
-        
+            }
+
             input {
                 width: 100%;
                 background-color: #111;
@@ -126,7 +127,7 @@
                 border-radius: 5px;
                 resize: none;
             }
-        
+
             .button {
                 margin-bottom: 5%;
                 margin-left: 35%;
@@ -143,7 +144,7 @@
                 font-weight: bold;
                 transition: 0.3s;
             }
-        
+
             .button:hover {
                 width: 50%;
                 margin-left: 25%;
@@ -158,8 +159,8 @@
         .footer {
             max-height: 70%;
             transition: max-height 0.3s ease;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
         }
     }
 }

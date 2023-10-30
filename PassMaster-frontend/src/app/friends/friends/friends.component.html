@@ -1,1 +1,43 @@
 <h1>Mes amis</h1>
+
+<div class="friends-table">
+    <table>
+        <thead>
+            <tr>
+                <th>Numéro </th>
+                <th>Amis</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Contenu de la ligne 1</td>
+                <td>
+                    <div class="buttons">
+                        <div class="button" (click)="openMessagePage()">
+                            <mat-icon>message</mat-icon>
+                        </div>
+                        <div class="button" (click)="deleteFriend()">
+                            <mat-icon>delete</mat-icon>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Contenu de la ligne 2</td>
+                <td>
+                    <div class="buttons">
+                        <div class="button" (click)="openMessagePage()">
+                            <mat-icon>message</mat-icon>
+                        </div>
+                        <div class="button" (click)="deleteFriend()">
+                            <mat-icon>delete</mat-icon>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
