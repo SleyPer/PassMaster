@@ -1,0 +1,21 @@
+<h1>Messages</h1>
+
+<div class="messages-container">
+    <div class="friend">
+        {{ friend.firstName }} {{ friend.lastName }}
+        <div class="details">
+            <mat-icon>dehaze</mat-icon>
+        </div>
+    </div>
+
+    <div class="chat">
+
+    </div>
+
+    <div class="message">
+        <input id="msg" [(ngModel)]="msg" placeholder="Saisissez votre message ici"/>
+        <div class="send">
+            <mat-icon>send</mat-icon>
+        </div>
+    </div>
+</div>

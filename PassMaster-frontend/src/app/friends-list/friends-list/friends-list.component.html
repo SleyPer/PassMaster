@@ -1,0 +1,18 @@
+<div class="header">
+    <div class="search">
+        <input type="text" id="search" name="search" placeholder="Chercher un ami" [(ngModel)]="search"
+            (keyup)="searchFriends()">
+    </div>
+    <div class="button" (click)="addFriend()" [matTooltip]="'Ajouter un ami'">
+        <mat-icon class="icon-white">add</mat-icon>
+    </div>
+</div>
+
+<div class="scrollable-list">
+    <div *ngIf="friends.length === 0" class="no-friends">
+        <p>Aucun ami</p>
+    </div>
+    <div class="friend-item" *ngFor="let friend of friends" (click)="openMessages(friend)">
+        <p>{{ friend.firstName }}</p>
+    </div>
+</div>

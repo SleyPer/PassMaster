@@ -15,20 +15,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ChestComponent } from './chest/chest/chest.component';
 import { GeneratorComponent } from './generator/generator/generator.component';
 import { AccountComponent } from './account/account/account.component';
-import { ChestFormComponent } from './chest-form/chest-form/chest-form.component';
-import { CreateChestComponent } from './create-chest/create-chest/create-chest.component';
 import { NotificationComponent } from './notification/notification/notification.component';
-import { ChestDetailsComponent } from './chest-details/chest-details/chest-details.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
 import { ValidateComponent } from './validate/validate/validate.component';
 import { TokenInterceptor } from './interceptor/token-interceptor.service';
 import { LogoutDialogComponent } from './logout-dialog/logout-dialog/logout-dialog.component';
-import { FriendsComponent } from './friends/friends/friends.component';
+import { FriendsListComponent } from './friends-list/friends-list/friends-list.component';
+import { AddFriendComponent } from './add-friend/add-friend/add-friend.component';
+import { FriendMessagesComponent } from './friend-messages/friend-messages/friend-messages.component';
 
 @NgModule({
   declarations: [
@@ -36,19 +34,17 @@ import { FriendsComponent } from './friends/friends/friends.component';
     NavbarComponent,
     HomeComponent,
     SidebarComponent,
-    ChestComponent,
     GeneratorComponent,
     AccountComponent,
-    ChestFormComponent,
-    CreateChestComponent,
     NotificationComponent,
-    ChestDetailsComponent,
     ConfirmationDialogComponent,
     LoginComponent,
     RegisterComponent,
     ValidateComponent,
     LogoutDialogComponent,
-    FriendsComponent,
+    FriendsListComponent,
+    AddFriendComponent,
+    FriendMessagesComponent,
   ],
   imports: [
     BrowserModule,

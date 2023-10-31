@@ -13,7 +13,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getAllUsers(): Observable<User[]>{
+  getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl);
   }
 
@@ -25,11 +25,25 @@ export class UserService {
   updateUser(updatedUser: User): Observable<User> {
     const url = `${this.apiUrl}/${updatedUser.id}`;
     return this.http.put<User>(url, updatedUser);
-  }  
+  }
 
   deleteUser(deletedUser: User): Observable<void> {
     const url = `${this.apiUrl}/${deletedUser.id}`;
     return this.http.delete<void>(url);
+  }
+
+  getUsersByMail(mail: string): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl + "/search", { params: { mail } });
+  }
+
+  getFriendsByUserId(userId: number): Observable<User[]> {
+    const url = `${this.apiUrl}/${userId}/friends`;
+    return this.http.get<User[]>(url);
+  }
+
+  addFriend(userId: number, friend: User): Observable<User> {
+    const url = `${this.apiUrl}/${userId}/addFriend`;
+    return this.http.put<User>(url, friend.id);
   }
 
   register(newUser: User): Observable<User> {
@@ -41,7 +55,7 @@ export class UserService {
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl + "/login", {username, password});
+    return this.http.post<any>(this.apiUrl + "/login", { username, password });
   }
 
   logout(): Observable<any> {

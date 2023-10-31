@@ -3,8 +3,12 @@ package com.example.PassMasterbackend.repository;
 import com.example.PassMasterbackend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByMail(String userMail);
+
+    Optional<User> findByMail(String mail);
+
+    Optional<List<User>> findByMailContaining(String userMail);
 }

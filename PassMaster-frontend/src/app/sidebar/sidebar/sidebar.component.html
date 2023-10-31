@@ -6,18 +6,18 @@
             Accueil
         </div>
     </a>
-    <a routerLink="/generator" [ngClass]="{'active': isGeneratorSelected}" class="section"
+    <!-- <a routerLink="/generator" [ngClass]="{'active': isGeneratorSelected}" class="section"
     (click)="toggleSubMenu('generator')" *ngIf="isAuthenticated()">
         <div class="menu-item">
             <mat-icon class="icon-white">build</mat-icon>
             Générateur de mots de passe
         </div>
-    </a>
-    <a routerLink="/friends" [ngClass]="{'active': isFriendsSelected}" class="section"
-    (click)="toggleSubMenu('friends')" *ngIf="isAuthenticated()">
+    </a> -->
+    <a routerLink="/notifications" [ngClass]="{'active': isNotificationsSelected}" class="section"
+    (click)="toggleSubMenu('notifications')" *ngIf="isAuthenticated()">
         <div class="menu-item">
-            <mat-icon class="icon-white">people</mat-icon>
-            Mes amis
+            <mat-icon class="icon-white">notifications</mat-icon>
+            Notifications
         </div>
     </a>
     <a routerLink="/messages" [ngClass]="{'active': isMessagesSelected}" class="section"

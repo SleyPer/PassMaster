@@ -54,7 +54,7 @@
     background-color: #222;
     border-radius: 5px;
 
-    .no-chests {
+    .no-friends {
         text-align: center;
         color: white;
     }
@@ -72,7 +72,7 @@
         display: none;
     }
 
-    .chest-item {
+    .friend-item {
         display: flex;
         margin: 2%;
         background-color: #111;
@@ -88,7 +88,7 @@
         }
     }
 
-    .chest-item:hover {
+    .friend-item:hover {
         background-color: white;
         transition: 0.3s;
 
@@ -96,8 +96,4 @@
             color: black;
         }
     }
-}
-
-app-create-chest {
-    display: none;
 }

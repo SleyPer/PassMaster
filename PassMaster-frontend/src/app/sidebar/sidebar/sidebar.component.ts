@@ -17,13 +17,13 @@ export class SidebarComponent {
   showHomeSubTabs: boolean = false;
   showGeneratorSubTabs: boolean = false;
   showAccountSubTabs: boolean = false;
-  showFriendsSubTabs: boolean = false;
+  showNotificationsSubTabs: boolean = false;
   showMessagesSubTabs: boolean = false;
 
   isHomeSelected: boolean = false;
   isGeneratorSelected: boolean = false;
   isAccountSelected: boolean = false;
-  isFriendsSelected: boolean = false;
+  isNotificationsSelected: boolean = false;
   isMessagesSelected: boolean = false;
 
   dialogRef!: any;
@@ -53,7 +53,7 @@ export class SidebarComponent {
         this.showAccountSubTabs = !this.showAccountSubTabs;
         break;
       case 'friends':
-        this.showFriendsSubTabs = !this.showFriendsSubTabs;
+        this.showNotificationsSubTabs = !this.showNotificationsSubTabs;
         break;
       case 'messages':
         this.showMessagesSubTabs = !this.showMessagesSubTabs;

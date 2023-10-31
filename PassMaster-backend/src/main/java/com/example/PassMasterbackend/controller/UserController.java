@@ -74,4 +74,25 @@ public class UserController {
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User user) {
         return ResponseEntity.ok(userService.updateUser(id, user));
     }
+
+    @GetMapping("search")
+    public List<User> getUserByMail(@RequestParam String mail) {
+        return userService.getUsersByMail(mail);
+    }
+
+    @GetMapping("/{id}/friends")
+    public List<User> getFriendsByUserId(@PathVariable Long id) {
+        return userService.getFriendsByUserId(id);
+    }
+
+    @PutMapping("/{userId}/addFriend")
+    public ResponseEntity<?> addFriend(@PathVariable Long userId, @RequestBody Long friendId) {
+
+        return ResponseEntity.ok(userService.addFriend(userId, friendId));
+    }
+
+    @DeleteMapping("/{userId}/deleteFriend/{friendId}")
+    public void deleteFriend(@PathVariable Long userId, @PathVariable Long friendId) {
+        userService.deleteFriend(userId, friendId);
+    }
 }

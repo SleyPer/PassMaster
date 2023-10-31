@@ -43,9 +43,8 @@ public class UserService implements UserDetailsService {
 
             user = this.userRepository.save(user);
             this.validationService.save(user);
-        }
-
-        throw new RuntimeException(errorMsg);
+        } else
+            throw new RuntimeException(errorMsg);
     }
 
     public void activation(Map<String, String> activation) {
@@ -160,5 +159,49 @@ public class UserService implements UserDetailsService {
             errorMsg = "Le mot de passe ne peut pas être vide";
             return false;
         }
+    }
+
+    public List<User> getUsersByMail(String mail) {
+        mail = mail.replaceAll("\\s", "");
+        return userRepository.findByMailContaining(mail).orElseThrow(
+                () -> new RuntimeException("Aucun utilisateur trouvé")
+        );
+    }
+
+    public List<User> getFriendsByUserId(Long id) {
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Utilisateur inconnu")
+        );
+
+        return user.getFriends();
+    }
+
+    public ResponseEntity<?> addFriend(Long userId, Long friendId) {
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new RuntimeException("Utilisateur inconnu")
+        );
+
+        User friend = userRepository.findById(friendId).orElseThrow(
+                () -> new RuntimeException("Ami inconnu")
+        );
+
+        user.getFriends().add(friend);
+        friend.getFriends().add(user);
+        userRepository.save(user);
+        userRepository.save(friend);
+        return ResponseEntity.ok("Ami ajouté avec succès");
+    }
+
+    public void deleteFriend(Long userId, Long friendId) {
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new RuntimeException("Utilisateur inconnu")
+        );
+
+        User friend = userRepository.findById(friendId).orElseThrow(
+                () -> new RuntimeException("Ami inconnu")
+        );
+
+        user.getFriends().removeIf(u -> Objects.equals(u.getId(), friend.getId()));
+        userRepository.save(user);
     }
 }

@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
       this.userService.login(this.user.mail, this.user.pass).subscribe(
         (response) => {
           this.authService.setToken(response.bearer);
+          this.authService.setRefreshToken(response.refresh);
           this.showNotification("Bienvenue !", "success");
           this.router.navigate(['/home']);
         },

@@ -1,0 +1,22 @@
+<h1>Ajouter un ami</h1>
+
+<div class="add-container">
+    <div class="params">
+        <div class="search-user">
+            <label>Veuillez saisir une adresse email :</label>
+            <input id="userMail" [(ngModel)]="userMail" (input)="onMailInputChange()" />
+
+            <div class="results">
+                <ul *ngIf="searchUsers.length > 0">
+                    <li *ngFor="let searchUser of searchUsers" (click)="onUserSelected(searchUser)">
+                        {{ searchUser.firstName }} {{ searchUser.lastName }} ({{ searchUser.mail }})
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="button" (click)="onSubmit()">
+            <p>Ajouter</p>
+        </div>
+    </div>
+</div>
