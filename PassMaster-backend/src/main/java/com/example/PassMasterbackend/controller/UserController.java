@@ -35,6 +35,16 @@ public class UserController {
         this.userService.activation(activation);
     }
 
+    @PostMapping(path = "reset-password-mail")
+    public void sendResetPasswordMail(@RequestBody Map<String, String> params) {
+        this.userService.sendResetPasswordMail(params);
+    }
+
+    @PostMapping(path = "reset-password")
+    public void resetPassword(@RequestBody Map<String, String> params) {
+        this.userService.resetPassword(params);
+    }
+
     @PostMapping(path = "refresh-token")
     public @ResponseBody Map<String, String> refreshToken(@RequestBody Map<String, String> refreshTokenRequest) {
         return this.jwtService.refreshToken(refreshTokenRequest);

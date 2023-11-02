@@ -25,6 +25,6 @@ public class Validation {
     private Instant activation;
     private String code;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH})
     private User user;
 }

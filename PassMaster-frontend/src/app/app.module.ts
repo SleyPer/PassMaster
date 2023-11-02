@@ -27,6 +27,7 @@ import { LogoutDialogComponent } from './logout-dialog/logout-dialog/logout-dial
 import { FriendsListComponent } from './friends-list/friends-list/friends-list.component';
 import { AddFriendComponent } from './add-friend/add-friend/add-friend.component';
 import { FriendMessagesComponent } from './friend-messages/friend-messages/friend-messages.component';
+import { ResetPasswordComponent } from './reset-password/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { FriendMessagesComponent } from './friend-messages/friend-messages/frien
     FriendsListComponent,
     AddFriendComponent,
     FriendMessagesComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -27,17 +27,22 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.user.mail && this.user.pass) {
-      this.userService.login(this.user.mail, this.user.pass).subscribe(
-        (response) => {
-          this.authService.setToken(response.bearer);
-          this.authService.setRefreshToken(response.refresh);
-          this.showNotification("Bienvenue !", "success");
-          this.router.navigate(['/home']);
-        },
-        (error: any) => {
-          this.showNotification("Erreur lors de la connexion à votre compte", "error");
-        }
-      )
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (emailRegex.test(this.user.mail)) {
+        this.userService.login(this.user.mail, this.user.pass).subscribe(
+          (response) => {
+            this.authService.setToken(response.bearer);
+            this.authService.setRefreshToken(response.refresh);
+            this.showNotification("Bienvenue !", "success");
+            this.router.navigate(['/home']);
+          },
+          (error: any) => {
+            this.showNotification("Erreur lors de la connexion à votre compte", "error");
+          }
+        )
+      } else {
+        this.showNotification("Le format de l'adresse mail est incorrect", "error");
+      }
     } else {
       this.showNotification("Veuillez remplir tous les champs", "error");
     }
@@ -58,5 +63,9 @@ export class LoginComponent implements OnInit {
 
   goToRegisterPage() {
     this.router.navigate(['/register']);
+  }
+
+  goToResetPasswordPage() {
+    this.router.navigate(['/reset/password']);
   }
 }

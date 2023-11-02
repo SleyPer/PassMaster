@@ -14,14 +14,14 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (!this.authService.isAuthenticated()) {
-      const allowedRoutes = ['/login', '/register', '/validate'];
+      const allowedRoutes = ['/login', '/register', '/validate', '/reset/password'];
       if (allowedRoutes.includes(state.url)) {
         return true;
       } else {
         return this.router.parseUrl('/login');
       }
     } else {
-      const restrictedRoutes = ['/login', '/register', '/validate'];
+      const restrictedRoutes = ['/login', '/register', '/validate', '/reset/password'];
       if (restrictedRoutes.includes(state.url)) {
         return this.router.parseUrl('/home');
       } else {

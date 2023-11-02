@@ -204,4 +204,19 @@ public class UserService implements UserDetailsService {
         user.getFriends().removeIf(u -> Objects.equals(u.getId(), friend.getId()));
         userRepository.save(user);
     }
+
+    public void sendResetPasswordMail(Map<String, String> params) {
+        User user = loadUserByUsername(params.get("mail"));
+        this.validationService.save(user);
+    }
+
+    public void resetPassword(Map<String, String> params) {
+        User user = loadUserByUsername(params.get("mail"));
+        final Validation validation = validationService.getValidationByCode(params.get("code"));
+        if (validation.getUser().getMail().equals(user.getMail())) {
+            String cryptedPass = this.passwordEncoder.encode(params.get("password"));
+            user.setPass(cryptedPass);
+            this.userRepository.save(user);
+        }
+    }
 }

@@ -4,12 +4,19 @@ import com.example.PassMasterbackend.entity.User;
 import com.example.PassMasterbackend.entity.Validation;
 import com.example.PassMasterbackend.repository.ValidationRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
+@Transactional
+@Slf4j
 @AllArgsConstructor
 @Service
 public class ValidationService {
@@ -38,5 +45,13 @@ public class ValidationService {
     public Validation getValidationByCode(String code) {
         return this.validationRepository.findByCode(code)
                 .orElseThrow(() -> new RuntimeException("Code invalide"));
+    }
+
+    @Scheduled(cron = "*/30 * * * * *")
+    public void removeUselessValidations() {
+        /**
+        log.info("Suppression des validations à {}", Instant.now());
+        this.validationRepository.deleteAllByExpirationBefore(Instant.now());
+         */
     }
 }

@@ -10,6 +10,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { FriendsListComponent } from './friends-list/friends-list/friends-list.component';
 import { AddFriendComponent } from './add-friend/add-friend/add-friend.component';
 import { FriendMessagesComponent } from './friend-messages/friend-messages/friend-messages.component';
+import { ResetPasswordComponent } from './reset-password/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'friends', component: FriendsListComponent, canActivate: [AuthGuard] },
   { path: 'add', component: AddFriendComponent, canActivate: [AuthGuard] },
   { path: 'messages/:id', component: FriendMessagesComponent, canActivate: [AuthGuard] },
+  { path: 'reset/password', component: ResetPasswordComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

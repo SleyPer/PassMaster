@@ -61,4 +61,22 @@ export class UserService {
   logout(): Observable<any> {
     return this.http.post<any>(this.apiUrl + "/logout", null);
   }
+
+  sendResetPasswordMail(userMail: string): Observable<any> {
+    const requestBody = {
+      mail: userMail
+    };
+    return this.http.post<any>(this.apiUrl + "/reset-password-mail", requestBody);
+  }
+
+  resetPassword(userMail: string, code: string, newPass: string): Observable<any> {
+    const requestBody = {
+      mail: userMail,
+      code: code,
+      password: newPass
+    };
+  
+    return this.http.post<any>(this.apiUrl + "/reset-password", requestBody);
+  }
+  
 }

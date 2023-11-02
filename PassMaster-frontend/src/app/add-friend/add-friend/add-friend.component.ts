@@ -31,6 +31,7 @@ export class AddFriendComponent implements OnInit {
       this.friendListService.addFriend(this.selectedUser).subscribe({
         next: result => {
           this.showNotification("Ami ajouté", "success");
+          this.userMail = "";
         },
         error: error => {
           this.showNotification("Erreur lors de l'ajout", "error");
@@ -55,6 +56,7 @@ export class AddFriendComponent implements OnInit {
     this.selectedUser = selectedUser;
     if (selectedUser.mail) {
       this.userMail = selectedUser.mail;
+      this.searchUsers = [];  
     }
   }
 

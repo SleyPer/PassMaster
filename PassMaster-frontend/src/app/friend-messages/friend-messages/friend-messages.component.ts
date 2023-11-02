@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { User } from 'src/app/user/user.model';
 import { UserService } from 'src/app/user/user.service';
 
@@ -14,20 +15,19 @@ export class FriendMessagesComponent implements OnInit {
 
   msg: string = "";
 
-  constructor(private userService: UserService, private route: ActivatedRoute) {
+  constructor(private userService: UserService, private route: ActivatedRoute) { }
 
-  }
-  
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const idString = params.get('id');
-      this.friendId = idString ? parseInt(idString, 10) : 0;
-    });
-    this.userService.getUserById(this.friendId).subscribe({
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        this.friendId = Number(params.get('id'));
+        return this.userService.getUserById(this.friendId);
+      })
+    ).subscribe({
       next: result => {
         this.friend = result;
       }
-    })
+    });
   }
 
 

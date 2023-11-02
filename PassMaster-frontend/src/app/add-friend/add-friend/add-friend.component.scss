@@ -59,6 +59,19 @@ h1 {
                     border-bottom: 2px solid #111;
                     transition: 0.3s;
                 }
+
+                &::-webkit-scrollbar {
+                    width: 6px;
+                }
+            
+                &::-webkit-scrollbar-thumb {
+                    background-color: #333;
+                    border-radius: 3px;
+                }
+            
+                &::-webkit-scrollbar-button {
+                    display: none;
+                }
             }
         }
 
