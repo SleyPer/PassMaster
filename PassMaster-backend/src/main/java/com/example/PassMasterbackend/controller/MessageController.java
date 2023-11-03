@@ -37,4 +37,19 @@ public class MessageController {
     public List<Message> getSentByUserId(@PathVariable Long id) {
         return messageService.getSentByUserId(id);
     }
+
+    @GetMapping("sentBy/{userId}/to/{recipientId}")
+    public List<Message> getSentByUserIdToRecipientId(@PathVariable Long userId, @PathVariable Long recipientId) {
+        return messageService.getSentByUserIdToRecipientId(userId, recipientId);
+    }
+
+    @GetMapping("receivedBy/{userId}/from/{senderId}")
+    public List<Message> getReceivedByUserIdFromSenderId(@PathVariable Long userId, @PathVariable Long senderId) {
+        return messageService.getReceivedByUserIdFromSenderId(userId, senderId);
+    }
+
+    @GetMapping("all/{userId}/with/{friendId}")
+    public List<Message> getAllByUserIdWithFriendId(@PathVariable Long userId, @PathVariable Long friendId) {
+        return messageService.getAllByUserIdWithFriendId(userId, friendId);
+    }
 }

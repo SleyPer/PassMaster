@@ -72,19 +72,15 @@ export class GeneratorComponent implements OnInit {
   changeParams(param: string) {
     if (param === "lowerCase") {
       this.includeLowercase = !this.includeLowercase;
-      console.log("lower : ", this.includeLowercase)
     }
     if (param === "upperCase") {
       this.includeUppercase = !this.includeUppercase;
-      console.log("upper : ", this.includeUppercase)
     }
     if (param === "numbers") {
       this.includeNumbers = !this.includeNumbers;
-      console.log("numbers : ", this.includeNumbers)
     }
     if (param === "specialCharacters") {
       this.includeSpecialCharacters = !this.includeSpecialCharacters;
-      console.log("special : ", this.includeSpecialCharacters)
     }
   }
 

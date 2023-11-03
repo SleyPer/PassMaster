@@ -23,6 +23,8 @@ export class FriendMessagesComponent implements OnInit {
   content: string = "";
 
   sentMessages: Message[] = [];
+  receivedMessages: Message[] = [];
+  allMessages: Message[] = [];
 
   constructor(
     private userService: UserService,
@@ -42,6 +44,31 @@ export class FriendMessagesComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.friendId = Number(params.get('id'));
+        this.messageService.getSentByUserIdToRecipientId(this.connectedUserId, this.friendId).subscribe({
+          next: result => {
+            this.sentMessages = result;
+          }
+        });
+        this.messageService.getReceivedByUserIdFromSenderId(this.connectedUserId, this.friendId).subscribe({
+          next: result => {
+            this.receivedMessages = result.map(message => ({ ...message, isSent: false }));
+          }
+        });
+        // this.allMessages = [...this.sentMessages, ...this.receivedMessages].sort((a, b) => {
+        //   if (a.timestamp && b.timestamp) {
+        //     return a.timestamp.getTime() - b.timestamp.getTime();
+        //   } else {
+        //     return 0;
+        //   }
+        // });
+        this.messageService.getAllByUserIdWithFriendId(this.connectedUserId, this.friendId).subscribe({
+          next: result => {
+            this.allMessages = result;
+            for (const msg of this.allMessages) {
+              console.log(msg.sender)
+            }
+          }
+        });
         return this.userService.getUserById(this.friendId);
       })
     ).subscribe({
@@ -59,10 +86,8 @@ export class FriendMessagesComponent implements OnInit {
       message.content = this.content;
       this.messageService.sendMessage(message).subscribe({
         next: result => {
-          this.showNotification("Message envoyé", "success");
-          this.sentMessages.push(message);
+          this.allMessages.push(message);
           this.content = "";
-          console.log("sentMessages : ", this.sentMessages)
         },
         error: error => {
           this.showNotification("Erreur lors de l'envoi du message", "error");

@@ -54,6 +54,9 @@ public class SecurityConfig {
                                 .requestMatchers(POST, "/api/message/send").permitAll()
                                 .requestMatchers(GET, "/api/message/received/{id}").permitAll()
                                 .requestMatchers(GET, "/api/message/sent/{id}").permitAll()
+                                .requestMatchers(GET, "/api/message/sentBy/{userId}/to/{recipientId}").permitAll()
+                                .requestMatchers(GET, "/api/message/receivedBy/{userId}/from/{senderId}").permitAll()
+                                .requestMatchers(GET, "/api/message/all/{userId}/with/{friendId}").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->

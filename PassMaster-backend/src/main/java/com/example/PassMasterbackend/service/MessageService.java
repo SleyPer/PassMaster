@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @AllArgsConstructor
@@ -37,4 +39,40 @@ public class MessageService {
         User user = this.userService.getUserById(id);
         return user.getSentMessages();
     }
+
+    public List<Message> getSentByUserIdToRecipientId(Long userId, Long recipientId) {
+        User user = this.userService.getUserById(userId);
+
+        List<Message> result = new ArrayList<>();
+        for (Message message : user.getSentMessages())
+            if (message.getRecipient().getId().equals(recipientId))
+                result.add(message);
+
+        return result;
+    }
+
+    public List<Message> getReceivedByUserIdFromSenderId(Long userId, Long senderId) {
+        User user = this.userService.getUserById(userId);
+
+        List<Message> result = new ArrayList<>();
+        for (Message message : user.getReceivedMessages())
+            if (message.getSender().getId().equals(senderId))
+                result.add(message);
+
+        return result;
+    }
+
+    public List<Message> getAllByUserIdWithFriendId(Long userId, Long friendId) {
+        List<Message> sent = getSentByUserIdToRecipientId(userId, friendId);
+        List<Message> received = getReceivedByUserIdFromSenderId(userId, friendId);
+
+        List<Message> allMessages = new ArrayList<>();
+        allMessages.addAll(sent);
+        allMessages.addAll(received);
+
+        allMessages.sort(Comparator.comparing(Message::getTimestamp));
+
+        return allMessages;
+    }
+
 }

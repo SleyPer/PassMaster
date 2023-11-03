@@ -76,48 +76,46 @@ h1 {
         &::-webkit-scrollbar {
             width: 6px;
         }
-    
+
         &::-webkit-scrollbar-thumb {
             background-color: #333;
             border-radius: 3px;
         }
-    
+
         &::-webkit-scrollbar-button {
             display: none;
         }
     }
 
-
-    .message {
+    .message-form {
         display: flex;
         justify-content: space-between;
+    }
 
-        input {
-            width: 86%;
-            background-color: #111;
-            color: white;
-            border: 1px solid #111;
-            border-radius: 5px;
-            font-size: 1rem;
-            padding: 2%;
-        }
+    .message-form input {
+        width: 86%;
+        background-color: #111;
+        color: white;
+        border: 1px solid #111;
+        border-radius: 5px;
+        font-size: 1rem;
+        padding: 2%;
+    }
 
-        .send {
-            width: 12%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #111;
-            color: white;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
+    .message-form .send {
+        width: 12%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #111;
+        color: white;
+        border-radius: 5px;
+        transition: 0.3s;
+    }
 
-        .send:hover {
-            cursor: pointer;
-            background: #408812;
-            transition: 0.3s;
-        }
-
+    .message-form .send:hover {
+        cursor: pointer;
+        background: #408812;
+        transition: 0.3s;
     }
 }
