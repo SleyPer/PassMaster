@@ -46,6 +46,7 @@ public class User implements UserDetails {
     private boolean active = false;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     private Role role;
 
     @ManyToMany
@@ -56,6 +57,14 @@ public class User implements UserDetails {
     )
     @JsonIgnore
     private List<User> friends;
+
+    @OneToMany(mappedBy = "sender")
+    @JsonIgnore
+    private List<Message> sentMessages;
+
+    @OneToMany(mappedBy = "recipient")
+    @JsonIgnore
+    private List<Message> receivedMessages;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

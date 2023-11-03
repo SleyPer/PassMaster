@@ -9,12 +9,16 @@
     </div>
 
     <div class="chat">
-
+        <div class="message-container">
+            <div *ngFor="let sentMessage of sentMessages" [ngClass]="{'right': sentMessage.sender === connectedUserId}">
+                {{ sentMessage.content }}
+            </div>
+        </div>
     </div>
 
     <div class="message">
-        <input id="msg" [(ngModel)]="msg" placeholder="Saisissez votre message ici"/>
-        <div class="send">
+        <input id="msg" [(ngModel)]="content" placeholder="Saisissez votre message ici" />
+        <div class="send" (click)="onSubmit()">
             <mat-icon>send</mat-icon>
         </div>
     </div>
