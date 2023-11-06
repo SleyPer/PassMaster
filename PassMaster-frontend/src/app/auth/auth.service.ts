@@ -9,15 +9,15 @@ export class AuthService {
   constructor() { }
 
   setToken(token: string) {
-    localStorage.setItem("auth-token", token);
+    sessionStorage.setItem("auth-token", token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem("auth-token");
+    return sessionStorage.getItem("auth-token");
   }
 
   deleteToken() {
-    localStorage.removeItem("auth-token");
+    sessionStorage.removeItem("auth-token");
   }
 
   isAuthenticated(): boolean {
@@ -35,6 +35,6 @@ export class AuthService {
   }
 
   setRefreshToken(refreshToken: string) {
-    localStorage.setItem("refresh-token", refreshToken);
+    sessionStorage.setItem("refresh-token", refreshToken);
   }
 }
