@@ -20,6 +20,7 @@ export class FriendMessagesComponent implements OnInit {
   connectedUser: User = new User();
   friendId: number = 0;
   connectedUserId: number = 0;
+  isMenuOpen = false;
 
   content: string = "";
 

@@ -1,9 +1,23 @@
 <h1>Messages</h1>
 
 <div class="messages-container">
-    <div class="friend">
-        {{ friend.firstName }} {{ friend.lastName }}
-        <div class="details">
+    <div class="friend" [ngClass]="{'expanded': isMenuOpen}">
+        <div class="friend-infos" [matTooltip]="'Voir le profil'">{{ friend.firstName }} {{ friend.lastName }}</div>
+        <div *ngIf="isMenuOpen" class="menu">
+            <div class="option" [matTooltip]="'Supprimer la conversation'">
+                <mat-icon>delete_outline</mat-icon>
+            </div>
+            <div class="option" [matTooltip]="'Epingler la conversation'">
+                <mat-icon>bookmark_border</mat-icon>
+            </div>
+            <div class="option" [matTooltip]="'Supprimer cet ami'">
+                <mat-icon>delete_forever</mat-icon>
+            </div>
+            <div class="option" [matTooltip]="'Bloquer cet ami'">
+                <mat-icon>block</mat-icon>
+            </div>
+        </div>
+        <div class="details" (click)="isMenuOpen = !isMenuOpen">
             <mat-icon>dehaze</mat-icon>
         </div>
     </div>
