@@ -19,6 +19,11 @@
         &:hover {
             background-color: #408812;
             transition: 0.3s;
+
+            mat-icon {
+                transform: rotate(360deg);
+                transition: 0.3s;
+            }
         }
 
 

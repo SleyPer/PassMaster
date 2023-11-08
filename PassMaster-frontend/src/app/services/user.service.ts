@@ -47,6 +47,10 @@ export class UserService {
     return this.http.put<User>(url, friend.id);
   }
 
+  deleteFriend(userId: number, friend: User): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${userId}/deleteFriend/${friend.id}`);
+  }
+
   register(newUser: User): Observable<User> {
     return this.http.post<User>(this.apiUrl + "/registration", newUser);
   }

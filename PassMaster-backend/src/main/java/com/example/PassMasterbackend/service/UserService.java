@@ -202,7 +202,9 @@ public class UserService implements UserDetailsService {
         );
 
         user.getFriends().removeIf(u -> Objects.equals(u.getId(), friend.getId()));
+        friend.getFriends().removeIf(u -> Objects.equals(u.getId(), user.getId()));
         userRepository.save(user);
+        userRepository.save(friend);
     }
 
     public void sendResetPasswordMail(Map<String, String> params) {

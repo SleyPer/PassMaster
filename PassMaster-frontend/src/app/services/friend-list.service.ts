@@ -26,4 +26,15 @@ export class FriendListService {
     }
     return this.userService.addFriend(this.userId, selectedUser);
   }
+
+  deleteFriend(selectedUser: User) {
+    if (selectedUser) {
+      for (const u of this.friends) {
+        if (u.id === selectedUser.id) {
+          this.friends.splice(this.friends.indexOf(u), 1);
+        }
+      }
+    }
+    return this.userService.deleteFriend(this.userId, selectedUser)
+  }
 }

@@ -10,7 +10,7 @@
             <div class="option" [matTooltip]="'Epingler la conversation'">
                 <mat-icon>bookmark_border</mat-icon>
             </div>
-            <div class="option" [matTooltip]="'Supprimer cet ami'">
+            <div class="option" [matTooltip]="'Supprimer cet ami'" (click)="deleteFriend()">
                 <mat-icon>delete_forever</mat-icon>
             </div>
             <div class="option" [matTooltip]="'Bloquer cet ami'">

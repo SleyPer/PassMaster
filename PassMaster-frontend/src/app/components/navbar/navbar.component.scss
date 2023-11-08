@@ -1,4 +1,7 @@
 .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     color: white;
     padding-left: 5px;
     height: 100%;
@@ -16,5 +19,9 @@
         h4 {
             font-size: 20px;
         }
+    }
+
+    .user {
+        margin-right: 2%;
     }
 }

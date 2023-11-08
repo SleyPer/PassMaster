@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +11,16 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private router: Router) { }
+  connectedUserId: number = 0;
+  connectedUser: User = new User();
+
+  constructor(private router: Router, private authService: AuthService, private userService: UserService) {
+    const token = this.authService.getToken();
+    this.connectedUserId = this.authService.getDecodedToken(token).jti;
+    this.userService.getUserById(this.connectedUserId).subscribe(data => {
+      this.connectedUser = data;
+    });
+  }
 
   createChest() {
     this.router.navigate(["/create"]);

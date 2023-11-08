@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { Message } from 'src/app/models/message.model';
 import { User } from 'src/app/models/user.model';
@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'src/app/services/message.service';
 import { UserService } from 'src/app/services/user.service';
 import { NotificationComponent } from '../notification/notification.component';
+import { FriendListService } from 'src/app/services/friend-list.service';
 
 
 @Component({
@@ -29,9 +30,11 @@ export class FriendMessagesComponent implements OnInit {
   allMessages: Message[] = [];
 
   constructor(
+    private router: Router,
     private userService: UserService,
     private messageService: MessageService,
     private authService: AuthService,
+    private friendListService: FriendListService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
   ) {
@@ -56,13 +59,6 @@ export class FriendMessagesComponent implements OnInit {
             this.receivedMessages = result.map(message => ({ ...message, isSent: false }));
           }
         });
-        // this.allMessages = [...this.sentMessages, ...this.receivedMessages].sort((a, b) => {
-        //   if (a.timestamp && b.timestamp) {
-        //     return a.timestamp.getTime() - b.timestamp.getTime();
-        //   } else {
-        //     return 0;
-        //   }
-        // });
         this.messageService.getAllByUserIdWithFriendId(this.connectedUserId, this.friendId).subscribe({
           next: result => {
             this.allMessages = result;
@@ -95,6 +91,22 @@ export class FriendMessagesComponent implements OnInit {
           this.showNotification("Erreur lors de l'envoi du message", "error");
         }
       })
+    }
+  }
+
+  deleteFriend() {
+    if (this.friend) {
+      this.friendListService.deleteFriend(this.friend).subscribe({
+        next: result => {
+          this.showNotification("Ami supprimé", "success");
+          this.router.navigate(['/home']);
+        },
+        error: error => {
+          this.showNotification("Erreur lors de l'ajout", "error");
+        }
+      })
+    } else {
+      this.showNotification("Ami inconnu", "error");
     }
   }
 
