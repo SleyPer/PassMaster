@@ -1,17 +1,16 @@
+import { User } from "./user.model";
+
 export class Message {
-    id?: number;
-    sender?: number;
-    recipient?: number;
+    sender?: User;
+    senderId?: number;
     content?: string;
     timestamp?: Date;
-    isSent?: boolean;
 
-    constructor(id?: number, sender?: number, recipient?: number, content?: string, timestamp?: Date, isSent?: boolean) {
-        this.id = id;
+    constructor(sender?: User, senderId?: number, content?: string, timestamp?: Date) {
         this.sender = sender;
-        this.recipient = recipient;
+        this.senderId = senderId;
         this.content = content;
         this.timestamp = timestamp;
-        this.isSent = isSent;
-    }
-}
+      }
+  }
+  

@@ -9,7 +9,6 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-
   private apiUrl = '/api/user';
 
   constructor(private http: HttpClient) { }

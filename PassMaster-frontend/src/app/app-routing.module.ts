@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AccountComponent } from '../components/account/account.component';
-import { AddFriendComponent } from '../components/add-friend/add-friend.component';
-import { FriendMessagesComponent } from '../components/friend-messages/friend-messages.component';
-import { FriendsListComponent } from '../components/friends-list/friends-list.component';
-import { GeneratorComponent } from '../components/generator/generator.component';
-import { HomeComponent } from '../components/home/home.component';
-import { LoginComponent } from '../components/login/login.component';
-import { RegisterComponent } from '../components/register/register.component';
-import { ResetPasswordComponent } from '../components/reset-password/reset-password.component';
-import { ValidateComponent } from '../components/validate/validate.component';
-import { AuthGuard } from '../guards/auth.guard';
+import { AccountComponent } from './components/account/account.component';
+import { AddFriendComponent } from './components/add-friend/add-friend.component';
+import { FriendMessagesComponent } from './components/friend-messages/friend-messages.component';
+import { FriendsListComponent } from './components/friends-list/friends-list.component';
+import { GeneratorComponent } from './components/generator/generator.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ValidateComponent } from './components/validate/validate.component';
+import { AuthGuard } from './guards/auth.guard';
+import { GroupMessageComponent } from './components/group-message/group-message.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'add', component: AddFriendComponent, canActivate: [AuthGuard] },
   { path: 'messages/:id', component: FriendMessagesComponent, canActivate: [AuthGuard] },
   { path: 'reset/password', component: ResetPasswordComponent, canActivate: [AuthGuard] },
+  { path: 'group-message', component: GroupMessageComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { Message } from 'src/app/models/message.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { MessageService } from 'src/app/services/message.service';
 import { UserService } from 'src/app/services/user.service';
 import { NotificationComponent } from '../notification/notification.component';
 import { FriendListService } from 'src/app/services/friend-list.service';
@@ -25,14 +23,9 @@ export class FriendMessagesComponent implements OnInit {
 
   content: string = "";
 
-  sentMessages: Message[] = [];
-  receivedMessages: Message[] = [];
-  allMessages: Message[] = [];
-
   constructor(
     private router: Router,
     private userService: UserService,
-    private messageService: MessageService,
     private authService: AuthService,
     private friendListService: FriendListService,
     private route: ActivatedRoute,
@@ -49,24 +42,6 @@ export class FriendMessagesComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.friendId = Number(params.get('id'));
-        this.messageService.getSentByUserIdToRecipientId(this.connectedUserId, this.friendId).subscribe({
-          next: result => {
-            this.sentMessages = result;
-          }
-        });
-        this.messageService.getReceivedByUserIdFromSenderId(this.connectedUserId, this.friendId).subscribe({
-          next: result => {
-            this.receivedMessages = result.map(message => ({ ...message, isSent: false }));
-          }
-        });
-        this.messageService.getAllByUserIdWithFriendId(this.connectedUserId, this.friendId).subscribe({
-          next: result => {
-            this.allMessages = result;
-            for (const msg of this.allMessages) {
-              console.log(msg.sender)
-            }
-          }
-        });
         return this.userService.getUserById(this.friendId);
       })
     ).subscribe({
@@ -77,21 +52,7 @@ export class FriendMessagesComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.content) {
-      var message = new Message();
-      message.sender = this.connectedUserId;
-      message.recipient = this.friendId;
-      message.content = this.content;
-      this.messageService.sendMessage(message).subscribe({
-        next: result => {
-          this.allMessages.push(message);
-          this.content = "";
-        },
-        error: error => {
-          this.showNotification("Erreur lors de l'envoi du message", "error");
-        }
-      })
-    }
+    
   }
 
   deleteFriend() {

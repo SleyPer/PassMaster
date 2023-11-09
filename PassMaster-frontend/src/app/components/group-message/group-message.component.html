@@ -1,0 +1,27 @@
+<h1>Messages</h1>
+
+<div class="messages-container">
+    <div class="chat">
+        <div class="message-container">
+            <div *ngFor="let message of messages" [ngClass]="{'right': message.senderId === connectedUserId, 'left': message.senderId !== connectedUserId}">
+                <div class="header">
+                    {{ message.sender?.firstName }} · {{ message.timestamp | date:'HH:MM' }}
+                </div>
+                <div class="content">
+                    {{ message.content }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="message">
+        <form #messageForm="ngForm" (ngSubmit)="sendMessage()" class="message-form">
+            <input id="msg" [(ngModel)]="message" placeholder="Saisissez votre message ici" name="content" ngModel
+                required />
+            <div class="send">
+                <mat-icon>send</mat-icon>
+            </div>
+        </form>
+    </div>
+
+</div>

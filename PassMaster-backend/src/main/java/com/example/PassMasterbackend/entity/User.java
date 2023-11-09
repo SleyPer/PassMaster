@@ -58,44 +58,43 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<User> friends;
 
-    @OneToMany(mappedBy = "sender")
     @JsonIgnore
-    private List<Message> sentMessages;
-
-    @OneToMany(mappedBy = "recipient")
-    @JsonIgnore
-    private List<Message> receivedMessages;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + this.role.getName()));
     }
 
+    @JsonIgnore
     @Override
     public String getPassword() {
         return this.pass;
     }
 
+    @JsonIgnore
     @Override
     public String getUsername() {
         return this.mail;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return this.active;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return this.active;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return this.active;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return this.active;

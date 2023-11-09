@@ -23,6 +23,10 @@ export class FriendsListComponent {
     this.router.navigate(["/add"]);
   }
 
+  createGroupDialog() {
+    this.router.navigate(['/group-message']);
+  }
+
   openMessages(friend: User) {
     this.router.navigate(['/messages', friend.id]);
   }
