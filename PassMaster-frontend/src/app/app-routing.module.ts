@@ -12,6 +12,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ValidateComponent } from './components/validate/validate.component';
 import { AuthGuard } from './guards/auth.guard';
 import { GroupMessageComponent } from './components/group-message/group-message.component';
+import { CreateRoomComponent } from './components/create-room/create-room.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'add', component: AddFriendComponent, canActivate: [AuthGuard] },
   { path: 'messages/:id', component: FriendMessagesComponent, canActivate: [AuthGuard] },
   { path: 'reset/password', component: ResetPasswordComponent, canActivate: [AuthGuard] },
-  { path: 'group-message', component: GroupMessageComponent, canActivate: [AuthGuard] },
+  { path: 'group-message/:id', component: GroupMessageComponent, canActivate: [AuthGuard] },
+  { path: 'createRoom', component: CreateRoomComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

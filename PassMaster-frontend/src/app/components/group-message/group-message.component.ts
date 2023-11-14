@@ -10,40 +10,46 @@ import { WebSocketService } from 'src/app/services/web-socket.service';
   templateUrl: './group-message.component.html',
   styleUrls: ['./group-message.component.scss'],
 })
-export class GroupMessageComponent implements OnInit, OnDestroy{
+export class GroupMessageComponent implements OnInit, OnDestroy {
   connectedUserId: number = 0;
-  connctedUser: User = new User();
+  connectedUser: User = new User();
 
   message: string = '';
   messages: Message[] = [];
+
+  connectedUsers: number[] = [];
 
   constructor(private webSocketService: WebSocketService, private authService: AuthService, private userService: UserService) {
     const token = this.authService.getToken();
     this.connectedUserId = this.authService.getDecodedToken(token).jti;
     this.userService.getUserById(this.connectedUserId).subscribe(data => {
-      this.connctedUser = data;
+      this.connectedUser = data;
     });
   }
 
   ngOnInit(): void {
-
+    this.webSocketService.initializeWebSocketConnection("group");
+    this.webSocketService.getMessages().subscribe((message: Message) => {
+      this.messages.push(message);
+    });
+    this.connectedUsers = this.webSocketService.connectedUsersId;
+    console.log(this.connectedUsers);
   }
 
   sendMessage() {
     if (this.message) {
       const messageObject: Message = {
         senderId: this.connectedUserId,
+        sender: this.connectedUser,
         content: this.message,
         timestamp: new Date(),
       };
       this.webSocketService.sendMessage(messageObject);
       this.message = '';
     }
-
-    this.messages = this.webSocketService.getMessages();
   }
 
   ngOnDestroy(): void {
-
+    this.webSocketService.disconnect();
   }
 }

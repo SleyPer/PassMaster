@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { NotificationComponent } from '../notification/notification.component';
 import { FriendListService } from 'src/app/services/friend-list.service';
+import { Message } from 'src/app/models/message.model';
+import { WebSocketService } from 'src/app/services/web-socket.service';
 
 
 @Component({
@@ -14,20 +16,22 @@ import { FriendListService } from 'src/app/services/friend-list.service';
   templateUrl: './friend-messages.component.html',
   styleUrls: ['./friend-messages.component.scss']
 })
-export class FriendMessagesComponent implements OnInit {
+export class FriendMessagesComponent implements OnInit, OnDestroy {
   friend: User = new User();
   connectedUser: User = new User();
   friendId: number = 0;
   connectedUserId: number = 0;
   isMenuOpen = false;
 
-  content: string = "";
+  message: string = "";
+  messages: Message[] = [];
 
   constructor(
     private router: Router,
     private userService: UserService,
     private authService: AuthService,
     private friendListService: FriendListService,
+    public webSocketService: WebSocketService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
   ) {
@@ -42,6 +46,13 @@ export class FriendMessagesComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.friendId = Number(params.get('id'));
+        this.webSocketService.openChatWithFriend(this.friendId);
+        this.webSocketService.getMessages().subscribe((message: Message) => {
+          this.messages.push(message);
+          if (message.senderId === this.friendId) {
+            this.webSocketService.isFriendConnected = true;
+          }
+        });
         return this.userService.getUserById(this.friendId);
       })
     ).subscribe({
@@ -51,8 +62,17 @@ export class FriendMessagesComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    
+  sendMessage() {
+    if (this.message) {
+      const messageObject: Message = {
+        senderId: this.connectedUserId,
+        sender: this.connectedUser,
+        content: this.message,
+        timestamp: new Date(),
+      };
+      this.webSocketService.sendMessage(messageObject);
+      this.message = '';
+    }
   }
 
   deleteFriend() {
@@ -82,5 +102,9 @@ export class FriendMessagesComponent implements OnInit {
       verticalPosition: 'bottom',
       panelClass: type == "success" ? ['success-snackbar'] : ['error-snackbar']
     });
+  }
+
+  ngOnDestroy(): void {
+    this.webSocketService.disconnect();
   }
 }

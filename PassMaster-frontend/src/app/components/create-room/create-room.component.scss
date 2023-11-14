@@ -1,0 +1,138 @@
+h1 {
+    color: white;
+    padding: 2%;
+}
+
+.container {
+    width: 96%;
+    height: 80%;
+    margin-left: 2%;
+    background-color: #222;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    .group-form {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 80%;
+        padding: 2%;
+
+        .inputs {
+            width: 50%;
+            height: 100%;
+            padding: 2%;
+            margin: 2%;
+            border-radius: 5px;
+            background-color: #444;
+            color: white;
+
+            .input {
+                width: 100%;
+                margin-top: 10%;
+
+                label {
+                    color: white;
+                    font-size: 1rem;
+                }
+        
+                input {
+                    width: 100%;
+                    background-color: black;
+                    color: white;
+                    border: 1px solid black;
+                    border-radius: 5px;
+                    font-size: 1rem;
+                    padding: 2%;
+                }
+            }
+        }
+
+        .scrollable-list {
+            width: 50%;
+            height: 100%;
+            overflow-y: auto;
+            background-color: #222;
+            border-radius: 5px;
+            padding: 2%;
+            margin: 2%;
+            background-color: #444;
+            color: white;
+        
+            .no-friends {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+            }
+        
+            &::-webkit-scrollbar {
+                width: 6px;
+            }
+        
+            &::-webkit-scrollbar-thumb {
+                background-color: #111;
+                border-radius: 3px;
+            }
+        
+            &::-webkit-scrollbar-button {
+                display: none;
+            }
+        
+            .friend-item {
+                display: flex;
+                margin: 2%;
+                background-color: #111;
+                border-radius: 5px;
+                padding: 10px;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: 0.3s;
+        
+                p {
+                    color: white;
+                }
+            }
+        
+            .friend-item:hover {
+                background-color: white;
+                transition: 0.3s;
+        
+                p {
+                    color: black;
+                }
+            }
+
+            .friend-item.selected-user {
+                background-color: #408812;
+            }
+        }
+    }
+
+    .button {
+        margin-bottom: 5%;
+        margin-left: 30%;
+        width: 40%;
+        margin-top: 5%;
+        height: 5vh;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        color: white;
+        border-radius: 5px;
+        background: #111;
+        line-height: 5vh;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .button:hover {
+        width: 60%;
+        margin-left: 20%;
+        background-color: white;
+        color: black;
+        transition: 0.3s;
+    }
+}

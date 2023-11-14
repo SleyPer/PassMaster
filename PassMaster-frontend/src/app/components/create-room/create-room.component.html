@@ -1,0 +1,31 @@
+<h1>Créer un groupe</h1>
+
+<div class="container">
+    <div class="group-form">
+        <div class="inputs">
+            Propriétés du groupe
+            <div class="input">
+                <label>Identifiant du groupe :</label>
+                <input id="roomId" [(ngModel)]="room.id" [disabled]="true"/>
+            </div>
+            <div class="input">
+                <label>Veuillez saisir un nom de groupe :</label>
+                <input id="roomName" [(ngModel)]="room.name" />
+            </div>
+        </div>
+        <div class="scrollable-list">
+            Ajouter des membres
+            <div *ngIf="friends.length === 0" class="no-friends">
+                <p>Aucun ami</p>
+            </div>
+            <div *ngFor="let friend of friends" (click)="selectUser(friend)">
+                <div class="friend-item" [ngClass]="{'selected-user': isUserSelected(friend)}">
+                    <p>{{ friend.firstName }} {{ friend.lastName }} ({{ friend.mail }})</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button" (click)="onSubmit()">
+        Créer le groupe
+    </div>
+</div>

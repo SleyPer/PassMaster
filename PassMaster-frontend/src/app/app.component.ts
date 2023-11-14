@@ -7,7 +7,9 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'PassMaster';
+  title = 'ChatMaster';
+  friendsList: boolean = true;
+  groupsList: boolean = false;
 
   constructor(private authService: AuthService) {
 
@@ -15,5 +17,15 @@ export class AppComponent {
 
   isAuthenticated() {
     return this.authService.isAuthenticated();
+  }
+
+  showFriendsList() {
+    this.groupsList = false;
+    this.friendsList = true;
+  }
+
+  showGroupsList() {
+    this.friendsList = false;
+    this.groupsList = true;
   }
 }

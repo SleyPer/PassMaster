@@ -1,0 +1,18 @@
+<div class="header">
+    <div class="group-message" (click)="addRoom()">
+        Créer un groupe
+    </div>
+    <div class="search">
+        <input type="text" id="search" name="search" placeholder="Chercher un groupe" [(ngModel)]="search"
+            (keyup)="searchGroups()">
+    </div>
+</div>
+
+<div class="scrollable-list">
+    <div *ngIf="rooms.length === 0" class="no-rooms">
+        <p>Aucun groupe</p>
+    </div>
+    <div class="rooms-item" *ngFor="let room of rooms" (click)="openMessages(room)">
+        <p>{{ room.name }}</p>
+    </div>
+</div>

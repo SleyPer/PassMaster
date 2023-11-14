@@ -7,7 +7,16 @@
       <app-sidebar></app-sidebar>
     </div>
     <div class="list">
-      <app-friends-list></app-friends-list>
+      <div class="header">
+        <div class="friends" (click)="showFriendsList()" [ngClass]="{'friends-active': friendsList}">
+          Amis
+        </div>
+        <div class="groups" (click)="showGroupsList()" [ngClass]="{'groups-active': groupsList}">
+          Groupes
+        </div>
+      </div>
+      <app-friends-list *ngIf="friendsList"></app-friends-list>
+      <app-groups-list *ngIf="groupsList"></app-groups-list>
     </div>
     <div class="content">
       <router-outlet></router-outlet>

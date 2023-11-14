@@ -1,15 +1,11 @@
 <div class="header">
+    <div class="group-message" (click)="addFriend()">
+        Ajouter un ami
+    </div>
     <div class="search">
         <input type="text" id="search" name="search" placeholder="Chercher un ami" [(ngModel)]="search"
             (keyup)="searchFriends()">
     </div>
-    <div class="button" (click)="addFriend()" [matTooltip]="'Ajouter un ami'">
-        <mat-icon class="icon-white">add</mat-icon>
-    </div>
-</div>
-
-<div class="group-message" (click)="createGroupDialog()">
-    Nouveau message de groupe
 </div>
 
 <div class="scrollable-list">

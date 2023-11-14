@@ -2,7 +2,9 @@
 
 <div class="messages-container">
     <div class="friend" [ngClass]="{'expanded': isMenuOpen}">
-        <div class="friend-infos" [matTooltip]="'Voir le profil'">{{ friend.firstName }} {{ friend.lastName }}</div>
+        <div class="friend-infos" [matTooltip]="'Voir le profil'">{{ friend.firstName }} {{ friend.lastName }}<div
+                *ngIf="webSocketService.isFriendConnected"> · </div>
+        </div>
         <div *ngIf="isMenuOpen" class="menu">
             <div class="option" [matTooltip]="'Supprimer la conversation'">
                 <mat-icon>delete_outline</mat-icon>
@@ -23,15 +25,21 @@
     </div>
 
     <div class="chat">
-        <div class="message-container">
-            
+        <div *ngFor="let message of messages"
+            [ngClass]="{'right': message.sender && message.senderId === connectedUserId, 'left': message.sender && message.senderId !== connectedUserId, 'center': !message.sender}">
+            <div class="header">
+                {{ message.sender?.firstName }} · {{ message.timestamp | date:'HH:MM' }}
+            </div>
+            <div class="content">
+                {{ message.content }}
+            </div>
         </div>
     </div>
 
     <div class="message">
-        <form #messageForm="ngForm" (ngSubmit)="onSubmit()" class="message-form">
-            <input id="msg" [(ngModel)]="content" placeholder="Saisissez votre message ici" name="content" ngModel
-                required />
+        <form #messageForm="ngForm" (ngSubmit)="sendMessage()" class="message-form">
+            <input id="msg" [(ngModel)]="message" placeholder="Saisissez votre message ici" name="content" ngModel
+                required autocomplete="off" />
             <div class="send">
                 <mat-icon>send</mat-icon>
             </div>

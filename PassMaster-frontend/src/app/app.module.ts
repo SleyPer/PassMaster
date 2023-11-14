@@ -31,6 +31,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ValidateComponent } from './components/validate/validate.component';
 import { TokenInterceptor } from './services/token-interceptor.service';
 import { GroupMessageComponent } from './components/group-message/group-message.component';
+import { GroupsListComponent } from './components/groups-list/groups-list.component';
+import { CreateRoomComponent } from './components/create-room/create-room.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { GroupMessageComponent } from './components/group-message/group-message.
     FriendMessagesComponent,
     ResetPasswordComponent,
     GroupMessageComponent,
+    GroupsListComponent,
+    CreateRoomComponent,
   ],
   imports: [
     BrowserModule,
