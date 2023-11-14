@@ -1,2 +1,37 @@
-package com.example.PassMasterbackend.entity;public class Room {
+package com.example.PassMasterbackend.entity;
+
+import com.example.PassMasterbackend.deserializer.RoomDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "room")
+@JsonDeserialize(using = RoomDeserializer.class)
+public class Room {
+
+    @Id
+    @Column(name = "room_id")
+    private String id;
+
+    @Column
+    private String name;
+
+    @ManyToMany
+    @JoinTable(
+            name = "room_users",
+            joinColumns = @JoinColumn(name = "room_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+
+    private List<User> users;
 }

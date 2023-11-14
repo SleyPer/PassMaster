@@ -37,13 +37,15 @@ public class User implements UserDetails {
     private String lastName;
 
     @Column(nullable = false)
-    @JsonIgnore
     private String pass;
 
     @Column(nullable = false)
     private String mail;
 
+    @JsonIgnore
     private boolean active = false;
+
+    private String sessionId;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore

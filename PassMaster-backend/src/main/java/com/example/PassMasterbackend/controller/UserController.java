@@ -86,7 +86,7 @@ public class UserController {
     }
 
     @GetMapping("search")
-    public List<User> getUserByMail(@RequestParam String mail) {
+    public List<User> getUsersByMail(@RequestParam String mail) {
         return userService.getUsersByMail(mail);
     }
 

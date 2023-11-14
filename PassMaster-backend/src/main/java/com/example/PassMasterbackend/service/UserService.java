@@ -165,6 +165,12 @@ public class UserService implements UserDetailsService {
         );
     }
 
+    public User getUserBySessionId(String sessionId) {
+        return userRepository.findBySessionId(sessionId).orElseThrow(
+                () -> new RuntimeException("Aucun utilisateur trouvé")
+        );
+    }
+
     public List<User> getFriendsByUserId(Long id) {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Utilisateur inconnu")

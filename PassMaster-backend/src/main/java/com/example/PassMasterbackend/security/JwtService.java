@@ -53,7 +53,7 @@ public class JwtService {
                 .value(UUID.randomUUID().toString())
                 .expire(false)
                 .creationDate(Instant.now())
-                .expirationDate(Instant.now().plusMillis(30 *60 *1000))
+                .expirationDate(Instant.now().plusMillis(240 *60 *1000))
                 .build();
 
         final Jwt jwt = Jwt
