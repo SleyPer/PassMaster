@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.7'
 
 services:
 
@@ -37,6 +37,8 @@ services:
       - "8080:8080"
     depends_on:
       - db
+    volumes:
+      - ./PassMaster-backend:/app
   frontend:
     build:
       context: ./PassMaster-frontend
@@ -45,6 +47,9 @@ services:
       - "4200:4200"
     depends_on:
       - api
+    volumes:
+      - ./PassMaster-frontend:/app
 volumes:
   mysql-data:
+  backend-data:
   frontend-data:
