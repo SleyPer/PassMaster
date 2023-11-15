@@ -32,8 +32,8 @@ export class UserService {
     return this.http.delete<void>(url);
   }
 
-  getUsersByMail(mail: string): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl + "/search", { params: { mail } });
+  getUsersByMail(userId: number, mail: string): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl + "/" + userId + "/search", { params: { mail } });
   }
 
   getFriendsByUserId(userId: number): Observable<User[]> {

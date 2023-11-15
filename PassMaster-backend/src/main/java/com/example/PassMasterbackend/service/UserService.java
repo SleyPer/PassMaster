@@ -4,6 +4,7 @@ import com.example.PassMasterbackend.entity.*;
 import com.example.PassMasterbackend.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,6 +14,7 @@ import java.time.Instant;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -158,12 +160,22 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public List<User> getUsersByMail(String mail) {
+    public List<User> getUsersByMail(Long id, String mail) {
         mail = mail.replaceAll("\\s", "");
-        return userRepository.findByMailContaining(mail).orElseThrow(
-                () -> new RuntimeException("Aucun utilisateur trouvé")
-        );
+        User me = this.userRepository.findById(id).orElse(null);
+
+        return userRepository.findByMailContaining(mail)
+                .orElseThrow(() -> new RuntimeException("Aucun utilisateur trouvé"))
+                .stream()
+                .filter(user -> !user.equals(me))
+                .filter(user -> {
+                    assert me != null;
+                    return !me.getFriends().contains(user);
+                })
+                .collect(Collectors.toList());
     }
+
+
 
     public User getUserBySessionId(String sessionId) {
         return userRepository.findBySessionId(sessionId).orElseThrow(

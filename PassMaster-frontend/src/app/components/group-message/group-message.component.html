@@ -1,6 +1,19 @@
-<h1>Messages</h1>
+<h1>{{ room.name }}</h1>
+
+<div *ngIf="userListVisible" class="user-list-popup" (click)="closeUserList($event)">
+    <div class="user-list-content">
+        <h2>Membres du groupe</h2>
+        <div class="user-list">
+            <div class="user" *ngFor="let user of room?.users">{{ user.firstName }} {{ user.lastName }}</div>
+        </div>
+        <div class="button" (click)="closeUserList($event)">Fermer</div>
+    </div>
+</div>
 
 <div class="messages-container">
+    <div class="header" [matTooltip]="'Voir les membres'" (click)="openUserList()">
+        <div class="header-infos">{{ room.users?.length }} utilisateurs</div>
+    </div>
     <div class="chat">
         <div *ngFor="let message of messages"
             [ngClass]="{'right': message.sender && message.senderId === connectedUserId, 'left': message.sender && message.senderId !== connectedUserId, 'center': !message.sender}">

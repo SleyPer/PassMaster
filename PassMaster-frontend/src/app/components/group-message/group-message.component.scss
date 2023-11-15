@@ -3,6 +3,81 @@ h1 {
     padding: 2%;
 }
 
+.user-list-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    backdrop-filter: blur(5px);
+
+    .user-list-content {
+        width: 20%;
+        height: 50%;
+        background: #111;
+        padding: 1%;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        border: 1px solid #333;
+
+        .user-list {
+            width: 100%;
+            height: 80%;
+            overflow-y: auto;
+
+            .user {
+                margin-top: 2%;
+                padding-left: 5%;
+                display: flex;
+                align-items: center;
+                width: 100%;
+                height: 15%;
+                background-color: black;
+                border: 1px solid #222;
+                border-radius: 5px;
+                transition: 0.3s;
+
+                &:hover {
+                    background-color: white;
+                    color: black;
+                    cursor: pointer;
+                    transition: 0.3s;
+                }
+            }
+
+            &::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: #333;
+                border-radius: 3px;
+            }
+
+            &::-webkit-scrollbar-button {
+                display: none;
+            }
+        }
+
+        .button {
+            margin-top: 2%;
+            text-align: center;
+            padding: 1%;
+
+            &:hover {
+                cursor: pointer;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
 .messages-container {
     padding: 2%;
     width: 96%;
@@ -11,6 +86,30 @@ h1 {
     background-color: #222;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    .header {
+        display: flex;
+        align-items: center;
+        width: 20%;
+        height: 10%;
+        background-color: #111;
+        color: white;
+        border-radius: 5px;
+        font-size: 1rem;
+        justify-content: center;
+        transition: 0.3s;
+
+        .header-infos {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+    }
+
+    .header:hover {
+        cursor: pointer;
+        font-weight: bold;
+    }
 
     .chat {
         display: flex;
@@ -40,7 +139,7 @@ h1 {
                 font-size: 12px;
                 float: left;
             }
-    
+
             .content {
                 font-size: 16px;
             }
@@ -62,7 +161,7 @@ h1 {
                 font-size: 12px;
                 float: left;
             }
-    
+
             .content {
                 font-size: 16px;
             }

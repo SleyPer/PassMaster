@@ -85,9 +85,9 @@ public class UserController {
         return ResponseEntity.ok(userService.updateUser(id, user));
     }
 
-    @GetMapping("search")
-    public List<User> getUsersByMail(@RequestParam String mail) {
-        return userService.getUsersByMail(mail);
+    @GetMapping("/{id}/search")
+    public List<User> getUsersByMail(@PathVariable Long id, @RequestParam String mail) {
+        return userService.getUsersByMail(id, mail);
     }
 
     @GetMapping("/{id}/friends")

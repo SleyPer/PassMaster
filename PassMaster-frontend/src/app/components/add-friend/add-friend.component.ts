@@ -45,7 +45,7 @@ export class AddFriendComponent implements OnInit {
 
   onMailInputChange() {
     if (this.userMail.trim() !== '') {
-      this.userService.getUsersByMail(this.userMail).subscribe((result) => {
+      this.userService.getUsersByMail(this.userId, this.userMail).subscribe((result) => {
         this.searchUsers = result;
       });
     } else {

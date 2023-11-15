@@ -46,7 +46,7 @@ public class SecurityConfig {
                                 .requestMatchers(POST, "/api/user/refresh-token").permitAll()
                                 .requestMatchers(GET, "/api/user").permitAll()
                                 .requestMatchers(GET, "/api/user/{id}").permitAll()
-                                .requestMatchers(GET, "/api/user/search").permitAll()
+                                .requestMatchers(GET, "/api/user/{id}/search").permitAll()
                                 .requestMatchers(PUT, "/api/user/{id}").permitAll()
                                 .requestMatchers(GET, "/api/user/{id}/friends").permitAll()
                                 .requestMatchers(PUT, "/api/user/{userId}/addFriend").permitAll()
