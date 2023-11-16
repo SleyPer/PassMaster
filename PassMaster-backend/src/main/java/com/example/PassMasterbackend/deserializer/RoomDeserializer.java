@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RoomDeserializer extends StdDeserializer<Room> {
@@ -42,7 +43,9 @@ public class RoomDeserializer extends StdDeserializer<Room> {
             }
         }
 
-        return new Room(id, name, users);
+        List<String> sessionIds = Collections.singletonList(node.get("sessionIds").asText());
+
+        return new Room(id, name, users, sessionIds);
     }
 }
 

@@ -56,7 +56,6 @@ export class CreateRoomComponent {
   onSubmit() {
     if (this.verifyFields()) {
       this.room.users = this.friendsAdded;
-      console.log(this.room);
       this.roomService.addRoom(this.room).subscribe({
         next: result => {
           this.roomListService.addRoom(result);

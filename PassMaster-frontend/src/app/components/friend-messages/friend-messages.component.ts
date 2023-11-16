@@ -49,9 +49,6 @@ export class FriendMessagesComponent implements OnInit, OnDestroy {
         this.webSocketService.openChatWithFriend(this.friendId);
         this.webSocketService.getMessages().subscribe((message: Message) => {
           this.messages.push(message);
-          if (message.senderId === this.friendId) {
-            this.webSocketService.isFriendConnected = true;
-          }
         });
         return this.userService.getUserById(this.friendId);
       })

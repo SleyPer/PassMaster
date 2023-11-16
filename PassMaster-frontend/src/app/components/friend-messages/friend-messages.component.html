@@ -2,8 +2,7 @@
 
 <div class="messages-container">
     <div class="friend" [ngClass]="{'expanded': isMenuOpen}">
-        <div class="friend-infos" [matTooltip]="'Voir le profil'">{{ friend.firstName }} {{ friend.lastName }}<div
-                *ngIf="webSocketService.isFriendConnected"> · </div>
+        <div class="friend-infos" [matTooltip]="'Voir le profil'">{{ friend.firstName }} {{ friend.lastName }}
         </div>
         <div *ngIf="isMenuOpen" class="menu">
             <div class="option" [matTooltip]="'Supprimer la conversation'">

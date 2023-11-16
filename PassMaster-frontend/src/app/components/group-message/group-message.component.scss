@@ -26,6 +26,14 @@ h1 {
         flex-direction: column;
         border: 1px solid #333;
 
+        &.opening {
+            animation: openPopup 0.15s ease-in;
+        }
+
+        &.closing {
+            animation: closePopup 0.15s ease-out;
+        }
+
         .user-list {
             width: 100%;
             height: 80%;
@@ -49,6 +57,13 @@ h1 {
                     cursor: pointer;
                     transition: 0.3s;
                 }
+
+                div {
+                    display: flex;
+                    align-items: center;
+                    padding-left: 5%;
+                    height: 100%;
+                }
             }
 
             &::-webkit-scrollbar {
@@ -64,19 +79,33 @@ h1 {
                 display: none;
             }
         }
+    }
 
-        .button {
-            margin-top: 2%;
-            text-align: center;
-            padding: 1%;
+    @keyframes openPopup {
+        0% {
+            transform: scale(0.5);
+            opacity: 0;
+        }
 
-            &:hover {
-                cursor: pointer;
-                font-weight: bold;
-            }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes closePopup {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        100% {
+            transform: scale(0.5);
+            opacity: 0;
         }
     }
 }
+
 
 .messages-container {
     padding: 2%;
@@ -134,7 +163,7 @@ h1 {
             align-self: flex-end;
             margin-right: 2%;
 
-            .header {
+            .chat-header {
                 width: 100%;
                 font-size: 12px;
                 float: left;

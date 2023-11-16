@@ -17,15 +17,14 @@ export class GroupMessageComponent implements OnInit, OnDestroy {
   connectedUserId: number = 0;
   connectedUser: User = new User();
 
+  connectedUsers: string[] = [];
+
   message: string = '';
   messages: Message[] = [];
-
-  connectedUsers: number[] = [];
 
   groupId: string = "";
   room: Room = new Room();
 
-  @ViewChild('userListPopup') userListPopup!: ElementRef;
   userListVisible = false;
 
   constructor(
@@ -38,9 +37,6 @@ export class GroupMessageComponent implements OnInit, OnDestroy {
   ) {
     const token = this.authService.getToken();
     this.connectedUserId = this.authService.getDecodedToken(token).jti;
-    this.userService.getUserById(this.connectedUserId).subscribe(data => {
-      this.connectedUser = data;
-    });
   }
 
   ngOnInit(): void {
@@ -51,22 +47,21 @@ export class GroupMessageComponent implements OnInit, OnDestroy {
         this.roomService.getRoomById(groupIdParam).subscribe({
           next: result => {
             this.room = result;
+            this.connectedUsers = result.sessionIds!;
           }
         });
         this.webSocketService.initializeWebSocketConnection(this.groupId);
-
         this.webSocketService.getMessages().subscribe((message: Message) => {
           this.messages.push(message);
         });
-
-        this.connectedUsers = this.webSocketService.connectedUsersId;
-        console.log(this.connectedUsers);
+        this.userService.getUserById(this.connectedUserId).subscribe(data => {
+          this.connectedUser = data;
+        });
       } else {
         this.router.navigate(['/home']);
       }
     });
   }
-
 
   sendMessage() {
     if (this.message) {
@@ -84,7 +79,7 @@ export class GroupMessageComponent implements OnInit, OnDestroy {
   openUserList() {
     this.userListVisible = true;
   }
-  
+
   closeUserList(event: Event) {
     if (event.target !== event.currentTarget) return;
     this.userListVisible = false;
@@ -95,6 +90,16 @@ export class GroupMessageComponent implements OnInit, OnDestroy {
     if (event.key === 'Escape' && this.userListVisible) {
       this.userListVisible = false;
     }
+  }
+
+  isUserConnected(user: User): boolean {
+    for (const session of this.connectedUsers) {
+      console.log(session, " - ", user.sessionId)
+      if (session === user.sessionId)
+        return true;
+    }
+
+    return false;
   }
 
   ngOnDestroy(): void {

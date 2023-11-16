@@ -34,4 +34,12 @@ public class Room {
     )
 
     private List<User> users;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+            name = "room_session_ids",
+            joinColumns = @JoinColumn(name = "room_id")
+    )
+    @Column(name = "session_id")
+    private List<String> sessionIds;
 }

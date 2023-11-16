@@ -1,8 +1,11 @@
 package com.example.PassMasterbackend.controller;
 
 import com.example.PassMasterbackend.entity.Message;
+import com.example.PassMasterbackend.entity.Room;
 import com.example.PassMasterbackend.entity.User;
+import com.example.PassMasterbackend.repository.RoomRepository;
 import com.example.PassMasterbackend.repository.UserRepository;
+import com.example.PassMasterbackend.service.RoomService;
 import com.example.PassMasterbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.messaging.SessionConnectEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 
@@ -24,9 +28,11 @@ public class WebSocketController {
     @Autowired
     private UserService userService;
     @Autowired
+    private RoomService roomService;
+    @Autowired
     private UserRepository userRepository;
-
-    private final Map<String, List<String>> connectedUsers = new HashMap<>();
+    @Autowired
+    private RoomRepository roomRepository;
 
     @Autowired
     WebSocketController(SimpMessagingTemplate template){
@@ -37,43 +43,57 @@ public class WebSocketController {
     public void sendMessage(@DestinationVariable String roomId, Message message) {
         User user = this.userService.getUserById(message.getSenderId());
         message.setSender(user);
+        System.out.println(message);
         this.template.convertAndSend("/message/" + roomId, message);
     }
 
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectEvent event) {
         SimpMessageHeaderAccessor accessor = SimpMessageHeaderAccessor.wrap(event.getMessage());
-        System.out.println(accessor);
         String userId = accessor.getFirstNativeHeader("userId");
         String roomId = accessor.getFirstNativeHeader("roomId");
 
         assert userId != null;
         User user = this.userService.getUserById(Long.valueOf(userId));
         user.setSessionId(accessor.getSessionId());
+        Room room = this.roomService.getRoomById(roomId);
+        List<String> sessions = room.getSessionIds();
+        sessions.add(accessor.getSessionId());
+        room.setSessionIds(sessions);
         this.userRepository.save(user);
-        connectedUsers.computeIfAbsent(roomId, k -> new ArrayList<>()).add(user.getSessionId());
-        System.out.println(connectedUsers.values());
-        sendConnectedUsersList(roomId);
+        this.roomRepository.save(room);
+        sendConnectedUsersList(room);
     }
 
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         SimpMessageHeaderAccessor accessor = SimpMessageHeaderAccessor.wrap(event.getMessage());
-        String roomId = (String) Objects.requireNonNull(accessor.getSessionAttributes()).get("roomId");
-        System.out.println(accessor);
-        System.out.println("roomId : " + roomId);
 
         User user = this.userService.getUserBySessionId(accessor.getSessionId());
-        connectedUsers.getOrDefault(roomId, Collections.emptyList()).remove(user.getSessionId());
         user.setSessionId(null);
         this.userRepository.save(user);
-        System.out.println(connectedUsers.values());
-        sendConnectedUsersList(roomId);
+        List<Room> rooms = this.roomService.getAllRooms();
+        Room room = null;
+        for (Room r : rooms)
+            for (String sessionId : r.getSessionIds())
+                if (sessionId.equals(accessor.getSessionId()))
+                    room = r;
+
+        assert room != null;
+        List<String> sessions = room.getSessionIds();
+        sessions.removeIf(session -> session.equals(accessor.getSessionId()));
+
+        room.setSessionIds(sessions);
+        this.roomRepository.save(room);
+        sendConnectedUsersList(room);
     }
 
-    private void sendConnectedUsersList(String roomId) {
-        List<String> sessionsId = connectedUsers.getOrDefault(roomId, Collections.emptyList());
-        this.template.convertAndSend("/connected-users/" + roomId, sessionsId);
-    }
+    private void sendConnectedUsersList(Room room) {
+        List<String> sessionsId = room.getSessionIds();
+        List<Long> connectedUsers = new ArrayList<>();
+        for (String sessionId: sessionsId)
+            connectedUsers.add(this.userService.getUserBySessionId(sessionId).getId());
 
+        this.template.convertAndSend("/connected-users/" + room.getId(), connectedUsers);
+    }
 }

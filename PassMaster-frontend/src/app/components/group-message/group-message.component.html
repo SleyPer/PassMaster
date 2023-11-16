@@ -1,12 +1,14 @@
 <h1>{{ room.name }}</h1>
 
 <div *ngIf="userListVisible" class="user-list-popup" (click)="closeUserList($event)">
-    <div class="user-list-content">
+    <div class="user-list-content" [ngClass]="{'closing': !userListVisible, 'opening': userListVisible}">
         <h2>Membres du groupe</h2>
         <div class="user-list">
-            <div class="user" *ngFor="let user of room?.users">{{ user.firstName }} {{ user.lastName }}</div>
+            <div class="user" *ngFor="let user of room?.users">{{ user.firstName }} {{ user.lastName }} 
+                <div *ngIf="isUserConnected(user)"> (En ligne)</div>
+                <div *ngIf="user.id === connectedUserId"> (Vous)</div>
+            </div>
         </div>
-        <div class="button" (click)="closeUserList($event)">Fermer</div>
     </div>
 </div>
 
@@ -17,7 +19,7 @@
     <div class="chat">
         <div *ngFor="let message of messages"
             [ngClass]="{'right': message.sender && message.senderId === connectedUserId, 'left': message.sender && message.senderId !== connectedUserId, 'center': !message.sender}">
-            <div class="header">
+            <div class="chat-header">
                 {{ message.sender?.firstName }} · {{ message.timestamp | date:'HH:MM' }}
             </div>
             <div class="content">

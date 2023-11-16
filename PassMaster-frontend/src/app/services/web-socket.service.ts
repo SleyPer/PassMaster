@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Message } from '../models/message.model';
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from './auth.service';
+import { User } from '../models/user.model';
 declare var SockJS: any;
 declare var Stomp: any;
 
@@ -10,10 +11,10 @@ declare var Stomp: any;
 })
 export class WebSocketService {
   private messageSubject: Subject<Message> = new Subject<Message>();
+  private connectedUsersSubject: Subject<number[]> = new Subject<number[]>();
+
   connectedUserId: number = 0;
-  connectedUsersId: number[] = [];
   private roomId: any;
-  isFriendConnected: boolean = false;
 
   constructor(private authService: AuthService) {
     const token = this.authService.getToken();
@@ -43,10 +44,11 @@ export class WebSocketService {
           that.messageSubject.next(messageObject);
         }
       });
-      this.getConnectedUsers().subscribe(result => {
-        this.connectedUsersId = result;
+      that.stompClient.subscribe('/connected-users/' + roomId, (usersList: number[]) => {
+        if (usersList) {
+          this.connectedUsersSubject.next(usersList);
+        }
       });
-      this.isFriendConnected = true;
     });
   }
 
@@ -64,8 +66,6 @@ export class WebSocketService {
   disconnect() {
     if (this.stompClient && this.stompClient.connected) {
       this.stompClient.disconnect(() => {
-        console.log('Déconnecté du serveur WebSocket');
-        this.isFriendConnected = false;
         this.roomId = null;
       });
     }
@@ -75,16 +75,11 @@ export class WebSocketService {
     return this.messageSubject.asObservable();
   }
 
-  private parseMessage(message: string): Message {
-    return JSON.parse(message);
+  getConnectedUsers(): Observable<number[]> {
+    return this.connectedUsersSubject.asObservable();
   }
 
-  getConnectedUsers(): Observable<number[]> {
-    return new Observable<number[]>(observer => {
-      this.stompClient.subscribe(`/connected-users/${this.roomId}`, (usersList: any) => {
-        const connectedUsers: number[] = JSON.parse(usersList.body);
-        observer.next(connectedUsers);
-      });
-    });
+  private parseMessage(message: string): Message {
+    return JSON.parse(message);
   }
 }
