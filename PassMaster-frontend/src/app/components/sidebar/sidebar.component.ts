@@ -106,6 +106,6 @@ export class SidebarComponent {
       horizontalPosition: 'end',
       verticalPosition: 'bottom',
       panelClass: type == "success" ? ['success-snackbar'] : ['error-snackbar']
-    });
+    }); 
   }
 }
