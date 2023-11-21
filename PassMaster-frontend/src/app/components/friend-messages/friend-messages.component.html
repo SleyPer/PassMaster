@@ -25,7 +25,7 @@
 
     <div class="chat">
         <div *ngFor="let message of messages"
-            [ngClass]="{'right': message.sender && message.senderId === connectedUserId, 'left': message.sender && message.senderId !== connectedUserId, 'center': !message.sender}">
+            [ngClass]="{'right': message.sender && message.sender.id === connectedUserId, 'left': message.sender && message.sender.id !== connectedUserId, 'center': !message.sender}">
             <div class="header">
                 {{ message.sender?.firstName }} · {{ message.timestamp | date:'HH:MM' }}
             </div>

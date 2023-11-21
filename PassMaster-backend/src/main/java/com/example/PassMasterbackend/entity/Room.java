@@ -32,7 +32,6 @@ public class Room {
             joinColumns = @JoinColumn(name = "room_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-
     private List<User> users;
 
     @ElementCollection(fetch = FetchType.EAGER)

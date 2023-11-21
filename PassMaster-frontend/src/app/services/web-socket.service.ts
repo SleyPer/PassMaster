@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Message } from '../models/message.model';
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from './auth.service';
-import { User } from '../models/user.model';
 declare var SockJS: any;
 declare var Stomp: any;
 

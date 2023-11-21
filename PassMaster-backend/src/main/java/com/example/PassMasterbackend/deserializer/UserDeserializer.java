@@ -25,12 +25,14 @@ public class UserDeserializer extends StdDeserializer<User> {
     public User deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
         JsonNode node = jp.getCodec().readTree(jp);
 
+        Long id = node.has("id") ? node.get("id").asLong() : null;
         String firstName = node.get("firstName").asText();
         String lastName = node.get("lastName").asText();
         String mail = node.get("mail").asText();
         String pass = node.get("pass").asText();
 
         User user = new User();
+        if (id != null) user.setId(id);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setMail(mail);

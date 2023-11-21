@@ -62,7 +62,7 @@ export class FriendMessagesComponent implements OnInit, OnDestroy {
   sendMessage() {
     if (this.message) {
       const messageObject: Message = {
-        senderId: this.connectedUserId,
+        //room: this.room,
         sender: this.connectedUser,
         content: this.message,
         timestamp: new Date(),

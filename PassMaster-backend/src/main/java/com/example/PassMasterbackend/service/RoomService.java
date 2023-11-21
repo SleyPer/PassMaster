@@ -1,5 +1,6 @@
 package com.example.PassMasterbackend.service;
 
+import com.example.PassMasterbackend.entity.Message;
 import com.example.PassMasterbackend.entity.Room;
 import com.example.PassMasterbackend.entity.User;
 import com.example.PassMasterbackend.repository.RoomRepository;

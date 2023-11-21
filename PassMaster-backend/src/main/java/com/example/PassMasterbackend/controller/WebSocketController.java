@@ -5,6 +5,7 @@ import com.example.PassMasterbackend.entity.Room;
 import com.example.PassMasterbackend.entity.User;
 import com.example.PassMasterbackend.repository.RoomRepository;
 import com.example.PassMasterbackend.repository.UserRepository;
+import com.example.PassMasterbackend.service.MessageService;
 import com.example.PassMasterbackend.service.RoomService;
 import com.example.PassMasterbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.socket.messaging.SessionConnectEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
@@ -30,6 +32,8 @@ public class WebSocketController {
     @Autowired
     private RoomService roomService;
     @Autowired
+    private MessageService messageService;
+    @Autowired
     private UserRepository userRepository;
     @Autowired
     private RoomRepository roomRepository;
@@ -41,9 +45,12 @@ public class WebSocketController {
 
     @MessageMapping("/send/message/{roomId}")
     public void sendMessage(@DestinationVariable String roomId, Message message) {
-        User user = this.userService.getUserById(message.getSenderId());
-        message.setSender(user);
-        System.out.println(message);
+        System.out.println(message.getSender().getId());
+
+        User sender = this.userService.getUserById(message.getSender().getId());
+        message.setSender(sender);
+        this.messageService.save(message);
+
         this.template.convertAndSend("/message/" + roomId, message);
     }
 
