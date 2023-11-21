@@ -16,7 +16,7 @@
     <div class="header" [matTooltip]="'Voir les membres'" (click)="openUserList()">
         <div class="header-infos">{{ room.users?.length }} utilisateurs</div>
     </div>
-    <div class="chat">
+    <div class="chat" appScrollToBottom>
         <div *ngFor="let message of messages"
             [ngClass]="{'right': message.sender && message.sender.id === connectedUserId, 'left': message.sender && message.sender.id !== connectedUserId, 'center': !message.sender}">
             <div class="chat-header">

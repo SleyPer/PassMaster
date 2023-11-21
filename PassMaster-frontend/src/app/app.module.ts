@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { ScrollToBottomDirective } from './directives/scroll-to-bottom.directive';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
@@ -55,6 +56,7 @@ import { CreateRoomComponent } from './components/create-room/create-room.compon
     GroupMessageComponent,
     GroupsListComponent,
     CreateRoomComponent,
+    ScrollToBottomDirective
   ],
   imports: [
     BrowserModule,
@@ -68,6 +70,9 @@ import { CreateRoomComponent } from './components/create-room/create-room.compon
     MatTooltipModule,
     MatDialogModule,
     ReactiveFormsModule,
+  ],
+  exports: [
+    ScrollToBottomDirective,
   ],
   providers: [
     {
