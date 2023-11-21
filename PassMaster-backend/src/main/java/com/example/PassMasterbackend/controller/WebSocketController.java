@@ -49,9 +49,8 @@ public class WebSocketController {
 
         User sender = this.userService.getUserById(message.getSender().getId());
         message.setSender(sender);
-        this.messageService.save(message);
-
         this.template.convertAndSend("/message/" + roomId, message);
+        this.messageService.save(message);
     }
 
     @EventListener
