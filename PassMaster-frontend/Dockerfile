@@ -5,6 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 
 RUN npm install -g node-pre-gyp
+
 RUN npm install
 
 EXPOSE 4200
