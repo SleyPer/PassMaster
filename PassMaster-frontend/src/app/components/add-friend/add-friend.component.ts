@@ -20,7 +20,12 @@ export class AddFriendComponent implements OnInit {
 
   userId: number = 0;
 
-  constructor(private userService: UserService, private authService: AuthService, private friendListService: FriendListService, private snackBar: MatSnackBar) { }
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private friendListService: FriendListService,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     const token = this.authService.getToken();
@@ -57,7 +62,7 @@ export class AddFriendComponent implements OnInit {
     this.selectedUser = selectedUser;
     if (selectedUser.mail) {
       this.userMail = selectedUser.mail;
-      this.searchUsers = [];  
+      this.searchUsers = [];
     }
   }
 
