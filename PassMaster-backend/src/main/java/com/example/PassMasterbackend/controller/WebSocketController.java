@@ -51,6 +51,7 @@ public class WebSocketController {
         message.setSender(sender);
         this.template.convertAndSend("/message/" + roomId, message);
         this.messageService.save(message);
+        this.roomService.updateUnreadMessagesForRoomUsers(roomId);
     }
 
     @EventListener

@@ -1,8 +1,8 @@
 package com.example.PassMasterbackend.service;
 
-import com.example.PassMasterbackend.entity.Message;
 import com.example.PassMasterbackend.entity.Room;
 import com.example.PassMasterbackend.entity.User;
+import com.example.PassMasterbackend.entity.UserRoomUnreadMessages;
 import com.example.PassMasterbackend.repository.RoomRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +18,7 @@ import java.util.Optional;
 public class RoomService {
 
     private RoomRepository roomRepository;
+    private UserRoomUnreadMessagesService userRoomUnreadMessagesService;
 
     public List<Room> getAllRooms() {
         return this.roomRepository.findAll();
@@ -65,10 +66,39 @@ public class RoomService {
             throw new RuntimeException("Ce nom existe déjà !");
         }
 
-        return ResponseEntity.ok(this.roomRepository.save(room));
+        Room savedRoom = this.roomRepository.save(room);
+
+        List<User> users = savedRoom.getUsers();
+        for (User user : users) {
+            UserRoomUnreadMessages userRoomUnreadMessage = new UserRoomUnreadMessages();
+            userRoomUnreadMessage.setUser(user);
+            userRoomUnreadMessage.setRoom(savedRoom);
+            userRoomUnreadMessage.setUnreadMessages(0);
+            userRoomUnreadMessagesService.save(userRoomUnreadMessage);
+        }
+
+        return ResponseEntity.ok(savedRoom);
     }
+
 
     public void deleteRoom(String id) {
         this.roomRepository.deleteById(id);
+    }
+
+    public void updateUnreadMessagesForRoomUsers(String roomId) {
+//        Room room = roomRepository.findById(roomId)
+//                .orElseThrow(() -> new RuntimeException("Room not found"));
+//
+//        List<User> users = room.getUsers();
+//        for (User user : users) {
+//            if (user.getSessionId() == null || !user.getSessionId().equals(userRoomSessionId)) {
+//                int currentUnreadMessages = userRoomUnreadMessagesService
+//                        .findByUserAndRoom(user, room)
+//                        .map(UserRoomUnreadMessages::getUnreadMessages)
+//                        .orElse(0);
+//
+//                userRoomUnreadMessagesRepository.save(new UserRoomUnreadMessages(user, room, currentUnreadMessages + 1));
+//            }
+//        }
     }
 }

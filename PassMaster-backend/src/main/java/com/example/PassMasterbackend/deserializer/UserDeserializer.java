@@ -1,15 +1,15 @@
 package com.example.PassMasterbackend.deserializer;
 
+import com.example.PassMasterbackend.entity.Room;
 import com.example.PassMasterbackend.entity.User;
+import com.example.PassMasterbackend.entity.UserRoomUnreadMessages;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDeserializer extends StdDeserializer<User> {
 
@@ -39,6 +39,22 @@ public class UserDeserializer extends StdDeserializer<User> {
         user.setMail(mail);
         user.setPass(pass);
         user.setColor(color);
+
+        if (node.has("userRoomUnreadMessages")) {
+            List<UserRoomUnreadMessages> userRoomUnreadMessages = new ArrayList<>();
+            JsonNode userRoomUnreadMessagesNode = node.get("userRoomUnreadMessages");
+            if (userRoomUnreadMessagesNode.isArray()) {
+                for (JsonNode messageNode : userRoomUnreadMessagesNode) {
+                    Room room = ctxt.readValue(messageNode.get("room").traverse(), Room.class);
+                    int unreadMessages = messageNode.get("unreadMessages").asInt();
+                    UserRoomUnreadMessages userRoomUnreadMessage = new UserRoomUnreadMessages();
+                    userRoomUnreadMessage.setRoom(room);
+                    userRoomUnreadMessage.setUnreadMessages(unreadMessages);
+                    userRoomUnreadMessages.add(userRoomUnreadMessage);
+                }
+            }
+            user.setUserRoomUnreadMessages(userRoomUnreadMessages);
+        }
 
         return user;
     }

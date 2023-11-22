@@ -44,8 +44,6 @@ public class RoomController {
 
     @PostMapping
     public ResponseEntity<?> addRoom(@RequestBody Room room) {
-        System.out.println(room.getId());
-        System.out.println(room.getName());
         return ResponseEntity.ok(roomService.addRoom(room));
     }
 

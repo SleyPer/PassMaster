@@ -64,6 +64,10 @@ public class User implements UserDetails {
     private List<User> friends;
 
     @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserRoomUnreadMessages> userRoomUnreadMessages;
+
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + this.role.getName()));
