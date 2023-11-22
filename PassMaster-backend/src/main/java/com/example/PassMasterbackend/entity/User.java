@@ -42,6 +42,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String mail;
 
+    @Column
+    private String color;
+
     @JsonIgnore
     private boolean active = false;
 

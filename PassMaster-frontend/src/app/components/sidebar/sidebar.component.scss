@@ -17,7 +17,7 @@
         padding: 0.5rem;
 
         &:hover {
-            background-color: #408812;
+            background-color: #000;
             transition: 0.3s;
 
             mat-icon {
@@ -38,7 +38,7 @@
         }
 
         &.active {
-            background-color: #408812;
+            background-color: #000;
         }
 
         ul {

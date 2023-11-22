@@ -12,7 +12,7 @@
     <div *ngIf="friends.length === 0" class="no-friends">
         <p>Aucun ami</p>
     </div>
-    <div class="friend-item" *ngFor="let friend of friends" (click)="openMessages(friend)">
+    <div class="friend-item" *ngFor="let friend of friends" (click)="openMessages(friend)" [ngStyle]="{'border-left': '10px solid ' + friend.color}">
         <p>{{ friend.firstName }}</p>
     </div>
 </div>

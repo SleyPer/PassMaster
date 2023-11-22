@@ -40,6 +40,9 @@ public class UserService implements UserDetailsService {
             userRole.setName(RoleType.USER);
             user.setRole(userRole);
 
+            Random random = new Random();
+            user.setColor(String.format("#%06x", random.nextInt(0xFFFFFF + 1)));
+
             user = this.userRepository.save(user);
             this.validationService.save(user);
         } else

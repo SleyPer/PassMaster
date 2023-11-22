@@ -3,7 +3,7 @@
         <img src="assets/img/icon.png" alt="Logo ChatMaster">
         <h4>ChatMaster</h4>
     </div>
-    <div class="user">
+    <div class="user" [ngStyle]="{'border-left': '10px solid ' + connectedUser.color}">
         {{ connectedUser.firstName }} {{ connectedUser.lastName }}
     </div>
 </nav>

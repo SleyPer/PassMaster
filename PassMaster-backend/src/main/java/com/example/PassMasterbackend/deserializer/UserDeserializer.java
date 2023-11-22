@@ -30,6 +30,7 @@ public class UserDeserializer extends StdDeserializer<User> {
         String lastName = node.get("lastName").asText();
         String mail = node.get("mail").asText();
         String pass = node.get("pass").asText();
+        String color = node.has("color") ? node.get("color").asText() : null;
 
         User user = new User();
         if (id != null) user.setId(id);
@@ -37,6 +38,7 @@ public class UserDeserializer extends StdDeserializer<User> {
         user.setLastName(lastName);
         user.setMail(mail);
         user.setPass(pass);
+        user.setColor(color);
 
         return user;
     }

@@ -4,7 +4,8 @@
     <div class="user-list-content" [ngClass]="{'closing': !userListVisible, 'opening': userListVisible}">
         <h2>Membres du groupe</h2>
         <div class="user-list">
-            <div class="user" *ngFor="let user of room?.users">{{ user.firstName }} {{ user.lastName }} 
+            <div class="user" *ngFor="let user of room?.users" [ngStyle]="{'border-left': '10px solid ' + user.color}">
+                {{ user.firstName }} {{ user.lastName }}
                 <div *ngIf="isUserConnected(user)"> (En ligne)</div>
                 <div *ngIf="user.id === connectedUserId"> (Vous)</div>
             </div>
@@ -17,8 +18,9 @@
         <div class="header-infos">{{ room.users?.length }} utilisateurs</div>
     </div>
     <div class="chat" appScrollToBottom>
-        <div *ngFor="let message of messages"
-            [ngClass]="{'right': message.sender && message.sender.id === connectedUserId, 'left': message.sender && message.sender.id !== connectedUserId, 'center': !message.sender}">
+        <div *ngFor="let message of messages" [ngClass]="{'right': message.sender && message.sender.id === connectedUserId, 
+            'left': message.sender && message.sender.id !== connectedUserId, 
+            'center': !message.sender}" [ngStyle]="{'border-left': '10px solid ' + message.sender!.color}">
             <div class="chat-header">
                 {{ message.sender?.firstName }} · {{ message.timestamp | date:'HH:MM' }}
             </div>
